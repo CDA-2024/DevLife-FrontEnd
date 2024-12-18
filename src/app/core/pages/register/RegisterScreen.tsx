@@ -33,17 +33,9 @@ const formSchema = z
       .email({ message: "Veuillez entrer une adresse email valide." }),
     password: z
       .string()
-      .min(8, {
-        message: "Le mot de passe doit contenir au moins 8 caractères.",
-      })
-      .regex(/[A-Z]/, {
-        message: "Le mot de passe doit contenir au moins une majuscule.",
-      })
-      .regex(/[0-9]/, {
-        message: "Le mot de passe doit contenir au moins un chiffre.",
-      })
-      .regex(/[!@#$%^&*]/, {
-        message: "Le mot de passe doit contenir au moins un caractère spécial.",
+      .regex(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
+        message:
+          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
       }),
     confirmPassword: z.string(),
   })
