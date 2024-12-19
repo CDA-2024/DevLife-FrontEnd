@@ -1,7 +1,7 @@
-import { SidebarInset } from "../../../components/ui/sidebar"
+import { SidebarInset } from "../components/ui/sidebar"
 
-import { AppSidebar } from "../../../components/app-sidebar"
-import { SidebarProvider } from "../../../components/ui/sidebar"
+import { AppSidebar } from "../components/app-sidebar"
+import { SidebarProvider } from "../components/ui/sidebar"
 import Header from "./Header/Header"
 
 type Props = {

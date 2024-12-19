@@ -8,7 +8,10 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<TestPage />} />
 
-        <Route path="*" element={<TestPage />} />
+        <Route path="profile">
+          <Route path="login" element={<TestPage />} />
+          <Route path="register" element={<TestPage />} />
+        </Route>
 
         <Route
           path="/homepage"
@@ -18,6 +21,7 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
         <Route
           path="/compagnie"
           element={
@@ -26,6 +30,7 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
         <Route
           path="/contract"
           element={
@@ -34,6 +39,7 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
         <Route
           path="/shop"
           element={
@@ -42,6 +48,7 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
         <Route
           path="/recruitment"
           element={
@@ -50,6 +57,7 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
         <Route
           path="/budjet"
           element={
@@ -58,6 +66,8 @@ const Routing = () => {
             </BaseLayout>
           }
         />
+
+        <Route path="*" element={<TestPage />} />
       </Routes>
     </>
   );
