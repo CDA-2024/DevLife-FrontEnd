@@ -24,14 +24,14 @@ const loginSchema = z.object({
 });
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
-export function LoginScreen() {
+const LoginScreen = () => {
   const form = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       username: "",
       password: "",
     },
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   const onSubmit = (data: LoginFormInputs) => {
@@ -91,3 +91,5 @@ export function LoginScreen() {
     </div>
   );
 };
+
+export default LoginScreen;

@@ -45,7 +45,7 @@ const formSchema = z
   });
 type RegisterFormInputs = z.infer<typeof formSchema>;
 
-export function RegisterScreen() {
+const RegisterScreen = () =>  {
   const form = useForm<RegisterFormInputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,7 +54,7 @@ export function RegisterScreen() {
       password: "",
       confirmPassword: "",
     },
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   const onSubmit = (data: RegisterFormInputs) => {
@@ -148,3 +148,5 @@ export function RegisterScreen() {
     </div>
   );
 }
+
+export default RegisterScreen;
