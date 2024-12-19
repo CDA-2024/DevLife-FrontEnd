@@ -17,37 +17,14 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterFormSchema } from "../../schemas/auth/RegisterSchema";
+import { Link } from "react-router-dom";
 
-const formSchema = z
-  .object({
-    username: z
-      .string()
-      .min(3, {
-        message: "Le nom d'utilisateur doit contenir au moins 3 caractères.",
-      })
-      .max(50, {
-        message: "Le nom d'utilisateur ne doit pas dépasser 50 caractères.",
-      }),
-    email: z
-      .string()
-      .email({ message: "Veuillez entrer une adresse email valide." }),
-    password: z
-      .string()
-      .regex(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-        message:
-          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
-      }),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Les mots de passe ne correspondent pas.",
-    path: ["confirmPassword"],
-  });
-type RegisterFormInputs = z.infer<typeof formSchema>;
+type RegisterFormInputs = z.infer<typeof RegisterFormSchema>;
 
-const RegisterScreen = () =>  {
+const RegisterScreen = () => {
   const form = useForm<RegisterFormInputs>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       username: "",
       email: "",
@@ -65,7 +42,14 @@ const RegisterScreen = () =>  {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md p-4 shadow-md">
         <CardHeader>
-          <CardTitle>Créer un compte</CardTitle>
+          <div className="mt-4 flex items-center justify-between">
+            <CardTitle>Créer un compte</CardTitle>
+            <p className="text-sm mt-2">
+              <Link to="/auth/login" className="text-blue-500 hover:underline">
+                Déjà un compte ?
+              </Link>
+            </p>
+          </div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -147,6 +131,6 @@ const RegisterScreen = () =>  {
       </Card>
     </div>
   );
-}
+};
 
 export default RegisterScreen;

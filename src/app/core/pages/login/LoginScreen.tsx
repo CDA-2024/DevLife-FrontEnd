@@ -17,16 +17,14 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "../../schemas/auth/LoginSchema";
+import { Link } from "react-router-dom";
 
-const loginSchema = z.object({
-  username: z.string().min(1, { message: "Le nom d'utilisateur est requis." }),
-  password: z.string().min(1, { message: "Le mot de passe est requis." }),
-});
-type LoginFormInputs = z.infer<typeof loginSchema>;
+type LoginFormInputs = z.infer<typeof LoginFormSchema>;
 
 const LoginScreen = () => {
   const form = useForm<LoginFormInputs>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -42,7 +40,17 @@ const LoginScreen = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md p-4 shadow-md">
         <CardHeader>
-          <CardTitle>Connexion</CardTitle>
+          <div className="mt-4 flex items-center justify-between">
+            <CardTitle>Connexion</CardTitle>
+            <p className="text-sm mt-2">
+              <Link
+                to="/auth/register"
+                className="text-blue-500 hover:underline"
+              >
+                Pas de compte ?
+              </Link>
+            </p>
+          </div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -60,12 +68,21 @@ const LoginScreen = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Mot de passe</FormLabel>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Mot de passe</FormLabel>
+                      <Link
+                        to="/auth/forgot-password"
+                        className="text-sm text-blue-500 hover:underline"
+                      >
+                        Mot de passe oublié ?
+                      </Link>
+                    </div>
                     <FormControl>
                       <Input
                         type="password"

@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
+import LoginScreen from "./pages/login/LoginScreen";
+import RegisterScreen from "./pages/register/RegisterScreen";
 
 const Routing = () => {
   return (
@@ -9,8 +11,8 @@ const Routing = () => {
         <Route path="/" element={<TestPage />} />
 
         <Route path="auth">
-          <Route path="login" element={<TestPage />} />
-          <Route path="register" element={<TestPage />} />
+          <Route path="login" element={<LoginScreen />} />
+          <Route path="register" element={<RegisterScreen />} />
         </Route>
 
         <Route
