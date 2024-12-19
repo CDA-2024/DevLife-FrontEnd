@@ -18,7 +18,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "../../schemas/auth/LoginSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 type LoginFormInputs = z.infer<typeof LoginFormSchema>;
 
@@ -32,8 +33,26 @@ const LoginScreen = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log("Form data:", data);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users?name=${data.username}&password=${data.password}`
+      );
+      const users = await response.json();
+
+      if (users.length === 1) {
+        console.log("Connexion réussie", users[0]);
+        navigate("/");
+      } else {
+        setErrorMessage("Nom d'utilisateur ou mot de passe incorrect");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion", error);
+      setErrorMessage("Erreur lors de la connexion");
+    }
   };
 
   return (
@@ -101,6 +120,9 @@ const LoginScreen = () => {
               >
                 Connexion
               </Button>
+              {errorMessage && (
+                <p className="text-sm text-red-500 mt-2">{errorMessage}</p>
+              )}
             </form>
           </Form>
         </CardContent>
