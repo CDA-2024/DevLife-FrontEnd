@@ -5,6 +5,8 @@ import LoginScreen from "./pages/login/LoginScreen";
 import RegisterScreen from "./pages/register/RegisterScreen";
 import GamePage from "./pages/Game";
 import EditProfileScreen from "./pages/EditUserProfile";
+import { MaterialScreen } from "../screens/materialPage/MaterialPage";
+
 const Routing = () => {
   return (
     <>
@@ -39,6 +41,15 @@ const Routing = () => {
           element={
             <BaseLayout>
               <TestPage />
+            </BaseLayout>
+          }
+        />
+
+        <Route
+          path="/material"
+          element={
+            <BaseLayout>
+              <MaterialScreen />
             </BaseLayout>
           }
         />
