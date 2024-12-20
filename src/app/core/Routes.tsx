@@ -6,12 +6,13 @@ import RegisterScreen from "./pages/register/RegisterScreen";
 import GamePage from "./pages/Game";
 import EditProfileScreen from "./pages/EditUserProfile";
 import { MaterialScreen } from "../screens/materialPage/MaterialPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const Routing = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<TestPage />} />
+        <Route path="/" element={<LandingPage />} />
 
         <Route path="auth">
           <Route path="login" element={<LoginScreen />} />
