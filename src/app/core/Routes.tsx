@@ -3,6 +3,7 @@ import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RegisterScreen from "./pages/register/RegisterScreen";
+import StaffPage from "../screens/staffSection/StaffPage";
 
 const Routing = () => {
   return (
@@ -52,10 +53,10 @@ const Routing = () => {
         />
 
         <Route
-          path="/recruitment"
+          path="/staff"
           element={
             <BaseLayout>
-              <TestPage />
+              <StaffPage />
             </BaseLayout>
           }
         />
