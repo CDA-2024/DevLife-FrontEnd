@@ -3,7 +3,7 @@ import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RegisterScreen from "./pages/register/RegisterScreen";
-import StaffPage from "../screens/staffSection/StaffPage";
+import StaffPage from "../screens/staff/StaffPage";
 
 const Routing = () => {
   return (
