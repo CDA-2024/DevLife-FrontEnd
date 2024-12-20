@@ -12,6 +12,7 @@ import {
   SidebarMenuButton,
 } from "./ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
+import { Link } from "react-router-dom"
 
 // Données de l'application
 const data = {
@@ -30,9 +31,9 @@ const data = {
   ],
   navItems: [
     {
-      title: "Page perso",
+      title: "Game",
       icon: "👤",
-      url: "/profile",
+      url: "/game",
       variant: "default",
     },
     {
@@ -79,12 +80,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {data.navItems.map((item) => (
             <SidebarMenuItem key={item.title} className="px-2">
               <SidebarMenuButton
+                asChild
                 variant={item.variant as "default" | "outline" | null}
                 size="lg"
                 className="w-full justify-start gap-2 text-base"
               >
-                <span className="flex-none">{item.icon}</span>
-                <span>{item.title}</span>
+                <Link to={item.url}>
+                  <span className="flex-none">{item.icon}</span>
+                  <span>{item.title}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card"
-import { Progress } from "../../../components/ui/progress"
-import { Button } from "../../../components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "../../shared/components/ui/card"
+import { Progress } from "../../shared/components/ui/progress"
+import { Button } from "../../shared/components/ui/button"
 import { useNavigate } from "react-router-dom"
 
 interface Enterprise {
@@ -36,77 +36,84 @@ interface Equipment {
     type: string
 }
 
+const enterprise: Enterprise = {
+    name: "DevStudio Pro",
+    level: 3,
+    employees: 5,
+    revenue: 25000
+}
+
+const team: TeamMember[] = [
+    { name: "Fatal.xxl", role: "Full-Stack", level: 12 },
+    { name: "CodeMaster", role: "Front-End", level: 8 },
+    { name: "DataWizard", role: "Back-End", level: 10 }
+]
+
+const projects: Project[] = [
+    {
+        name: "Site E-commerce",
+        type: "Enterprise",
+        status: "En cours",
+        progress: 75,
+        deadline: "3 jours"
+    },
+    {
+        name: "App Mobile",
+        type: "Freelance",
+        status: "En retard",
+        progress: 45,
+        deadline: "1 jour"
+    }
+]
+
+const specializations: Specialization[] = [
+    {
+        name: "Salle de jeux",
+        description: "Espace de détente pour l'équipe",
+        bonus: "+15% productivité"
+    },
+    {
+        name: "Cafétéria Premium",
+        description: "Zone de restauration équipée",
+        bonus: "-20% fatigue"
+    }
+]
+
+const equipment: Equipment[] = [
+    { name: "Ordinateur", status: "Bon état", type: "Hardware" },
+    { name: "Bureau", status: "Correct", type: "Mobilier" },
+    { name: "Chaise", status: "Usé", type: "Mobilier" },
+    { name: "Écran", status: "Bon état", type: "Hardware" },
+    { name: "Clavier", status: "Défectueux", type: "Hardware" }
+]
+
 export default function GamePage() {
     const navigate = useNavigate()
 
-    const enterprise: Enterprise = {
-        name: "DevStudio Pro",
-        level: 3,
-        employees: 5,
-        revenue: 25000
-    }
 
-    const team: TeamMember[] = [
-        { name: "Fatal.xxl", role: "Full-Stack", level: 12 },
-        { name: "CodeMaster", role: "Front-End", level: 8 },
-        { name: "DataWizard", role: "Back-End", level: 10 }
-    ]
-
-    const projects: Project[] = [
-        {
-            name: "Site E-commerce",
-            type: "Enterprise",
-            status: "En cours",
-            progress: 75,
-            deadline: "3 jours"
-        },
-        {
-            name: "App Mobile",
-            type: "Freelance",
-            status: "En retard",
-            progress: 45,
-            deadline: "1 jour"
-        }
-    ]
-
-    const specializations: Specialization[] = [
-        {
-            name: "Salle de jeux",
-            description: "Espace de détente pour l'équipe",
-            bonus: "+15% productivité"
-        },
-        {
-            name: "Cafétéria Premium",
-            description: "Zone de restauration équipée",
-            bonus: "-20% fatigue"
-        }
-    ]
-
-    const equipment: Equipment[] = [
-        { name: "Ordinateur", status: "Bon état", type: "Hardware" },
-        { name: "Bureau", status: "Correct", type: "Mobilier" },
-        { name: "Chaise", status: "Usé", type: "Mobilier" },
-        { name: "Écran", status: "Bon état", type: "Hardware" },
-        { name: "Clavier", status: "Défectueux", type: "Hardware" }
-    ]
 
     return (
         <div className="p-6 bg-white">
-            <div className="space-y-6">
+            <div className="
+            grid gap-4
+            md:grid-cols-2 md:grid-rows-5 
+            lg:grid-cols-4 lg:grid-rows-3
+            ">
                 {/* Enterprise Card */}
-                <Card className="border-gray-200 shadow-sm">
+                <Card className="border-gray-200 shadow-sm col-span-2">
                     <CardHeader className="flex flex-row items-center justify-between">
                         <CardTitle className="text-gray-800">Mon Entreprise</CardTitle>
                         <Button
                             variant="outline"
                             onClick={() => navigate('/enterprise')}
+                            size="sm"
                         >
-                            Gérer mon entreprise →
+                            Gérer →
                         </Button>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <p className="text-gray-600">Nom : <span className="text-gray-800 font-medium">{enterprise.name}</span></p>
                                     <p className="text-gray-600">Niveau : <span className="text-amber-600 font-medium">{enterprise.level}</span></p>
@@ -121,14 +128,15 @@ export default function GamePage() {
                 </Card>
 
                 {/* Team Card */}
-                <Card className="border-gray-200 shadow-sm">
+                <Card className="border-gray-200 shadow-sm col-span-2 row-start-2 lg:row-start-1">
                     <CardHeader className="flex flex-row items-center justify-between">
                         <CardTitle className="text-gray-800">Mon Équipe</CardTitle>
                         <Button
                             variant="outline"
                             onClick={() => navigate('/staff')}
+                            size="sm"
                         >
-                            Gérer l'équipe →
+                            Gérer →
                         </Button>
                     </CardHeader>
                     <CardContent>
@@ -149,8 +157,8 @@ export default function GamePage() {
                     </CardContent>
                 </Card>
 
-                {/* Projects Card */}
-                <Card className="border-gray-200 shadow-sm">
+                {/* Projects et Specializations */}
+                <Card className="border-gray-200 shadow-sm col-span-2 row-start-3 lg:row-start-2">
                     <CardHeader>
                         <CardTitle className="text-gray-800">Projets en cours</CardTitle>
                     </CardHeader>
@@ -182,14 +190,15 @@ export default function GamePage() {
                 </Card>
 
                 {/* Specializations Card */}
-                <Card className="border-gray-200 shadow-sm">
+                <Card className="border-gray-200 shadow-sm col-span-2 row-start-4 lg:row-start-2">
                     <CardHeader className="flex flex-row items-center justify-between">
                         <CardTitle className="text-gray-800">Spécialisations</CardTitle>
                         <Button
                             variant="outline"
                             onClick={() => navigate('/enterprise')}
+                            size="sm"
                         >
-                            Gérer les spécialisations →
+                            Gérer →
                         </Button>
                     </CardHeader>
                     <CardContent>
@@ -208,18 +217,19 @@ export default function GamePage() {
                 </Card>
 
                 {/* Equipment Card */}
-                <Card className="border-gray-200 shadow-sm">
+                <Card className="border-gray-200 shadow-sm col-span-2 row-start-5 lg:row-start-3 lg:col-span-4">
                     <CardHeader className="flex flex-row items-center justify-between">
                         <CardTitle className="text-gray-800">Équipements de base</CardTitle>
                         <Button
                             variant="outline"
                             onClick={() => navigate('/material')}
+                            size="sm"
                         >
-                            Gérer les équipements →
+                            Gérer →
                         </Button>
                     </CardHeader>
                     <CardContent>
-                        <div className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {equipment.map((item) => (
                                 <div key={item.name} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
                                     <div className="flex items-center gap-3">
@@ -232,18 +242,20 @@ export default function GamePage() {
                                         </div>
                                     </div>
                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${item.status === "Bon état" ? "bg-green-100 text-green-600" :
-                                            item.status === "Correct" ? "bg-blue-100 text-blue-600" :
-                                                item.status === "Usé" ? "bg-yellow-100 text-yellow-600" :
-                                                    "bg-red-100 text-red-600"
+                                        item.status === "Correct" ? "bg-blue-100 text-blue-600" :
+                                            item.status === "Usé" ? "bg-yellow-100 text-yellow-600" :
+                                                "bg-red-100 text-red-600"
                                         }`}>
                                         {item.status}
                                     </span>
                                 </div>
                             ))}
                         </div>
+
                     </CardContent>
                 </Card>
             </div>
+
         </div>
     )
 } 
