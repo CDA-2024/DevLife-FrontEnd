@@ -87,7 +87,6 @@ const LoginScreen = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="password"
