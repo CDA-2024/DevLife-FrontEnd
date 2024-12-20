@@ -18,7 +18,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema } from "../../schemas/auth/RegisterSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type RegisterFormInputs = z.infer<typeof RegisterFormSchema>;
 
@@ -34,8 +34,11 @@ const RegisterScreen = () => {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = (data: RegisterFormInputs) => {
     console.log("Form data:", data);
+    navigate("/auth/login");
   };
 
   return (

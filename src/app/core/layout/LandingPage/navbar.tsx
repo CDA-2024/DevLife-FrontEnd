@@ -40,7 +40,7 @@ export const Navbar = () => {
 
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link to="/login">
+            <Link to="/auth/login">
               <Button variant={"primary"} size={"lg"}>
                 Login
               </Button>
