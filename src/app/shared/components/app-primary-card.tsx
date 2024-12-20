@@ -1,11 +1,5 @@
-import React from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-
-export type CardItemType = {
-  header?: React.ReactNode;
-  content?: React.ReactNode;
-  footer?: React.ReactNode;
-};
+import { CardItemType } from "../interfaces/PrimaryCard.interface";
 
 type Props = {
   CardItem: CardItemType;
