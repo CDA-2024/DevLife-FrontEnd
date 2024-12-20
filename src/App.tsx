@@ -1,7 +1,7 @@
 import { Button } from "./components/ui/button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BaseLayout from "./app/core/layout/BaseLayout";
-import LandingPage from "./app/core/pages/LandingPage";
+import LandingPage from "./app/core/pages/LandingPage/LandingPage";
 export default function Home() {
   return (
     <BrowserRouter>

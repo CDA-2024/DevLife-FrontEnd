@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 
 const Hero = () => {
   return (
-    <section className="w-full max-w-[1200px] flex items-center h-[calc(100%-60px)]">
-      <div className="w-full flex justify-between pt-16">
+    <section className="w-full max-w-[1200px] flex items-center h-[calc(100%-60px)] mx-auto ">
+      <div className="w-full flex justify-between pt-16 px-5">
         <HeroLeft />
         <HeroRight />
       </div>
@@ -28,17 +28,13 @@ const HeroInfo = () => {
         Bienvenue <br />
         Chez <br /> <span className="text-[#6841DA]">DevLife</span>
       </h1>
-      <p className="font-light text-xs">
-        Dans ce jeu, commencez en tant que développeur freelance <br />
-        et progressez vers la gestion d’une entreprise de développement. <br />
-        Gérez vos projets, recrutez des développeurs, spécialisez votre
-        entreprise
-        <br /> et faites des choix stratégiques pour maximiser vos profits.
-        Surmontez des défis,
-        <br /> atteignez de nouveaux niveaux et développez une entreprise
-        florissante
-        <br /> tout en optimisant vos ressources et vos compétences. <br />{" "}
-        recommend recommendations to increase reach, engagement and sales.
+      <p className="font-light text-xs leading-relaxed">
+        Dans ce jeu, commencez en tant que développeur freelance et progressez
+        vers la gestion d’une entreprise de développement. Gérez vos projets,
+        recrutez des développeurs, spécialisez votre entreprise, et faites des
+        choix stratégiques pour maximiser vos profits. Surmontez des défis,
+        atteignez de nouveaux niveaux et développez une entreprise florissante,
+        tout en optimisant vos ressources et vos compétences.
       </p>
       <div className="flex gap-6">
         <Button variant={"secondary"} size={"lg"}>
@@ -92,7 +88,7 @@ const HeroRight = () => {
   return (
     <img
       alt="Mockup"
-      src={"src/assets/images/hero-image.png"}
+      src={"src/assets/images/1.png"}
       width={450}
       height={450}
     />

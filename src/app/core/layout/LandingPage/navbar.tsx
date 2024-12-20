@@ -4,8 +4,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "../../../components/ui/navigation-menu";
-import { Button } from "../../../components/ui/button";
+} from "../../../shared/components/ui/navigation-menu";
+import { Button } from "../../../shared/components/ui/button";
 
 const navigation = [
   { item: "Home", path: "/" },
