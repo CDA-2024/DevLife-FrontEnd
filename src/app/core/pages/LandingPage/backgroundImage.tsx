@@ -18,11 +18,9 @@ export const BackgroundImage = ({ children }: Props) => {
           position: "fixed", // Utilisation de fixed pour qu'il reste en place
           top: 0,
           left: 0,
-          zIndex: -1, // Le fond reste derrière
+          zIndex: -1, // L'image background reste derriere
         }}
       />
-
-      {/* Contenu interactif au-dessus */}
       <div>{children}</div>
     </>
   );

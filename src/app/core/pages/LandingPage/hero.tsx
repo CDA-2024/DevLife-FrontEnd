@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../../shared/components/ui/button";
+import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 
 const Hero = () => {
   return (
     <section className="w-full max-w-[1200px] flex items-center h-[calc(100%-60px)] mx-auto ">
       <div className="w-full flex justify-between pt-16 px-5">
-        <HeroLeft />
-        <HeroRight />
+        <GridComponent
+          cols="grid-cols-1 md:grid-cols-2"
+          gap="gap-8"
+          className="min-h-[calc(100vh-60px)] items-center p-8"
+        >
+          <HeroLeft />
+          <HeroRight />
+        </GridComponent>
       </div>
     </section>
   );
