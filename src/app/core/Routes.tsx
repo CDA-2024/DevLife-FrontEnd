@@ -3,6 +3,8 @@ import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RegisterScreen from "./pages/register/RegisterScreen";
+import GamePage from "./pages/Game";
+import EditProfileScreen from "./pages/EditUserProfile";
 import { MaterialScreen } from "../screens/materialPage/MaterialPage";
 import StaffPage from "../screens/staff/StaffPage";
 
@@ -18,10 +20,10 @@ const Routing = () => {
         </Route>
 
         <Route
-          path="/homepage"
+          path="/game"
           element={
             <BaseLayout>
-              <TestPage />
+              <GamePage />
             </BaseLayout>
           }
         />
@@ -76,6 +78,15 @@ const Routing = () => {
           element={
             <BaseLayout>
               <TestPage />
+            </BaseLayout>
+          }
+        />
+
+        <Route
+          path="/profile/edit"
+          element={
+            <BaseLayout>
+              <EditProfileScreen />
             </BaseLayout>
           }
         />
