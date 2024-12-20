@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "JohnDoe",
+      "email": "johndoe@gmail.com",
+      "password": "Azerty1234!",
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "name": "JaneDoe",
+      "email": "janedoe@gmail.com",
+      "password": "Azerty1234!",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "name": "JohnSmith",
+      "email": "johnsmith@gmail.com",
+      "password": "Azerty1234!",
+      "role": "moderator"
+    }
+  ]
+}
