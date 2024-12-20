@@ -3,6 +3,7 @@ import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RegisterScreen from "./pages/register/RegisterScreen";
+import { MaterialScreen } from "../screens/materialPage/MaterialPage";
 
 const Routing = () => {
   return (
@@ -38,6 +39,15 @@ const Routing = () => {
           element={
             <BaseLayout>
               <TestPage />
+            </BaseLayout>
+          }
+        />
+
+        <Route
+          path="/material"
+          element={
+            <BaseLayout>
+              <MaterialScreen />
             </BaseLayout>
           }
         />
