@@ -1,155 +1,69 @@
 import * as React from "react"
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react"
 
-import { NavMain } from "./nav-main"
-import { NavProjects } from "./nav-projects"
 import { NavUser } from "./nav-user"
-import { TeamSwitcher } from "./team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
 } from "./ui/sidebar"
+import { TeamSwitcher } from "./team-switcher"
 
-// This is sample data.
+// Données de l'application
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Fatal.xxl",
+    email: "fatal@example.com",
+    avatar: "/avatars/user.jpg",
+    website: "twitch.yodegoulook.com"
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
+      name: "Nom du jeu",
+      logo: "https://loremicon.com/grad/128/128/853580496045/jpg",
       plan: "Enterprise",
     },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
   ],
-  navMain: [
+  navItems: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
+      title: "Page perso",
+      icon: "👤",
+      url: "/profile",
+      variant: "default",
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
+      title: "Équipe",
+      icon: "👥",
+      url: "/team",
+      variant: "ghost",
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+      title: "Contrat",
+      icon: "📄",
+      url: "/contract",
+      variant: "ghost",
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      title: "Materiels",
+      icon: "💻",
+      url: "/equipment",
+      variant: "ghost",
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      title: "Recrutement",
+      icon: "🎯",
+      url: "/recruitment",
+      variant: "ghost",
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      title: "Budget",
+      icon: "💰",
+      url: "/budget",
+      variant: "ghost",
     },
   ],
 }
@@ -160,12 +74,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+      <SidebarContent className="flex flex-col gap-2">
+        <SidebarMenu className="flex flex-col mt-12">
+          {data.navItems.map((item) => (
+            <SidebarMenuItem key={item.title} className="px-2">
+              <SidebarMenuButton
+                variant={item.variant as "default" | "outline" | null}
+                size="lg"
+                className="w-full justify-start gap-2 text-base"
+              >
+                <span className="flex-none">{item.icon}</span>
+                <span>{item.title}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
+      <SidebarFooter className="border-t pt-2">
+        <NavUser
+          user={{
+            name: data.user.name,
+            website: data.user.website,
+            avatar: "😎"
+          }}
+        />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
