@@ -1,4 +1,4 @@
-import { Button } from "./components/ui/button";
+import { Button } from "../src/app/shared/components/ui/button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BaseLayout from "./app/core/layout/BaseLayout";
 import LandingPage from "./app/core/pages/LandingPage/LandingPage";
