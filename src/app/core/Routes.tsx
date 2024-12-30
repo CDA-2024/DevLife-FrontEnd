@@ -6,7 +6,7 @@ import RegisterScreen from "./pages/register/RegisterScreen";
 import GamePage from "./pages/Game";
 import EditProfileScreen from "./pages/EditUserProfile";
 import { MaterialScreen } from "../screens/materialPage/MaterialPage";
-import StaffPage from "../screens/staff/StaffPage";
+import StaffPage from "../screens/staffPage/StaffPage";
 
 const Routing = () => {
   return (

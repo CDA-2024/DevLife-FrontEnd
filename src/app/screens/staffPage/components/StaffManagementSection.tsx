@@ -1,4 +1,5 @@
-import PrimaryCard, { CardItemType } from "../../../shared/components/app-primary-card";
+import PrimaryCard from "../../../shared/components/app-primary-card";
+import { CardItemType } from "../../../shared/interfaces/PrimaryCard.interface";
 
 const StaffManagementSection = () => {
   const CardItem : CardItemType = {
