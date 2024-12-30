@@ -18,7 +18,7 @@ type Props = {
 const PageTabsSwitcher = ({tabs} : Props) => {
   return (
     <>
-      <Tabs defaultValue={tabs[0]?.value || ""} className="w-[400px]">
+      <Tabs defaultValue={tabs[0]?.value || ""} >
         <TabsList>
             {tabs.map((tab : TabItem) => (
                 <TabsTrigger key={tab.value} value={tab.value}>

@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
-import LoginScreen from "./pages/login/LoginScreen";
-import RegisterScreen from "./pages/register/RegisterScreen";
-import GamePage from "./pages/Game";
-import EditProfileScreen from "./pages/EditUserProfile";
-import { MaterialScreen } from "../screens/materialPage/MaterialPage";
-import StaffPage from "../screens/staffPage/StaffPage";
+import LoginScreen from "./screens/login/LoginScreen";
+import RegisterScreen from "./screens/register/RegisterScreen";
+import GamePage from "../pages/gamePage/Game";
+
+import { MaterialScreen } from "../pages/materialPage/MaterialPage";
+import StaffPage from "../pages/staffPage/StaffPage";
+import EditUserProfilePage from "./screens/editUserProfile/EditUserProfile";
 
 const Routing = () => {
   return (
@@ -86,7 +87,7 @@ const Routing = () => {
           path="/profile/edit"
           element={
             <BaseLayout>
-              <EditProfileScreen />
+              <EditUserProfilePage />
             </BaseLayout>
           }
         />

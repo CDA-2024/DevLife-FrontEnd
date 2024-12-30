@@ -20,7 +20,7 @@ const data = {
     name: "Fatal.xxl",
     email: "fatal@example.com",
     avatar: "/avatars/user.jpg",
-    website: "twitch.yodegoulook.com"
+    website: "twitch.yodegoulook.com",
   },
   teams: [
     {
@@ -39,7 +39,7 @@ const data = {
     {
       title: "Équipe",
       icon: "👥",
-      url: "/team",
+      url: "/staff",
       variant: "ghost",
     },
     {
@@ -51,7 +51,7 @@ const data = {
     {
       title: "Materiels",
       icon: "💻",
-      url: "/equipment",
+      url: "/material",
       variant: "ghost",
     },
     {
@@ -67,7 +67,7 @@ const data = {
       variant: "ghost",
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

@@ -13,7 +13,7 @@ function BaseLayout({ children }: Props) {
       <AppSidebar />
       <SidebarInset>
         <Header />
-        <main className="">{children}</main>
+        {children}
         <Toaster />
       </SidebarInset>
     </SidebarProvider>

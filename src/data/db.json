@@ -21,5 +21,31 @@
       "password": "Azerty1234!",
       "role": "moderator"
     }
+  ],
+  "staffToHier": [
+    {
+      "staffName": "dev 3",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "front-End",
+      "salary": 56
+    },
+    {
+      "staffName": "dev 2",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "back-End",
+      "salary": 56
+    },
+    {
+      "staffName": "dev 1",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "fullStack",
+      "salary": 156
+    }
   ]
 }
