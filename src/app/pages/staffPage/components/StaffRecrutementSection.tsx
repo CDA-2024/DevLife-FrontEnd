@@ -2,26 +2,48 @@ import GridComponent from "../../../shared/components/GridComponent/GridComponen
 import { Staff } from "../interfaces/Staff.interface";
 import StaffCard from "./StaffCard";
 
-import DevPortrait from "../../../../assets/images/pixelPortrait.jpg";
+
+import { useEffect, useState } from "react";
 
 const StaffRecrutementSection = () => {
-  const staffTest: Staff = {
-    name: "Test Nom",
-    img: DevPortrait,
-    imgAlt: "protrait dev",
-    level: 1,
-    skill: "front-End",
-    salary: 250,
-  };
+  const [datas, setDatas] = useState<Staff[]>([])
+
+  useEffect(() =>{
+
+    const url = "http://localhost:3000/staffToHire"
+
+    const fetchData = async () => {
+      try{
+        const response = await fetch(url);
+
+        if(!response){
+          throw new Error("oups !")
+        }
+
+        const result = await response.json();
+        console.log(result)
+        setDatas(result);
+
+      } catch (e) {
+       console.log(e.message)
+      }
+    };
+
+    fetchData();
+    
+  }, [])
 
   return (
     <>
       <GridComponent
-        cols="grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+        cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1"
         gap="gap-6"
       >
-        <StaffCard staff={staffTest} />
-
+        {
+          datas.map((data, index) => (
+            <StaffCard key={index} staff={data} />
+          ))
+        }
       </GridComponent>
     </>
   );

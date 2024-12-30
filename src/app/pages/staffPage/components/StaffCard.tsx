@@ -8,6 +8,8 @@ import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardI
 import { salaryToString } from "../../../shared/utils/salaryToString";
 import { levelToString } from "../../../shared/utils/levelToString";
 
+import devPortrait from "../../../../assets/images/pixelPortrait.jpg"
+
 interface StaffCardProps {
   staff: Staff;
 }
@@ -29,13 +31,13 @@ const StaffCard: React.FC<StaffCardProps> = ({ staff }) => {
           <div className="flex flex-row gap-4 h-full">
             <img
               className="min-w-15 max-w-48 h-full object-cover"
-              src={staff.img}
+              src={devPortrait}
               alt={staff.imgAlt}
             />
             <div className="flex flex-col flex-1 gap-2 h-full">
               {staffDetails.map((detail, index) => (
                 <PrimaryCardItem
-                    key={index}
+                  key={index}
                   icon={detail.icon}
                   label={detail.label}
                   value={detail.value}
