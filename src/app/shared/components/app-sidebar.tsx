@@ -24,7 +24,7 @@ const data = {
   },
   teams: [
     {
-      name: "Nom du jeu",
+      name: "DevLife",
       logo: "https://loremicon.com/grad/128/128/853580496045/jpg",
       plan: "Enterprise",
     },

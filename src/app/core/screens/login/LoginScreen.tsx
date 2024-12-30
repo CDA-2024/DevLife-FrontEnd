@@ -45,7 +45,7 @@ const LoginScreen = () => {
 
       if (users.length === 1) {
         console.log("Connexion réussie", users[0]);
-        navigate("/");
+        navigate("/game");
       } else {
         setErrorMessage("Nom d'utilisateur ou mot de passe incorrect");
       }

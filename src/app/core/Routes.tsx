@@ -8,12 +8,13 @@ import GamePage from "../pages/gamePage/Game";
 import { MaterialScreen } from "../pages/materialPage/MaterialPage";
 import StaffPage from "../pages/staffPage/StaffPage";
 import EditUserProfilePage from "./screens/editUserProfile/EditUserProfile";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const Routing = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<TestPage />} />
+        <Route path="/" element={<LandingPage />} />
 
         <Route path="auth">
           <Route path="login" element={<LoginScreen />} />
