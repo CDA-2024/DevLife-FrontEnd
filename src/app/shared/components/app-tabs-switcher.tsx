@@ -15,21 +15,21 @@ type Props = {
   tabs: TabItem[];
 };
 
-const PageTabsSwitcher = ({tabs} : Props) => {
+const PageTabsSwitcher = ({ tabs }: Props) => {
   return (
     <>
-      <Tabs defaultValue={tabs[0]?.value || ""} >
+      <Tabs defaultValue={tabs[0]?.value || ""}>
         <TabsList>
-            {tabs.map((tab : TabItem) => (
-                <TabsTrigger key={tab.value} value={tab.value}>
-                    {tab.label}
-                </TabsTrigger>
-            ))}
+          {tabs.map((tab: TabItem) => (
+            <TabsTrigger key={tab.value} value={tab.value}>
+              {tab.label}
+            </TabsTrigger>
+          ))}
         </TabsList>
-        {tabs.map((tab : TabItem) =>(
-            <TabsContent key={tab.value} value={tab.value}>
-                {tab.content}
-            </TabsContent>
+        {tabs.map((tab: TabItem) => (
+          <TabsContent key={tab.value} value={tab.value}>
+            {tab.content}
+          </TabsContent>
         ))}
       </Tabs>
     </>

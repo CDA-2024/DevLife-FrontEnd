@@ -24,7 +24,7 @@
   ],
   "staffToHire": [
     {
-      "staffName": "dev 3",
+      "name": "dev 3",
       "img": "../../../../assets/images/pixelPortrait.jpg",
       "imgAlt": "protrait de dev",
       "level": 1,
@@ -32,7 +32,7 @@
       "salary": 56
     },
     {
-      "staffName": "dev 2",
+      "name": "dev 2",
       "img": "../../../../assets/images/pixelPortrait.jpg",
       "imgAlt": "protrait de dev",
       "level": 1,
@@ -40,7 +40,7 @@
       "salary": 56
     },
     {
-      "staffName": "dev 1",
+      "name": "dev 1",
       "img": "../../../../assets/images/pixelPortrait.jpg",
       "imgAlt": "protrait de dev",
       "level": 1,

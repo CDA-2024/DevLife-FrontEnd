@@ -8,7 +8,9 @@ import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardI
 import { salaryToString } from "../../../shared/utils/salaryToString";
 import { levelToString } from "../../../shared/utils/levelToString";
 
-import devPortrait from "../../../../assets/images/pixelPortrait.jpg"
+import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
+import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardContent";
+import { Button } from "../../../shared/components/ui/button";
 
 interface StaffCardProps {
   staff: Staff;
@@ -18,7 +20,7 @@ const StaffCard: React.FC<StaffCardProps> = ({ staff }) => {
   const staffDetails = [
     { icon: "🎓", label: "Niveaux", value: levelToString(staff.level) },
     { icon: "🛠️", label: "Compétence", value: staff.skill },
-    { icon: "💰", label: "Salaire/J", value: salaryToString(staff.salary)},
+    { icon: "💰", label: "Salaire/J", value: salaryToString(staff.salary) },
   ];
 
   return (
@@ -46,6 +48,12 @@ const StaffCard: React.FC<StaffCardProps> = ({ staff }) => {
             </div>
           </div>
         </PrimaryCardContent>
+        <PrimaryCardFooter>
+          <div className="flex flex-row gap-4 h-full justify-end">
+            <Button variant="destructive">Refuser</Button>
+            <Button variant="accept">Recruter</Button>
+          </div>
+        </PrimaryCardFooter>
       </PrimaryCard>
     </>
   );

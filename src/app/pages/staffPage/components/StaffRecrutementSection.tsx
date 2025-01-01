@@ -36,10 +36,10 @@ const StaffRecrutementSection = () => {
   return (
     <>
       <GridComponent
-        cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1"
-        gap="gap-6"
+        cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
+        gap="gap-6 w-full"
       >
-        {
+        { 
           datas.map((data, index) => (
             <StaffCard key={index} staff={data} />
           ))

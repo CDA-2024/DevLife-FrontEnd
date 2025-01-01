@@ -4,7 +4,7 @@ import { CardContent } from "../ui/card";
 const PrimaryCardFooter = ({ children }: ReactChildren) => {
   return (
     <>
-      <CardContent  >{children}</CardContent>
+      <CardContent>{children}</CardContent>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Card } from "../ui/card";
 const PrimaryCard = ({ children }: ReactChildren) => {
   return (
     <>
-      <Card className="shadow-sm overflow-hidden max-w-xs min-w-[500px]">
+      <Card className="shadow-sm overflow-hidden flex-1 w-full">
         {children}
       </Card>
     </>
