@@ -1,9 +1,5 @@
 import { Tabs } from "@radix-ui/react-tabs";
-import {
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../../shared/components/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger } from "./shadcn/ui/tabs";
 
 type TabItem = {
   label: string;

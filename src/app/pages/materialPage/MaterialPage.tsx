@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../shared/components/ui/card";
-import { Button } from "../../shared/components/ui/button";
+} from "../../shared/components/shadcn/ui/card";
+import { Button } from "../../shared/components/shadcn/ui/button";
 import Ordinateur from "../../../assets/images/ordinateur.png";
 import Bureau from "../../../assets/images/bureau.jpg";
 import Chaise from "../../../assets/images/chaiseBureau.jpg";
@@ -23,7 +23,9 @@ const materials = [
 export const MaterialScreen = () => {
   return (
     <div className="p-20">
-      <h1 className="text-2xl font-bold mb-4 text-center">Liste des Matériels</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Liste des Matériels
+      </h1>
       <GridComponent
         cols="grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
         gap="gap-6"

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "./shadcn/ui/card";
 import { CardItemType } from "../interfaces/PrimaryCard.interface";
 
 type Props = {

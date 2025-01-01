@@ -1,10 +1,5 @@
-import { useNavigate } from "react-router-dom"
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  LogOut,
-} from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -24,15 +19,15 @@ import {
 
 interface NavUserProps {
   user: {
-    name: string
-    website: string
-    avatar: string
-  }
+    name: string;
+    website: string;
+    avatar: string;
+  };
 }
 
 export function NavUser({ user }: NavUserProps) {
-  const { isMobile } = useSidebar()
-  const navigate = useNavigate()
+  const { isMobile } = useSidebar();
+  const navigate = useNavigate();
 
   return (
     <SidebarMenu>
@@ -68,7 +63,7 @@ export function NavUser({ user }: NavUserProps) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => navigate('/profile/edit')}>
+              <DropdownMenuItem onClick={() => navigate("/profile/edit")}>
                 <BadgeCheck className="mr-2 h-4 w-4" />
                 Profile
               </DropdownMenuItem>

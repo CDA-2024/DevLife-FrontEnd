@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { NavUser } from "./nav-user"
+import { NavUser } from "./nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -10,9 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-} from "./ui/sidebar"
-import { TeamSwitcher } from "./team-switcher"
-import { Link } from "react-router-dom"
+} from "./ui/sidebar";
+import { TeamSwitcher } from "./team-switcher";
+import { Link } from "react-router-dom";
 
 // Données de l'application
 const data = {
@@ -99,11 +99,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           user={{
             name: data.user.name,
             website: data.user.website,
-            avatar: "😎"
+            avatar: "😎",
           }}
         />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

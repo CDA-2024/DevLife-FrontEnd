@@ -1,6 +1,6 @@
 import React from "react";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
-import { CardTitle } from "../../../shared/components/ui/card";
+import { CardTitle } from "../../../shared/components/shadcn/ui/card";
 import { Staff } from "../interfaces/Staff.interface";
 import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryHeader";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
@@ -10,7 +10,7 @@ import { levelToString } from "../../../shared/utils/levelToString";
 
 import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardContent";
-import { Button } from "../../../shared/components/ui/button";
+import { Button } from "../../../shared/components/shadcn/ui/button";
 
 interface StaffCardProps {
   staff: Staff;

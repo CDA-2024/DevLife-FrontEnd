@@ -6,7 +6,7 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@/app/shared/components/ui/toast"
+} from "@/app/shared/components/shadcn/ui/toast";
 
 export function Toaster() {
   const { toasts } = useToast()

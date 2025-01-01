@@ -5,15 +5,15 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "../../../shared/components/ui/form";
-import { Input } from "../../../shared/components/ui/input";
-import { Button } from "../../../shared/components/ui/button";
+} from "../../../shared/components/shadcn/ui/form";
+import { Input } from "../../../shared/components/shadcn/ui/input";
+import { Button } from "../../../shared/components/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../../shared/components/ui/card";
+} from "../../../shared/components/shadcn/ui/card";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

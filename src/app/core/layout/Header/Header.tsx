@@ -1,15 +1,15 @@
-import { SidebarTrigger } from "../../../shared/components/ui/sidebar";
-import { Progress } from "../../../shared/components/ui/progress";
-import { Separator } from "../../../shared/components/ui/separator";
+import { SidebarTrigger } from "../../../shared/components/shadcn/ui/sidebar";
+import { Progress } from "../../../shared/components/shadcn/ui/progress";
+import { Separator } from "../../../shared/components/shadcn/ui/separator";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Button } from "../../../shared/components/ui/button";
+import { Button } from "../../../shared/components/shadcn/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../../shared/components/ui/dropdown-menu";
+} from "../../../shared/components/shadcn/ui/dropdown-menu";
 import { Menu } from "lucide-react";
 
 interface HeaderStats {
