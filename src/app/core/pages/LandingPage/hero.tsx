@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../../shared/components/shadcn/ui/button";
+import { Button } from "../../../shared/components/Shadcn/ui/button";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 
 const Hero = () => {

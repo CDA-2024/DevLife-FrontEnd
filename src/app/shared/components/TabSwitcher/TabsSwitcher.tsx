@@ -1,5 +1,5 @@
 import { Tabs } from "@radix-ui/react-tabs";
-import { TabsContent, TabsList, TabsTrigger } from "./shadcn/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger } from "../Shadcn/ui/tabs";
 
 type TabItem = {
   label: string;
@@ -11,7 +11,7 @@ type Props = {
   tabs: TabItem[];
 };
 
-const PageTabsSwitcher = ({ tabs }: Props) => {
+const TabsSwitcher = ({ tabs }: Props) => {
   return (
     <>
       <Tabs defaultValue={tabs[0]?.value || ""}>
@@ -32,4 +32,4 @@ const PageTabsSwitcher = ({ tabs }: Props) => {
   );
 };
 
-export default PageTabsSwitcher;
+export default TabsSwitcher;

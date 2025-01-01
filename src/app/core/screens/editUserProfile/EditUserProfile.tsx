@@ -4,15 +4,15 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../../shared/components/shadcn/ui/card";
-import { Button } from "../../../shared/components/shadcn/ui/button";
-import { Input } from "../../../shared/components/shadcn/ui/input";
-import { Label } from "../../../shared/components/shadcn/ui/label";
+} from "../../../shared/components/Shadcn/ui/card";
+import { Button } from "../../../shared/components/Shadcn/ui/button";
+import { Input } from "../../../shared/components/Shadcn/ui/input";
+import { Label } from "../../../shared/components/Shadcn/ui/label";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "../../../shared/components/shadcn/ui/avatar";
+} from "../../../shared/components/Shadcn/ui/avatar";
 import { useToast } from "../../../shared/hooks/use-toast";
 
 interface UserProfile {

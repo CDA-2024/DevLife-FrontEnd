@@ -1,4 +1,4 @@
-import PageTabsSwitcher from "../../shared/components/app-tabs-switcher";
+import TabsSwitcher from "../../shared/components/TabSwitcher/TabsSwitcher";
 import StaffManagementSection from "./components/StaffManagementSection";
 import StaffRecrutementSection from "./components/StaffRecrutementSection";
 
@@ -18,10 +18,9 @@ const StaffPage = () => {
 
   return (
     <>
-    <div className=" m-2 ml-10">
-      <PageTabsSwitcher tabs={tabs} />
-    </div>
-      
+      <div className=" m-2 ml-10">
+        <TabsSwitcher tabs={tabs} />
+      </div>
     </>
   );
 };

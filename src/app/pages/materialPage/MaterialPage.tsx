@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../shared/components/shadcn/ui/card";
-import { Button } from "../../shared/components/shadcn/ui/button";
+} from "../../shared/components/Shadcn/ui/card";
+import { Button } from "../../shared/components/Shadcn/ui/button";
 import Ordinateur from "../../../assets/images/ordinateur.png";
 import Bureau from "../../../assets/images/bureau.jpg";
 import Chaise from "../../../assets/images/chaiseBureau.jpg";

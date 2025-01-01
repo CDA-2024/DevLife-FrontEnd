@@ -1,5 +1,5 @@
 import { ReactChildren } from "../../interfaces/ReactChildren.interface";
-import { Card } from "../shadcn/ui/card";
+import { Card } from "../Shadcn/ui/card";
 
 const PrimaryCard = ({ children }: ReactChildren) => {
   return (

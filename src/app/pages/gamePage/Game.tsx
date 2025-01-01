@@ -3,9 +3,9 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../shared/components/shadcn/ui/card";
-import { Progress } from "../../shared/components/shadcn/ui/progress";
-import { Button } from "../../shared/components/shadcn/ui/button";
+} from "../../shared/components/Shadcn/ui/card";
+import { Progress } from "../../shared/components/Shadcn/ui/progress";
+import { Button } from "../../shared/components/Shadcn/ui/button";
 import { useNavigate } from "react-router-dom";
 
 interface Enterprise {
