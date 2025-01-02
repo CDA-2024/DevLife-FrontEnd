@@ -7,6 +7,9 @@ import GamePage from "./pages/Game";
 import EditProfileScreen from "./pages/EditUserProfile";
 import { MaterialScreen } from "../screens/materialPage/MaterialPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import BusinessScreenFreelance from "./pages/businessPage/BusinessScreenFreelance";
+import BusinessScreenCompany from "./pages/businessPage/BusinessScreenCompany";
+import BudgetPage from "./pages/budgetPage/BudgetPage";
 
 const Routing = () => {
   return (
@@ -29,14 +32,21 @@ const Routing = () => {
         />
 
         <Route
-          path="/compagnie"
+          path="/team"
           element={
             <BaseLayout>
-              <TestPage />
+              <BusinessScreenFreelance />
             </BaseLayout>
           }
         />
-
+        <Route
+          path="/teamcompany"
+          element={
+            <BaseLayout>
+              <BusinessScreenCompany />
+            </BaseLayout>
+          }
+        />
         <Route
           path="/contract"
           element={
@@ -74,10 +84,10 @@ const Routing = () => {
         />
 
         <Route
-          path="/budjet"
+          path="/budget"
           element={
             <BaseLayout>
-              <TestPage />
+              <BudgetPage />
             </BaseLayout>
           }
         />
