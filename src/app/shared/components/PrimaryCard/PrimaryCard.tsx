@@ -3,11 +3,7 @@ import { Card } from "../Shadcn/ui/card";
 
 const PrimaryCard = ({ children }: ReactChildren) => {
   return (
-    <>
-      <Card className="shadow-sm overflow-hidden flex-1 w-full">
-        {children}
-      </Card>
-    </>
+    <Card className="shadow-sm overflow-hidden flex-1 w-full">{children}</Card>
   );
 };
 

@@ -1,4 +1,5 @@
-export interface Staff {
+export interface EmployeToHire {
+  id: string;
   name: string;
   img?: string;
   imgAlt: string;

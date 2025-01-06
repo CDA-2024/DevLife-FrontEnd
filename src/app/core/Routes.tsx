@@ -6,96 +6,94 @@ import RegisterScreen from "./screens/register/RegisterScreen";
 import GamePage from "../pages/gamePage/Game";
 
 import { MaterialScreen } from "../pages/materialPage/MaterialPage";
-import StaffPage from "../pages/staffPage/StaffPage";
+import EmployePage from "../pages/staffPage/EmployePage";
 import EditUserProfilePage from "./screens/editUserProfile/EditUserProfile";
-import LandingPage from "./pages/LandingPage/LandingPage";
+import LandingPage from "./screens/LandingPage/LandingPage";
 
 const Routing = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
 
-        <Route path="auth">
-          <Route path="login" element={<LoginScreen />} />
-          <Route path="register" element={<RegisterScreen />} />
-        </Route>
+      <Route path="auth">
+        <Route path="login" element={<LoginScreen />} />
+        <Route path="register" element={<RegisterScreen />} />
+      </Route>
 
-        <Route
-          path="/game"
-          element={
-            <BaseLayout>
-              <GamePage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/game"
+        element={
+          <BaseLayout>
+            <GamePage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/compagnie"
-          element={
-            <BaseLayout>
-              <TestPage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/compagnie"
+        element={
+          <BaseLayout>
+            <TestPage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/contract"
-          element={
-            <BaseLayout>
-              <TestPage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/contract"
+        element={
+          <BaseLayout>
+            <TestPage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/material"
-          element={
-            <BaseLayout>
-              <MaterialScreen />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/material"
+        element={
+          <BaseLayout>
+            <MaterialScreen />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/shop"
-          element={
-            <BaseLayout>
-              <TestPage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/shop"
+        element={
+          <BaseLayout>
+            <TestPage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/staff"
-          element={
-            <BaseLayout>
-              <StaffPage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/employe"
+        element={
+          <BaseLayout>
+            <EmployePage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/budjet"
-          element={
-            <BaseLayout>
-              <TestPage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/budjet"
+        element={
+          <BaseLayout>
+            <TestPage />
+          </BaseLayout>
+        }
+      />
 
-        <Route
-          path="/profile/edit"
-          element={
-            <BaseLayout>
-              <EditUserProfilePage />
-            </BaseLayout>
-          }
-        />
+      <Route
+        path="/profile/edit"
+        element={
+          <BaseLayout>
+            <EditUserProfilePage />
+          </BaseLayout>
+        }
+      />
 
-        <Route path="*" element={<TestPage />} />
-      </Routes>
-    </>
+      <Route path="*" element={<TestPage />} />
+    </Routes>
   );
 };
 

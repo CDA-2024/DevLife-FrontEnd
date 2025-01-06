@@ -13,9 +13,8 @@ type Props = {
 
 const TabsSwitcher = ({ tabs }: Props) => {
   return (
-    <>
       <Tabs defaultValue={tabs[0]?.value || ""}>
-        <TabsList>
+        <TabsList className="bg-white">
           {tabs.map((tab: TabItem) => (
             <TabsTrigger key={tab.value} value={tab.value}>
               {tab.label}
@@ -28,7 +27,6 @@ const TabsSwitcher = ({ tabs }: Props) => {
           </TabsContent>
         ))}
       </Tabs>
-    </>
   );
 };
 

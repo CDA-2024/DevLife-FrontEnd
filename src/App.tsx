@@ -1,7 +1,7 @@
 import { Button } from "./app/shared/components/Shadcn/ui/button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BaseLayout from "./app/core/layout/BaseLayout";
-import LandingPage from "./app/core/pages/LandingPage/LandingPage";
+import LandingPage from "./app/core/screens/LandingPage/LandingPage";
 export default function Home() {
   return (
     <BrowserRouter>

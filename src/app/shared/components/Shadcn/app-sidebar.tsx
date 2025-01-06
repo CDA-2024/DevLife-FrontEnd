@@ -39,7 +39,7 @@ const data = {
     {
       title: "Équipe",
       icon: "👥",
-      url: "/staff",
+      url: "/employe",
       variant: "ghost",
     },
     {

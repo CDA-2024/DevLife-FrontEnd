@@ -8,7 +8,7 @@ const PrimaryCardItem = ({
 }: {
   icon: string;
   label: string;
-  value: string;
+  value: number | string;
   threshold?: number;
 }) => {
   const { isSmall, containerRef } = useResize(threshold);
@@ -24,7 +24,13 @@ const PrimaryCardItem = ({
         <span>{icon}</span>
         <p className="font-semibold">{label}</p>
       </div>
-      <p className="mt-2 text-sm sm:text-base">{value}</p>
+      <p
+        className={`mt-2 text-sm sm:text-base ${
+          isSmall ? "ml-auto text-right" : ""
+        }`}
+      >
+        {value}
+      </p>
     </div>
   );
 };
