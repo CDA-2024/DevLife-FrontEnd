@@ -1,14 +1,16 @@
 import { Route, Routes } from "react-router-dom";
+import { MaterialScreen } from "../pages/materialPage/MaterialPage";
 import BaseLayout from "./layout/BaseLayout";
 import TestPage from "./screens/TestPage";
 import LoginScreen from "./screens/login/LoginScreen";
 import RegisterScreen from "./screens/register/RegisterScreen";
 import GamePage from "../pages/gamePage/Game";
-
-import { MaterialScreen } from "../pages/materialPage/MaterialPage";
 import EmployePage from "../pages/staffPage/EmployePage";
 import EditUserProfilePage from "./screens/editUserProfile/EditUserProfile";
 import LandingPage from "./screens/LandingPage/LandingPage";
+import BusinessScreenFreelance from "./pages/businessPage/BusinessScreenFreelance";
+import BusinessScreenCompany from "./pages/businessPage/BusinessScreenCompany";
+import BudgetPage from "./pages/budgetPage/BudgetPage";
 
 const Routing = () => {
   return (
@@ -30,14 +32,21 @@ const Routing = () => {
       />
 
       <Route
-        path="/compagnie"
+        path="/buisnesse"
         element={
           <BaseLayout>
-            <TestPage />
+            <BusinessScreenFreelance />
           </BaseLayout>
         }
       />
-
+      <Route
+        path="/buisnessecompany"
+        element={
+          <BaseLayout>
+            <BusinessScreenCompany />
+          </BaseLayout>
+        }
+      />
       <Route
         path="/contract"
         element={
@@ -57,15 +66,6 @@ const Routing = () => {
       />
 
       <Route
-        path="/shop"
-        element={
-          <BaseLayout>
-            <TestPage />
-          </BaseLayout>
-        }
-      />
-
-      <Route
         path="/employe"
         element={
           <BaseLayout>
@@ -75,10 +75,10 @@ const Routing = () => {
       />
 
       <Route
-        path="/budjet"
+        path="/budget"
         element={
           <BaseLayout>
-            <TestPage />
+            <BudgetPage />
           </BaseLayout>
         }
       />

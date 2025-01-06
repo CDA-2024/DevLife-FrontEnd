@@ -37,6 +37,12 @@ const data = {
       variant: "default",
     },
     {
+      title: "Buisnesse",
+      icon: "👥",
+      url: "/buisnesse",
+      variant: "ghost",
+    },
+    {
       title: "Équipe",
       icon: "👥",
       url: "/employe",
