@@ -4,8 +4,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "../../../shared/components/ui/navigation-menu";
-import { Button } from "../../../shared/components/ui/button";
+} from "../../../shared/components/Shadcn/ui/navigation-menu";
+import { Button } from "../../../shared/components/Shadcn/ui/button";
 
 const navigation = [
   { item: "Home", path: "/" },

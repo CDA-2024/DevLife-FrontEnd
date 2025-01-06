@@ -20,6 +20,207 @@
       "email": "johnsmith@gmail.com",
       "password": "Azerty1234!",
       "role": "moderator"
+    },
+    {
+      "id": 4,
+      "name": "admin",
+      "email": "johnsmith@gmail.com",
+      "password": "admin",
+      "role": "admin"
+    }
+  ],
+  "staffToHire": [
+    {
+      "id": "1a",
+      "name": "dev 1",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "front-End",
+      "salary": 56
+    },
+    {
+      "id": "2a",
+      "name": "dev 2",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "back-End",
+      "salary": 56
+    },
+    {
+      "id": "3a",
+      "name": "dev 3",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "fullStack",
+      "salary": 156
+    },
+    {
+      "id": "4a",
+      "name": "dev 4",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "front-End",
+      "salary": 56
+    },
+    {
+      "id": "5a",
+      "name": "dev 5",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "back-End",
+      "salary": 56
+    },
+    {
+      "id": "6a",
+      "name": "dev 6",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "fullStack",
+      "salary": 156
+    },
+    {
+      "id": "7a",
+      "name": "dev 7",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "fullStack",
+      "salary": 156
+    },
+    {
+      "id": "8a",
+      "name": "dev 8",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "front-End",
+      "salary": 56
+    },
+    {
+      "id": "9a",
+      "name": "dev 9",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "back-End",
+      "salary": 56
+    },
+    {
+      "id": "10a",
+      "name": "dev 10",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "skill": "fullStack",
+      "salary": 156
+    }
+  ],
+  "staff": [
+    {
+      "id": "1a",
+      "name": "dev 1",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "xp": 200,
+      "skill": "front-End",
+      "salary": 56,
+      "materials": [
+        {
+          "id": "1aa",
+          "employeId": "1a",
+          "name": "computer",
+          "type": "hardware",
+          "condition": 1000,
+          "description": "this is a computer dude, what did you imagine... a unicorne ?!",
+          "materialSkill": {
+            "id": "1aaa",
+            "name": "computer",
+            "description": "Your dev will work faster ! sure is beter to work on a computer then to use paper and a pen to code !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2a",
+      "name": "dev 2",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 3,
+      "xp": 783,
+      "skill": "back-End",
+      "salary": 256,
+      "materials": [
+        {
+          "id": "2aa",
+          "employeId": "2a",
+          "name": "computer",
+          "type": "hardware",
+          "condition": 1000,
+          "description": "this is a computer dude, what did you imagine... a unicorne ?!",
+          "materialSkill": {
+            "id": "1aaa",
+            "name": "computer",
+            "description": "Your dev will work faster ! sure is beter to work on a computer then to use paper and a pen to code !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3a",
+      "name": "dev 3",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 2,
+      "xp": 200,
+      "skill": "fullStack",
+      "salary": 156,
+      "materials": [
+        {
+          "id": "3aa",
+          "employeId": "3a",
+          "name": "computer",
+          "type": "hardware",
+          "condition": 1000,
+          "description": "this is a computer dude, what did you imagine... a unicorne ?!",
+          "materialSkill": {
+            "id": "1aaa",
+            "name": "computer",
+            "description": "Your dev will work faster ! sure is beter to work on a computer then to use paper and a pen to code !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4a",
+      "name": "dev 4",
+      "img": "../../../../assets/images/pixelPortrait.jpg",
+      "imgAlt": "protrait de dev",
+      "level": 1,
+      "xp": 0,
+      "skill": "front-End",
+      "salary": 56,
+      "materials": [
+        {
+          "id": "4aa",
+          "employeId": "4a",
+          "name": "computer",
+          "type": "hardware",
+          "condition": 1000,
+          "description": "this is a computer dude, what did you imagine... a unicorne ?!",
+          "materialSkill": {
+            "id": "1aaa",
+            "name": "computer",
+            "description": "Your dev will work faster ! sure is beter to work on a computer then to use paper and a pen to code !"
+          }
+        }
+      ]
     }
   ]
 }
