@@ -4,7 +4,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../../shared/components/ui/card";
+} from "../../../shared/components/Shadcn/ui/card";
 import ExpensesPieChart from "./ExpensesChart";
 
 const chargesData = {

@@ -11,7 +11,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../../shared/components/ui/card";
+} from "../../../shared/components/Shadcn/ui/card";
 
 // Configuration globale de Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);

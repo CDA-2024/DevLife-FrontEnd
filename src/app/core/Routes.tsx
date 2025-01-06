@@ -32,7 +32,7 @@ const Routing = () => {
       />
 
       <Route
-        path="/buisnesse"
+        path="/buisness"
         element={
           <BaseLayout>
             <BusinessScreenFreelance />
@@ -40,7 +40,7 @@ const Routing = () => {
         }
       />
       <Route
-        path="/buisnessecompany"
+        path="/buisnesscompany"
         element={
           <BaseLayout>
             <BusinessScreenCompany />

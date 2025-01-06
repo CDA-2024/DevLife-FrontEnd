@@ -32,14 +32,14 @@ const data = {
   navItems: [
     {
       title: "Game",
-      icon: "👤",
+      icon: "🏠",
       url: "/game",
       variant: "default",
     },
     {
-      title: "Buisnesse",
-      icon: "👥",
-      url: "/buisnesse",
+      title: "Entreprise",
+      icon: "💼",
+      url: "/buisness",
       variant: "ghost",
     },
     {
