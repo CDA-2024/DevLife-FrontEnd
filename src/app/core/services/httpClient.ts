@@ -1,7 +1,7 @@
 import { HttpClientOptions } from "../schemas/HttpClientOptions.interface";
-import { buildHeader } from "../utils/buildHeaders";
-import { handleHttpErrors } from "../utils/handleHttpErrors";
-import { handleTimeout } from "../utils/handleTimeout";
+import { buildHeaders } from "../utils/httpClient/buildHeaders";
+import { handleHttpErrors } from "../utils/httpClient/handleHttpErrors";
+import { handleTimeout } from "../utils/httpClient/handleTimeout";
 
 export const httpClient = async <T>(
   url: string,
@@ -16,7 +16,7 @@ export const httpClient = async <T>(
     const response = await fetch(url, {
       ...otherOptions,
       signal: finalSignal,
-      headers: buildHeader(otherOptions.headers),
+      headers: buildHeaders(otherOptions.headers),
     });
 
     await handleHttpErrors(response);
