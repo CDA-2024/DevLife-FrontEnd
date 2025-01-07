@@ -50,7 +50,8 @@ export const dataProvider: DataProvider = {
       url,
     });
 
-    return response.data;
+    // A changer quand back seras implementé par response.data 
+    return response;
   },
 
   create: async <T>(
