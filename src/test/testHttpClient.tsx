@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { httpClient } from "../app/core/services/httpClient";
 
+import { dataProvider } from "../app/core/contexts/dataProvider/dataProvider";
 
 const TestHttpClient: React.FC = () => {
   const [data, setData] = useState<any>(null);
@@ -12,18 +13,17 @@ const TestHttpClient: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        // Remplacez l'URL par une URL d'API valide
-        const response = await httpClient<any>("http://localhost:3000/staff");
+        const response = await dataProvider.getOne("staff", { id: "1a" });
         setData(response);
       } catch (e) {
-        setError("Failed to fetch data");
+        setError(e.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;

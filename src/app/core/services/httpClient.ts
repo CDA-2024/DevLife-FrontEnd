@@ -1,12 +1,18 @@
-import { HttpClientOptions } from "../schemas/HttpClientOptions.interface";
-import { buildHeaders } from "../utils/httpClient/buildHeaders";
-import { handleHttpErrors } from "../utils/httpClient/handleHttpErrors";
-import { handleTimeout } from "../utils/httpClient/handleTimeout";
+import {
+  buildHeaders,
+  handleHttpErrors,
+  handleTimeout,
+} from "../utils/httpUtils";
+
+interface HttpClientOptions extends RequestInit {
+  timeout?: number;
+  signal?: AbortSignal;
+}
 
 export const httpClient = async <T>(
   url: string,
   option: HttpClientOptions = {}
-): Promise<T> => {
+): Promise<{ data: T | T[] }> => {
   const { timeout = 10000, signal, ...otherOptions } = option;
 
   const controller = handleTimeout(timeout);
@@ -21,7 +27,7 @@ export const httpClient = async <T>(
 
     await handleHttpErrors(response);
 
-    return (await response.json()) as T;
+    return (await response.json());
   } catch (e) {
     if (e instanceof Error) {
       if (e.name === "AbortError") {
