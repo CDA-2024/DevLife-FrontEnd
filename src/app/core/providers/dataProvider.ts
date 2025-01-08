@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { RequestParams } from "../../schemas/request/RequestParams.interface";
-import { fetchUtils } from "../../utils/fetchUtils";
-import { buildUrl } from "../../utils/httpUtils";
-import { DataProvider } from "./dataProvider.interface";
+import { RequestParams } from "../schemas/request/RequestParams.interface";
+import { fetchUtils } from "../utils/fetchUtils";
+import { buildUrl } from "../utils/httpUtils";
+import { DataProvider } from "../schemas/DataProvider.interface";
 
 const API_BASE_URL = "http://localhost:3000";
+
+// changer le Type de reponses atendue pour chaque reponses en implementant des interfaces
 
 export const dataProvider: DataProvider = {
   getList: async <T>(
@@ -20,14 +21,15 @@ export const dataProvider: DataProvider = {
       url,
     });
 
-    // A changer quand back seras implementé par response.data
-    return response.data;
+    // A changer quand back seras implementé par response
+    const res = { data: response } as T | T[];
+    return res;
   },
 
   getOne: async <T>(
     resource: string,
     params: RequestParams
-  ): Promise< T | T[] > => {
+  ): Promise<T | T[]> => {
     const url = `${API_BASE_URL}/${resource}/${params.id}`;
 
     const response = await fetchUtils<T>({
@@ -35,29 +37,24 @@ export const dataProvider: DataProvider = {
       url,
     });
 
-    // A changer quand back seras implementé par response.data 
-    return response;
+    // A changer quand back seras implementé par response.data
+    const res = { data: response } as T | T[];
+    return res;
   },
 
   getMany: async <T>(
     resource: string,
     params: RequestParams
   ): Promise<T | T[]> => {
-    const url = `${API_BASE_URL}/${resource}/${params.ids}/${buildUrl(params)}`;
-
-    const response = await fetchUtils<T>({
-      method: "GET",
-      url,
-    });
-
-    // A changer quand back seras implementé par response.data 
-    return response;
+    console.log(resource, params);
+    throw new Error("Function not implemented.");
   },
 
   create: async <T>(
     resource: string,
     params: RequestParams
   ): Promise<T | T[]> => {
+    console.log(resource, params);
     throw new Error("Function not implemented.");
   },
 
@@ -65,6 +62,7 @@ export const dataProvider: DataProvider = {
     resource: string,
     params: RequestParams
   ): Promise<T | T[]> => {
+    console.log(resource, params);
     throw new Error("Function not implemented.");
   },
 
@@ -72,6 +70,7 @@ export const dataProvider: DataProvider = {
     resource: string,
     params: RequestParams
   ): Promise<T | T[]> => {
+    console.log(resource, params);
     throw new Error("Function not implemented.");
   },
 
@@ -79,6 +78,7 @@ export const dataProvider: DataProvider = {
     resource: string,
     params: RequestParams
   ): Promise<T | T[]> => {
+    console.log(resource, params);
     throw new Error("Function not implemented.");
   },
 };

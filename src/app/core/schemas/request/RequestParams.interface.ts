@@ -5,7 +5,5 @@ export interface RequestParams {
   perPage?: number;
   field?: string;
   order?: string;
-  headers?: HeadersInit;
-  useCache?: boolean;
   data?: Record<string, unknown>;
 }
