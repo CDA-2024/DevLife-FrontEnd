@@ -1,4 +1,4 @@
 import { createContext } from "react";
-import { DataProvider as IDataProvider } from "../../schemas/DataProvider.interface";
+import { DataProviderContext as IDataProviderContext } from "../../schemas/DataProviderContext.interface";
 
-export const DataProviderContext = createContext<IDataProvider | null>(null);
+export const DataProviderContext = createContext<IDataProviderContext | null>(null);

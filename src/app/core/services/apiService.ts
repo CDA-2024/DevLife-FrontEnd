@@ -1,5 +1,5 @@
 import { RequestOption } from "../schemas/request/RequestOptions.interface";
-import { getCache, setCache } from "./cahe";
+import { getCache, setCache } from "../utils/caheUtils";
 import { httpClient } from "./httpClient";
 
 const httpRequest = async <T>(

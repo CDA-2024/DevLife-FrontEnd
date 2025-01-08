@@ -2,38 +2,33 @@
 import React, { useEffect, useState } from "react";
 import { useDataProvider } from "../app/core/contexts/dataProvider/useDataProvider";
 
-
-
 const TestHttpClient: React.FC = () => {
+  const { callApiWithState, requestStates, dataProvider } = useDataProvider();
   const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const dataProvider = useDataProvider()
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await dataProvider.getList("staff", { id: "1a" });
-        setData(response);
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
+      await callApiWithState("fetchdata", async () => {
+        const response = await dataProvider.getList("staff");
+        console.log(response);
+        setData(response); 
+      });
     };
 
     fetchData();
-  }, []);
+  }, [callApiWithState, dataProvider]); 
 
-  if (loading) {
+  const fetchResourcesState = requestStates["fetchdata"] || {
+    loading: false,
+    error: null,
+  };
+
+  if (fetchResourcesState.loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (fetchResourcesState.error) {
+    return <div>Error: {fetchResourcesState.error}</div>;
   }
 
   return (

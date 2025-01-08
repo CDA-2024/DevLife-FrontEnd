@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { DataProvider } from "../../schemas/DataProvider.interface";
 import { DataProviderContext } from "./dataProviderContext";
+import { DataProviderContext as IDataProviderContext } from "../../schemas/DataProviderContext.interface";
 
-export const useDataProvider = (): DataProvider => {
+export const useDataProvider = (): IDataProviderContext => {
   const context = useContext(DataProviderContext);
   if (!context) {
     throw new Error(
