@@ -1,84 +1,58 @@
-import { RequestParams } from "../schemas/request/RequestParams.interface";
-import { fetchUtils } from "../utils/fetchUtils";
 import { buildUrl } from "../utils/httpUtils";
-import { DataProvider } from "../schemas/DataProvider.interface";
+import {
+  DataProvider,
+  ParamsCreate,
+  ParamsDelete,
+  ParamsGet,
+  ParamsGetAll,
+  ParamsUpdate,
+} from "../schemas/DataProvider.interface";
+import { fetchRequestJson } from "../services/apiService";
+import { getFirstItem } from "../utils/getFirstItem";
 
 const API_BASE_URL = "http://localhost:3000";
 
-// changer le Type de reponses atendue pour chaque reponses en implementant des interfaces
-
 export const dataProvider: DataProvider = {
-  getList: async <T>(
-    resource: string,
-    params?: RequestParams
-  ): Promise<T | T[]> => {
+  getAll: async <T>(resource: string, params: ParamsGetAll): Promise<T[]> => {
     const url = params
       ? `${API_BASE_URL}/${resource}/${buildUrl(params)}`
       : `${API_BASE_URL}/${resource}`;
 
-    const response = await fetchUtils<T>({
-      method: "GET",
-      url,
+    const response = await fetchRequestJson<T>(url, {
+      useCache: params?.useCache,
     });
 
-    // A changer quand back seras implementé par response
-    const res = { data: response } as T | T[];
-    return res;
+    return response;
   },
 
-  getOne: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
+  get: async <T>(resource: string, params: ParamsGet): Promise<T> => {
     const url = `${API_BASE_URL}/${resource}/${params.id}`;
 
-    const response = await fetchUtils<T>({
-      method: "GET",
-      url,
+    const response = await fetchRequestJson<T>(url, {
+      useCache: params?.useCache,
     });
 
-    // A changer quand back seras implementé par response.data
-    const res = { data: response } as T | T[];
-    return res;
+    return getFirstItem(response);
   },
 
-  getMany: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
-    console.log(resource, params);
+  create: async <T>(resource: string, params: ParamsCreate<T>): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}`;
+
+    console.log(url, params);
     throw new Error("Function not implemented.");
   },
 
-  create: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
-    console.log(resource, params);
+  update: async <T>(resource: string, params: ParamsUpdate<T>): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
+
+    console.log(url);
     throw new Error("Function not implemented.");
   },
 
-  update: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
-    console.log(resource, params);
-    throw new Error("Function not implemented.");
-  },
+  delete: async <T>(resource: string, params: ParamsDelete): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
 
-  delete: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
-    console.log(resource, params);
-    throw new Error("Function not implemented.");
-  },
-
-  deleteMany: async <T>(
-    resource: string,
-    params: RequestParams
-  ): Promise<T | T[]> => {
-    console.log(resource, params);
+    console.log(url);
     throw new Error("Function not implemented.");
   },
 };

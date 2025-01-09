@@ -1,66 +1,80 @@
-import { RequestOption } from "../schemas/request/RequestOptions.interface";
+import { RequestOptions } from "../schemas/request/RequestOptions.interface";
+import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient";
 import { getCache, setCache } from "../utils/caheUtils";
 import { httpClient } from "./httpClient";
 
-const httpRequest = async <T>(
-  method: string,
+export const fetchRequestJson = async <T>(
   url: string,
-  body?: Record<string, unknown>,
-  { useCache = false, headers }: RequestOption = {}
-): Promise<{ data: T | T[] }> => {
-  if (useCache && getCache<T>(url)) {
-    return getCache<T>(url.toString())!;
+  options: RequestOptions = {}
+): Promise<T[]> => {
+  if (options.useCache) {
+    const cachedData = getCache<T>(url);
+    if (cachedData) {
+      return cachedData;
+    }
   }
+
+  const headers = createHeadersFromOptions(options);
 
   const response = await httpClient<T>(url, {
-    method,
-    body: body ? JSON.stringify(body) : undefined,
-    headers,
+    method: options.method,
+    body: options.body ? JSON.stringify(options.body) : undefined,
+    headers: {
+      ...headers,
+    },
   });
 
-  if (useCache) {
-    setCache(url, response);
+  const jsonData = response.json;
+
+  if (!jsonData) {
+    throw new Error("No Valid Json.");
   }
+
+  const normalizedResponse = Array.isArray(jsonData) ? jsonData : [jsonData];
+
+  if (options.useCache) {
+    setCache(url, normalizedResponse);
+  }
+
+  return normalizedResponse;
+};
+
+export const fetchRequest = async <T>(
+  url: string,
+  options: RequestOptions = {}
+): Promise<ResponseHttpClient<T>> => {
+  const response = await httpClient<T>(url, {
+    method: options.method,
+    body: options.body ? JSON.stringify(options.body) : undefined,
+    headers: {
+      ...options.headers,
+    },
+  });
 
   return response;
 };
 
-export const apiService = {
-  get: <T>(
-    url: string,
-    options?: RequestOption
-  ): Promise<{ data: T | T[] }> => {
-    return httpRequest<T>("GET", url, undefined, options);
-  },
+const createHeadersFromOptions = (options: RequestOptions): HeadersInit => {
+  const requestHeaders = (options.headers ||
+    new Headers({
+      Accept: "application/json",
+    })) as Headers;
+  const hasBody = options.body;
+  const isContentTypeSet = requestHeaders.has("Content-Type");
+  const isGetMethod = !options?.method || options?.method === "GET";
+  const isFormData = options?.body instanceof FormData;
 
-  post: <T>(
-    endpoint: string,
-    body: Record<string, unknown>,
-    options?: RequestOption
-  ): Promise<{ data: T | T[] }> => {
-    return httpRequest<T>("POST", endpoint, body, options);
-  },
+  const shouldSetContentType =
+    hasBody && !isContentTypeSet && !isGetMethod && !isFormData;
+  if (shouldSetContentType) {
+    requestHeaders.set("Content-Type", "application/json");
+  }
 
-  put: <T>(
-    endpoint: string,
-    body: Record<string, unknown>,
-    options?: RequestOption
-  ): Promise<{ data: T | T[] }> => {
-    return httpRequest<T>("PUT", endpoint, body, options);
-  },
+  if (options.user) {
+    if (options.user.authenticated && options.user.token) {
+      requestHeaders.set("Authorization", options.user.token);
+    }
+  }
 
-  patch: <T>(
-    endpoint: string,
-    body: Record<string, unknown>,
-    options?: RequestOption
-  ): Promise<{ data: T | T[] }> => {
-    return httpRequest<T>("PATCH", endpoint, body, options);
-  },
-
-  delete: <T>(
-    endpoint: string,
-    options?: RequestOption
-  ): Promise<{ data: T | T[] }> => {
-    return httpRequest<T>("DELETE", endpoint, undefined, options);
-  },
+  return requestHeaders;
 };

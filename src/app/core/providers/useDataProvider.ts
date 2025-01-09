@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { DataProviderContext } from "./dataProviderContext";
-import { DataProviderContext as IDataProviderContext } from "../../schemas/DataProviderContext.interface";
+import { DataProviderContext } from "../contexts/dataProviderContext";
+import { DataProviderContext as IDataProviderContext } from "../schemas/DataProviderContext.interface";
 
 export const useDataProvider = (): IDataProviderContext => {
   const context = useContext(DataProviderContext);

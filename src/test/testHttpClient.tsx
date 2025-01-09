@@ -1,40 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-import { useDataProvider } from "../app/core/contexts/dataProvider/useDataProvider";
+import { useCallback } from "react";
+import { useGet, useGetAll } from "../app/core/hooks/useApi";
+import { Employe } from "../app/pages/employePage/interfaces/Employe.interface";
+import { Button } from "../app/shared/components/Shadcn/ui/button";
 
-const TestHttpClient: React.FC = () => {
-  const { callApiWithState, requestStates, dataProvider } = useDataProvider();
-  const [data, setData] = useState<any>(null);
+const TestHttpClient = () => {
+  const { data, loading, error, refresh } = useGetAll<Employe>("staff");
+  const {
+    data: data1,
+    error: error1,
+    loading: loading1,
+    refresh: refresh1,
+  } = useGet<Employe>("staff", { id: "1a" });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await callApiWithState("fetchdata", async () => {
-        const response = await dataProvider.getList("staff");
-        console.log(response);
-        setData(response); 
-      });
-    };
+  const handleRefresh = useCallback(() => refresh(), [refresh]);
 
-    fetchData();
-  }, [callApiWithState, dataProvider]); 
-
-  const fetchResourcesState = requestStates["fetchdata"] || {
-    loading: false,
-    error: null,
-  };
-
-  if (fetchResourcesState.loading) {
+  if (loading1 || loading) {
     return <div>Loading...</div>;
   }
 
-  if (fetchResourcesState.error) {
-    return <div>Error: {fetchResourcesState.error}</div>;
+  if (error1 || error) {
+    return <div>Error: {error}</div>;
   }
+
+  console.log(data);
+  console.log(data1);
 
   return (
     <div>
       <h1>Data:</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <Button onClick={() => handleRefresh()}>refetch Data</Button>
+      <Button onClick={refresh1}>refetch Data1</Button>
     </div>
   );
 };
