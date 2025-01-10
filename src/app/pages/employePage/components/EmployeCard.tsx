@@ -2,7 +2,7 @@ import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import { Employe } from "../interfaces/Employe.interface";
-import { numberVerification } from "../../../core/utils/numberVerification";
+import { numberVerification } from "../../../core/utils/helpers";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
 import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardFooter";

@@ -3,5 +3,5 @@ export interface ResponseHttpClient<T> {
   statusText: string;
   headers: Headers;
   body: string;
-  json?: T | T[] ;
+  json?: T ;
 }

@@ -1,35 +1,44 @@
-import { useCallback } from "react";
-import { useGet, useGetAll } from "../app/core/hooks/useApi";
+import { useState } from "react";
+import { useGet, useGetOne} from "../app/core/hooks/useApi";
 import { Employe } from "../app/pages/employePage/interfaces/Employe.interface";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
 
 const TestHttpClient = () => {
-  const { data, loading, error, refresh } = useGetAll<Employe>("staff");
-  const {
-    data: data1,
-    error: error1,
-    loading: loading1,
-    refresh: refresh1,
-  } = useGet<Employe>("staff", { id: "1a" });
-
-  const handleRefresh = useCallback(() => refresh(), [refresh]);
-
-  if (loading1 || loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error1 || error) {
-    return <div>Error: {error}</div>;
-  }
-
-  console.log(data);
-  console.log(data1);
+  const [showChild, setShowChild] = useState(true);
 
   return (
     <div>
-      <h1>Data:</h1>
-      <Button onClick={() => handleRefresh()}>refetch Data</Button>
-      <Button onClick={refresh1}>refetch Data1</Button>
+      <Button onClick={() => setShowChild((prev) => !prev)}>
+        {showChild ? "Unmount Child" : "Mount Child"}
+      </Button>
+      {showChild && <ChildComponent />}
+    </div>
+  );
+};
+
+const ChildComponent = () => {
+  const { data, loading, error } = useGetOne<Employe>("staff", {id: "1a"});
+  const { data: alldata, loading: allloading, error: allerror } = useGet<Employe[]>("staff")
+
+  
+
+  if (loading || allloading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error || allerror) {
+    return <p>{error?.message}</p>;
+  }
+
+  if (data) {
+    console.log(data);
+    console.log(alldata);
+  }
+
+  return (
+    <div>
+      <p>Data loaded!</p>
+      
     </div>
   );
 };

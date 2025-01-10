@@ -1,80 +1,112 @@
-import { RequestOptions } from "../schemas/request/RequestOptions.interface";
-import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient";
-import { getCache, setCache } from "../utils/caheUtils";
-import { httpClient } from "./httpClient";
+import {
+  ApiService,
+  ParamsCreate,
+  ParamsDelete,
+  ParamsGet,
+  ParamsGetOne,
+  ParamsUpdate,
+} from "../schemas/ApiService.interface";
+import { fetchRequestJson } from "../utils/fetchUtils";
 
-export const fetchRequestJson = async <T>(
-  url: string,
-  options: RequestOptions = {}
-): Promise<T[]> => {
-  if (options.useCache) {
-    const cachedData = getCache<T>(url);
-    if (cachedData) {
-      return cachedData;
-    }
-  }
+const API_BASE_URL = "http://localhost:3000";
 
-  const headers = createHeadersFromOptions(options);
+export const apiService: ApiService = {
+  get: async <T>(resource: string, params: ParamsGet): Promise<T | T[]> => {
+    const url = params
+      ? `${API_BASE_URL}/${resource}/${buildUrl(params)}`
+      : `${API_BASE_URL}/${resource}`;
 
-  const response = await httpClient<T>(url, {
-    method: options.method,
-    body: options.body ? JSON.stringify(options.body) : undefined,
-    headers: {
-      ...headers,
-    },
-  });
+    const response = await fetchRequestJson<T>(url, {
+      useCache: params?.useCache,
+    });
 
-  const jsonData = response.json;
+    return normilizeResponse(response);
+  },
 
-  if (!jsonData) {
-    throw new Error("No Valid Json.");
-  }
+  getOne: async <T>(resource: string, params: ParamsGetOne): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
 
-  const normalizedResponse = Array.isArray(jsonData) ? jsonData : [jsonData];
+    const response = await fetchRequestJson<T>(url, {
+      useCache: params?.useCache,
+    });
 
-  if (options.useCache) {
-    setCache(url, normalizedResponse);
-  }
+    return response;
+  },
 
-  return normalizedResponse;
+  create: async <T>(
+    resource: string,
+    params: ParamsCreate<T>
+  ): Promise<T[] | T> => {
+    const url = `${API_BASE_URL}/${resource}`;
+
+    console.log(url, params);
+    throw new Error("Function not implemented.");
+  },
+
+  createOne: async <T>(
+    resource: string,
+    params: ParamsCreate<T>
+  ): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}`;
+
+    console.log(url, params);
+    throw new Error("Function not implemented.");
+  },
+
+  update: async <T>(
+    resource: string,
+    params: ParamsUpdate<T>
+  ): Promise<T[] | T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
+
+    console.log(url);
+    throw new Error("Function not implemented.");
+  },
+
+  updateOne: async <T>(
+    resource: string,
+    params: ParamsUpdate<T>
+  ): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
+
+    console.log(url);
+    throw new Error("Function not implemented.");
+  },
+
+  delete: async <T>(
+    resource: string,
+    params: ParamsDelete
+  ): Promise<T | T[]> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
+
+    console.log(url);
+    throw new Error("Function not implemented.");
+  },
+
+  deleteOne: async <T>(resource: string, params: ParamsDelete): Promise<T> => {
+    const url = `${API_BASE_URL}/${resource}/${params.id}`;
+
+    console.log(url);
+    throw new Error("Function not implemented.");
+  },
 };
 
-export const fetchRequest = async <T>(
-  url: string,
-  options: RequestOptions = {}
-): Promise<ResponseHttpClient<T>> => {
-  const response = await httpClient<T>(url, {
-    method: options.method,
-    body: options.body ? JSON.stringify(options.body) : undefined,
-    headers: {
-      ...options.headers,
-    },
-  });
+const buildUrl = (params: ParamsGet) => {
+  const queryParams = [];
 
+  if (params.pagination?.page)
+    queryParams.push(`_page=${params.pagination?.page}`);
+  if (params.pagination?.perPage)
+    queryParams.push(`_limit=${params.pagination?.perPage}`);
+  if (params.sort?.field) queryParams.push(`_sort=${params.sort?.field}`);
+  if (params.sort?.order) queryParams.push(`_order=${params.sort?.order}`);
+
+  return queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
+};
+
+const normilizeResponse = <T>(response: T | T[]): T | T[] => {
+  if (Array.isArray(response) && response.length === 1) {
+    return response[0];
+  }
   return response;
-};
-
-const createHeadersFromOptions = (options: RequestOptions): HeadersInit => {
-  const requestHeaders = (options.headers ||
-    new Headers({
-      Accept: "application/json",
-    })) as Headers;
-  const hasBody = options.body;
-  const isContentTypeSet = requestHeaders.has("Content-Type");
-  const isGetMethod = !options?.method || options?.method === "GET";
-  const isFormData = options?.body instanceof FormData;
-
-  const shouldSetContentType =
-    hasBody && !isContentTypeSet && !isGetMethod && !isFormData;
-  if (shouldSetContentType) {
-    requestHeaders.set("Content-Type", "application/json");
-  }
-
-  if (options.user) {
-    if (options.user.authenticated && options.user.token) {
-      requestHeaders.set("Authorization", options.user.token);
-    }
-  }
-
-  return requestHeaders;
 };
