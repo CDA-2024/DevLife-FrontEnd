@@ -1,19 +1,13 @@
 export interface ApiService {
-  get: <T>(resource: string, params: ParamsGet) => Promise<T[] | T>;
-  getOne: <T>(resource: string, params: ParamsGetOne) => Promise<T>;
-  create: <T>(resource: string, params: ParamsCreate<T>) => Promise<T[] | T>;
-  createOne: <T>(resource: string, params: ParamsCreate<T>) => Promise<T>;
-  update: <T>(resource: string, params: ParamsUpdate<T>) => Promise<T[] | T>;
-  updateOne: <T>(resource: string, params: ParamsUpdate<T>) => Promise<T>;
-  delete: <T>(resource: string, params: ParamsDelete) => Promise<T[] | T>;
-  deleteOne: <T>(resource: string, params: ParamsDelete) => Promise<T>;
+  get: <T>(resource: string, params: ParamsGet) => Promise<T>;
+  create: <T>(resource: string, params: ParamsCreate<T>) => Promise<T>;
+  update: <T>(resource: string, params: ParamsUpdate<T>) => Promise<T>;
+  delete: <T>(resource: string, params: ParamsDelete) => Promise<T>;
 }
 
-export interface ParamsGet extends Params {
+export interface ParamsGet extends Params, PaginationPayload, SortPayload {
   id?: string;
   ids?: string[];
-  pagination?: PaginationPayload;
-  sort?: SortPayload;
 }
 
 export interface ParamsGetOne extends Params {
@@ -50,11 +44,11 @@ export interface Params {
 }
 
 export interface SortPayload {
-  field: string;
-  order: "ASC" | "DESC";
+  field?: string;
+  order?: "ASC" | "DESC";
 }
 
 export interface PaginationPayload {
-  page: number;
-  perPage: number;
+  page?: number;
+  perPage?: number;
 }

@@ -158,7 +158,7 @@ export default function GamePage() {
             <CardTitle className="text-gray-800">Mon Équipe</CardTitle>
             <Button
               variant="outline"
-              onClick={() => navigate("/employe")}
+              onClick={() => navigate("/employee")}
               size="sm"
             >
               Gérer →

@@ -1,18 +1,18 @@
 import TabsSwitcher from "../../shared/components/TabSwitcher/TabsSwitcher";
-import EmployeManagementSection from "./components/EmployeManagementSection";
-import EmployeRecrutementSection from "./components/EmployeRecrutementSection";
+import EmployeeManagementSection from "./components/EmployeeManagementSection";
+import EmployeeRecrutementSection from "./components/EmployeeRecrutementSection";
 
-const EmployePage = () => {
+const EmployeePage = () => {
   const tabs = [
     {
       label: "Recrutement",
       value: "Recrutement",
-      content: <EmployeRecrutementSection />,
+      content: <EmployeeRecrutementSection />,
     },
     {
       label: "Management",
       value: "Management",
-      content: <EmployeManagementSection />,
+      content: <EmployeeManagementSection />,
     },
   ];
 
@@ -23,4 +23,4 @@ const EmployePage = () => {
   );
 };
 
-export default EmployePage;
+export default EmployeePage;

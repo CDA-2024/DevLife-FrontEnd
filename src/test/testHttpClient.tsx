@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useGet, useGetOne} from "../app/core/hooks/useApi";
-import { Employe } from "../app/pages/employePage/interfaces/Employe.interface";
+import { useGet } from "../app/core/hooks/useApi";
+import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
+import { useGetEmployees } from "../app/pages/employePage/hooks/useEmployeeApi";
 
 const TestHttpClient = () => {
   const [showChild, setShowChild] = useState(true);
@@ -17,10 +18,14 @@ const TestHttpClient = () => {
 };
 
 const ChildComponent = () => {
-  const { data, loading, error } = useGetOne<Employe>("staff", {id: "1a"});
-  const { data: alldata, loading: allloading, error: allerror } = useGet<Employe[]>("staff")
+  //const { data, loading, error } = useGet<Employee>("staff");
+  const { data, loading, error } =useGetEmployees(); 
 
-  
+  const {
+    data: datas,
+    loading: allloading,
+    error: allerror,
+  } = useGet<Employee[]>("staff");
 
   if (loading || allloading) {
     return <p>Loading...</p>;
@@ -32,13 +37,13 @@ const ChildComponent = () => {
 
   if (data) {
     console.log(data);
-    console.log(alldata);
+    //console.log(emmployees);
+    
   }
 
   return (
     <div>
       <p>Data loaded!</p>
-      
     </div>
   );
 };

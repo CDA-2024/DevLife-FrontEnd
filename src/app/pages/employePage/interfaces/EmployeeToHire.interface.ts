@@ -1,4 +1,4 @@
-export interface EmployeToHire {
+export interface EmployeeToHire {
   id: string;
   name: string;
   img?: string;

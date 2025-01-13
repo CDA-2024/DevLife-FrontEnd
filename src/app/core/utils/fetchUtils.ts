@@ -1,5 +1,5 @@
 import { RequestOptions } from "../schemas/request/RequestOptions.interface";
-import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient";
+import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient.interface";
 import { httpClient } from "../services/httpClient";
 
 export const fetchRequestJson = async <T>(

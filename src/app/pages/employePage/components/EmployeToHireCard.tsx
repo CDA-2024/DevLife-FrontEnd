@@ -1,9 +1,9 @@
 import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 
 import { Button } from "../../../shared/components/Shadcn/ui/button";
-import { getEmployeToHireDetails } from "../../../shared/utils/data/EmployeToHireDetails";
+import { getEmployeeToHireDetails } from "../../../shared/utils/data/EmployeeToHireDetails";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
-import { EmployeToHire } from "../interfaces/EmployeToHire.interface";
+import { EmployeeToHire } from "../interfaces/EmployeeToHire.interface";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
@@ -12,23 +12,19 @@ import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCar
 import useButtonClick from "../../../core/hooks/useButtonClick";
 import useResize from "../../../shared/hooks/useResize";
 
-
-
-
 interface EmployeToHireCardProps {
-  employe: EmployeToHire;
+  employee: EmployeeToHire;
 }
 
-const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
-
-  const emplyeDetails = getEmployeToHireDetails(employe); 
+const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employee }) => {
+  const emplyeDetails = getEmployeeToHireDetails(employee);
   const { isSmall, containerRef } = useResize(425);
   const { handleClick } = useButtonClick();
 
   return (
     <PrimaryCard>
       <PrimaryCardHeader>
-        <CardTitle className="text-gray-800">{employe.name}</CardTitle>
+        <CardTitle className="text-gray-800">{employee.name}</CardTitle>
       </PrimaryCardHeader>
       <PrimaryCardContent>
         <div
@@ -38,7 +34,7 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
           <img
             className="min-w-15 max-w-48 h-full object-cover"
             src={devPortrait}
-            alt={employe.imgAlt}
+            alt={employee.imgAlt}
           />
           <div className="flex flex-col flex-1 gap-2 h-full">
             {emplyeDetails.map((detail) => (

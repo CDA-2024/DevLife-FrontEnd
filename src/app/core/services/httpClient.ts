@@ -1,4 +1,4 @@
-import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient";
+import { ResponseHttpClient } from "../schemas/response/ResponseHttpClient.interface";
 
 interface HttpClientOptions extends RequestInit {
   timeout?: number;
