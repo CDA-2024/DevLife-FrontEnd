@@ -16,6 +16,10 @@ export const fetchRequestJson = async <T>(
     },
   });
 
+  if (!response) {
+    throw new Error(`Invalid response from ${url}`);
+  }
+
   const jsonData = response.json;
 
   if (!jsonData) {
@@ -36,6 +40,10 @@ export const fetchRequest = async <T>(
       ...options.headers,
     },
   });
+
+  if (!response) {
+    throw new Error(`Invalid response from ${url}`);
+  }
 
   return response;
 };

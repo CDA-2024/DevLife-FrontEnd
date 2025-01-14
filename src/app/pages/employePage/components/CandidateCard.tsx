@@ -1,9 +1,9 @@
 import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 
 import { Button } from "../../../shared/components/Shadcn/ui/button";
-import { getEmployeeToHireDetails } from "../../../shared/utils/data/EmployeeToHireDetails";
+import { getCandidateDetails } from "../../../shared/utils/data/CandidateDetails";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
-import { EmployeeToHire } from "../interfaces/EmployeeToHire.interface";
+import { Candidate } from "../interfaces/Candidate.interface";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
@@ -12,12 +12,12 @@ import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCar
 import useButtonClick from "../../../core/hooks/useButtonClick";
 import useResize from "../../../shared/hooks/useResize";
 
-interface EmployeToHireCardProps {
-  employee: EmployeeToHire;
+interface CandidateCardProps {
+  employee: Candidate;
 }
 
-const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employee }) => {
-  const emplyeDetails = getEmployeeToHireDetails(employee);
+const CandidateCard: React.FC<CandidateCardProps> = ({ employee }) => {
+  const emplyeDetails = getCandidateDetails(employee);
   const { isSmall, containerRef } = useResize(425);
   const { handleClick } = useButtonClick();
 
@@ -62,4 +62,4 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employee }) => {
   );
 };
 
-export default EmployeToHireCard;
+export default CandidateCard;

@@ -5,7 +5,7 @@ import {
   ParamsGet,
   ParamsUpdate,
 } from "../schemas/ApiService.interface";
-import { fetchRequestJson } from "../utils/fetchUtils";
+import { fetchRequestJson } from "../utils/fetch.Utils";
 
 const API_BASE_URL = "http://localhost:3000";
 

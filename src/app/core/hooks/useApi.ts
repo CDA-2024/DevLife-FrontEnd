@@ -15,11 +15,6 @@ export const useGet = <T>(
   const fetchData = async () => {
     return await track(key, async () => {
       const response = await apiService.get<T>(resource, params);
-
-      if (!response || !Array.isArray(response)) {
-        throw new Error(`Invalid response format from ${resource}`);
-      }
-
       setData(response);
       return response;
     });
@@ -36,6 +31,7 @@ export const useGet = <T>(
 
   return {
     data: data,
+    key: key,
     loading: getState(key).loading,
     error: getState(key).error,
     refresh: fetchData,

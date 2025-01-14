@@ -31,6 +31,7 @@ export const httpClient = async <T>(
       body,
       json,
     };
+
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === "AbortError") {

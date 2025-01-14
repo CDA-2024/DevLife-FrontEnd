@@ -1,6 +1,18 @@
 import { useRef, useState } from "react";
 
-export const useApiCallTracker = () => {
+export interface ApiCallState {
+  loading: boolean;
+  error: Error | null;
+}
+
+export interface ApiCallTracker {
+  track: <T>(key: string, apiCall: () => Promise<T>) => Promise<T>;
+  setError: (key: string, error: Error) => void;
+  getState: (key: string) => ApiCallState;
+  untrack: (key: string) => void;
+}
+
+export const useApiCallTracker = (): ApiCallTracker => {
   const requestStates = useRef<
     Record<string, { loading: boolean; error: Error | null }>
   >({});
@@ -27,14 +39,22 @@ export const useApiCallTracker = () => {
   };
 
   const untrack = (key: string) => {
-    console.log(`Untracking key: ${key}`);
     delete requestStates.current[key];
     forceRender((prev) => prev - 1);
+  };
+
+  const setError = (key: string, error: Error) => {
+    if (!requestStates.current[key]) {
+      requestStates.current[key] = { loading: false, error };
+    } else {
+      requestStates.current[key].error = error;
+    }
+    forceRender((prev) => prev + 1);
   };
 
   const getState = (key: string) => {
     return requestStates.current[key] || { loading: false, error: null };
   };
 
-  return { track, getState, untrack };
+  return { track, setError, getState, untrack };
 };

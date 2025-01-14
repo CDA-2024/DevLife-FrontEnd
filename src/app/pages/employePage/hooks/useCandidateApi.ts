@@ -7,27 +7,27 @@ import {
 import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
-import { Employee } from "../interfaces/Employee.interface";
-import { validateEmployee } from "../services/employeeService";
+import { Candidate } from "../interfaces/Candidate.interface";
+import { validateCandidate } from "../services/candidateService";
 
-const resource = "staff";
+const resource = "staffToHire";
 
-export const useGetEmployees = (
+export const useGetCandidate = (
   params: ParamsGet = {}
-): ResponseApi<Employee[]> => {
+): ResponseApi<Candidate[]> => {
   const { setError, getState } = useApiCallTracker();
 
-  const response = useGet<Employee[]>(resource, params);
+  const response = useGet<Candidate[]>(resource, params);
 
-  const { validData, hasInvalidData } = validateResponseData<Employee[]>(
+  const { validData, hasInvalidData } = validateResponseData<Candidate[]>(
     response.data,
-    validateEmployee
+    validateCandidate
   );
 
   if (hasInvalidData) {
     handleApiError(
       response.key,
-      new Error("Some employee data are invalid."),
+      new Error("Some Candidates data are invalid."),
       setError,
       getState
     );
@@ -36,22 +36,22 @@ export const useGetEmployees = (
   return { ...response, error: getState(response.key).error, data: validData };
 };
 
-export const useGetOneEmployee = (
+export const useGetOneCandidate = (
   params: ParamsGetOne
-): ResponseApi<Employee> => {
+): ResponseApi<Candidate> => {
   const { setError, getState } = useApiCallTracker();
 
-  const response = useGet<Employee>(resource, params);
+  const response = useGet<Candidate>(resource, params);
 
-  const { validData, hasInvalidData } = validateResponseData<Employee>(
+  const { validData, hasInvalidData } = validateResponseData<Candidate>(
     response.data,
-    validateEmployee
+    validateCandidate
   );
 
   if (hasInvalidData) {
     handleApiError(
       response.key,
-      new Error("employee data is invalid."),
+      new Error("Candidate data is invalid."),
       setError,
       getState
     );
