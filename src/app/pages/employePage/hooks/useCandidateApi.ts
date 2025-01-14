@@ -1,5 +1,4 @@
 import { useGet } from "../../../core/hooks/useApi";
-import { useApiCallTracker } from "../../../core/hooks/useApiCallTracker";
 import {
   ParamsGet,
   ParamsGetOne,
@@ -15,8 +14,6 @@ const resource = "staffToHire";
 export const useGetCandidate = (
   params: ParamsGet = {}
 ): ResponseApi<Candidate[]> => {
-  const { setError, getState } = useApiCallTracker();
-
   const response = useGet<Candidate[]>(resource, params);
 
   const { validData, hasInvalidData } = validateResponseData<Candidate[]>(
@@ -25,22 +22,18 @@ export const useGetCandidate = (
   );
 
   if (hasInvalidData) {
-    handleApiError(
-      response.key,
-      new Error("Some Candidates data are invalid."),
-      setError,
-      getState
+    response.error = handleApiError(
+      response.error,
+      new Error("Candidates datas is invalid.")
     );
   }
 
-  return { ...response, error: getState(response.key).error, data: validData };
+  return { ...response, error: response.error, data: validData };
 };
 
 export const useGetOneCandidate = (
   params: ParamsGetOne
 ): ResponseApi<Candidate> => {
-  const { setError, getState } = useApiCallTracker();
-
   const response = useGet<Candidate>(resource, params);
 
   const { validData, hasInvalidData } = validateResponseData<Candidate>(
@@ -49,13 +42,11 @@ export const useGetOneCandidate = (
   );
 
   if (hasInvalidData) {
-    handleApiError(
-      response.key,
-      new Error("Candidate data is invalid."),
-      setError,
-      getState
+    response.error = handleApiError(
+      response.error,
+      new Error("Candidate data is invalid.")
     );
   }
 
-  return { ...response, error: getState(response.key).error, data: validData };
+  return { ...response, error: response.error, data: validData };
 };
