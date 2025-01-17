@@ -8,7 +8,7 @@ import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCar
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
 import { levelToString } from "../../../shared/utils/levelToString";
-import { salaryToString } from "../../../shared/utils/salaryToString";
+import { moneyNumberToString } from "../../../shared/utils/moneyNumberToString";
 import { Employe } from "../interfaces/Employe.interface";
 import EmployeSheet from "./EmployeSheet";
 import PrimaryCardProgressItem from "../../../shared/components/PrimaryCard/PrimaryCardProgressItem";
@@ -23,7 +23,11 @@ const EmployeCard: React.FC<EmployeCardProps> = ({ employe }) => {
     { icon: "🎓", label: "Niveaux", value: levelToString(employe.level) },
     { icon: "🎓", label: "Experience", value: employe.xp },
     { icon: "🛠️", label: "Compétence", value: employe.skill },
-    { icon: "💰", label: "Salaire/J", value: salaryToString(employe.salary) },
+    {
+      icon: "💰",
+      label: "Salaire/J",
+      value: moneyNumberToString(employe.salary),
+    },
   ];
 
   const { isSmall, containerRef } = useResize(425);

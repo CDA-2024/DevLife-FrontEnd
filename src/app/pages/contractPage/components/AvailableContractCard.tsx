@@ -1,32 +1,25 @@
-import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
-import { EmployeToHire } from "../interfaces/EmployeToHire.interface";
-import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
-import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
-import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
-import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
-import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardFooter";
-import { moneyNumberToString } from "../../../shared/utils/moneyNumberToString";
-import { levelToString } from "../../../shared/utils/levelToString";
-import { Button } from "../../../shared/components/Shadcn/ui/button";
+import contractImage from "../../../../assets/images/contract.avif";
 import useButtonClick from "../../../core/hooks/useButtonClick";
+
+import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
+import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
+import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardFooter";
+import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
+import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
+import { Button } from "../../../shared/components/Shadcn/ui/button";
+import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
+import { AvailableContract } from "../../../shared/interfaces/Contract.interface";
+import { getAvailableContractDetails } from "../../../shared/utils/data/contractDetails";
 
-import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
-
-interface EmployeToHireCardProps {
-  employe: EmployeToHire;
+interface AvailableContractCardProps {
+  contract: AvailableContract;
 }
 
-const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
-  const staffDetails = [
-    { icon: "🎓", label: "Niveaux", value: levelToString(employe.level) },
-    { icon: "🛠️", label: "Compétence", value: employe.skill },
-    {
-      icon: "💰",
-      label: "Salaire/J",
-      value: moneyNumberToString(employe.salary),
-    },
-  ];
+const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
+  contract,
+}) => {
+  const contractDetails = getAvailableContractDetails(contract);
 
   const { isSmall, containerRef } = useResize(425);
   const { handleClick } = useButtonClick();
@@ -34,7 +27,7 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
   return (
     <PrimaryCard>
       <PrimaryCardHeader>
-        <CardTitle className="text-gray-800">{employe.name}</CardTitle>
+        <CardTitle className="text-gray-800">{contract.title}</CardTitle>
       </PrimaryCardHeader>
       <PrimaryCardContent>
         <div
@@ -43,11 +36,11 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
         >
           <img
             className="min-w-15 max-w-48 h-full object-cover"
-            src={devPortrait}
-            alt={employe.imgAlt}
+            src={contractImage}
+            alt="contrat"
           />
           <div className="flex flex-col flex-1 gap-2 h-full">
-            {staffDetails.map((detail) => (
+            {contractDetails.map((detail) => (
               <PrimaryCardItem
                 key={detail.label}
                 icon={detail.icon}
@@ -63,8 +56,8 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
           <Button variant="destructive" onClick={() => handleClick("refusé")}>
             Refuser
           </Button>
-          <Button variant="accept" onClick={() => handleClick("recruté")}>
-            Recruter
+          <Button variant="accept" onClick={() => handleClick("acceptée")}>
+            accepter
           </Button>
         </div>
       </PrimaryCardFooter>
@@ -72,4 +65,4 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
   );
 };
 
-export default EmployeToHireCard;
+export default AvailableContractCard;
