@@ -11,6 +11,7 @@ import LandingPage from "./screens/LandingPage/LandingPage";
 import BusinessScreenFreelance from "./pages/businessPage/BusinessScreenFreelance";
 import BusinessScreenCompany from "./pages/businessPage/BusinessScreenCompany";
 import BudgetPage from "./pages/budgetPage/BudgetPage";
+import ContractsPage from "../pages/contractPage/ContractsPage";
 
 const Routing = () => {
   return (
@@ -51,7 +52,7 @@ const Routing = () => {
         path="/contract"
         element={
           <BaseLayout>
-            <TestPage />
+            <ContractsPage />
           </BaseLayout>
         }
       />
