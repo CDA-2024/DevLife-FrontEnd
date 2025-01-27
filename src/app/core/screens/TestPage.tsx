@@ -1,11 +1,8 @@
-import PrimaryCard from "../../shared/components/app-primary-card";
+import TestHttpClient from "../../../test/testHttpClient";
+
 
 const TestPage = () => {
-  const CardItem = {
-    header: <>test header</>,
-    content: <>test header</>,
-    footer: <>test footer</>,
-  };
+
 
   return (
     <>
@@ -17,14 +14,7 @@ const TestPage = () => {
         asperiores optio ab delectus.
       </p>
 
-      <h2>Ceci est un titre</h2>
-      <p>
-        <PrimaryCard CardItem={CardItem} />
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut,
-        blanditiis molestias delectus earum tempore quam incidunt maxime minus
-        praesentium quidem facere magnam perspiciatis aspernatur illum culpa
-        autem! In, sequi eos!
-      </p>
+      <TestHttpClient />
     </>
   );
 };

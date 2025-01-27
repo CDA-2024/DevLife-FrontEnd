@@ -35,7 +35,7 @@
       "name": "dev 1",
       "img": "../../../../assets/images/pixelPortrait.jpg",
       "imgAlt": "protrait de dev",
-      "level": 1,
+      "level": "1",
       "skill": "front-End",
       "salary": 56
     },

@@ -1,7 +1,6 @@
 import { Material } from "../../../shared/interfaces/Material.interface";
 
-
-export interface Employe {
+export interface Employee {
   id: string;
   name: string;
   img?: string;
