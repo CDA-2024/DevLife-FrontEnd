@@ -1,41 +1,30 @@
 import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 
+import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
+import { Employee } from "../interfaces/Employee.interface";
+import { numberVerification } from "../../../core/utils/helpers.Utils";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
 import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardFooter";
 import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
 import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
-import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
-import { levelToString } from "../../../shared/utils/levelToString";
-import { moneyNumberToString } from "../../../shared/utils/moneyNumberToString";
-import { Employe } from "../interfaces/Employe.interface";
-import EmployeSheet from "./EmployeSheet";
+import EmployeeSheet from "./EmployeeSheet";
 import PrimaryCardProgressItem from "../../../shared/components/PrimaryCard/PrimaryCardProgressItem";
-import { numberVerification } from "../../../core/utils/numberVerification";
+import { getEmployeeDetails } from "../../../shared/utils/data/EmployeeDetails";
 
-interface EmployeCardProps {
-  employe: Employe;
+interface EmployeeCardProps {
+  employee: Employee;
 }
 
-const EmployeCard: React.FC<EmployeCardProps> = ({ employe }) => {
-  const staffDetails = [
-    { icon: "🎓", label: "Niveaux", value: levelToString(employe.level) },
-    { icon: "🎓", label: "Experience", value: employe.xp },
-    { icon: "🛠️", label: "Compétence", value: employe.skill },
-    {
-      icon: "💰",
-      label: "Salaire/J",
-      value: moneyNumberToString(employe.salary),
-    },
-  ];
-
+const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+  const employeeDetails = getEmployeeDetails(employee);
   const { isSmall, containerRef } = useResize(425);
 
   return (
     <PrimaryCard>
       <PrimaryCardHeader>
-        <CardTitle className="text-gray-800">{employe.name}</CardTitle>
+        <CardTitle className="text-gray-800">{employee.name}</CardTitle>
       </PrimaryCardHeader>
       <PrimaryCardContent>
         <div
@@ -48,7 +37,7 @@ const EmployeCard: React.FC<EmployeCardProps> = ({ employe }) => {
             alt="dev"
           />
           <div className="flex flex-col flex-1 gap-2 h-full">
-            {staffDetails.map((detail) =>
+            {employeeDetails.map((detail) =>
               detail.label === "Experience" ? (
                 <PrimaryCardProgressItem
                   key={detail.label}
@@ -70,11 +59,11 @@ const EmployeCard: React.FC<EmployeCardProps> = ({ employe }) => {
       </PrimaryCardContent>
       <PrimaryCardFooter>
         <div className="flex flex-row w-full justify-end">
-          <EmployeSheet />
+          <EmployeeSheet />
         </div>
       </PrimaryCardFooter>
     </PrimaryCard>
   );
 };
 
-export default EmployeCard;
+export default EmployeeCard;

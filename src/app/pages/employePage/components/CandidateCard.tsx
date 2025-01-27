@@ -1,40 +1,30 @@
+import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
+
+import { Button } from "../../../shared/components/Shadcn/ui/button";
+import { getCandidateDetails } from "../../../shared/utils/data/CandidateDetails";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
-import { EmployeToHire } from "../interfaces/EmployeToHire.interface";
+import { Candidate } from "../interfaces/Candidate.interface";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCardHeader";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
 import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
 import PrimaryCardFooter from "../../../shared/components/PrimaryCard/PrimaryCardFooter";
-import { moneyNumberToString } from "../../../shared/utils/moneyNumberToString";
-import { levelToString } from "../../../shared/utils/levelToString";
-import { Button } from "../../../shared/components/Shadcn/ui/button";
 import useButtonClick from "../../../core/hooks/useButtonClick";
 import useResize from "../../../shared/hooks/useResize";
 
-import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
-
-interface EmployeToHireCardProps {
-  employe: EmployeToHire;
+interface CandidateCardProps {
+  employee: Candidate;
 }
 
-const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
-  const staffDetails = [
-    { icon: "🎓", label: "Niveaux", value: levelToString(employe.level) },
-    { icon: "🛠️", label: "Compétence", value: employe.skill },
-    {
-      icon: "💰",
-      label: "Salaire/J",
-      value: moneyNumberToString(employe.salary),
-    },
-  ];
-
+const CandidateCard: React.FC<CandidateCardProps> = ({ employee }) => {
+  const emplyeDetails = getCandidateDetails(employee);
   const { isSmall, containerRef } = useResize(425);
   const { handleClick } = useButtonClick();
 
   return (
     <PrimaryCard>
       <PrimaryCardHeader>
-        <CardTitle className="text-gray-800">{employe.name}</CardTitle>
+        <CardTitle className="text-gray-800">{employee.name}</CardTitle>
       </PrimaryCardHeader>
       <PrimaryCardContent>
         <div
@@ -44,10 +34,10 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
           <img
             className="min-w-15 max-w-48 h-full object-cover"
             src={devPortrait}
-            alt={employe.imgAlt}
+            alt={employee.imgAlt}
           />
           <div className="flex flex-col flex-1 gap-2 h-full">
-            {staffDetails.map((detail) => (
+            {emplyeDetails.map((detail) => (
               <PrimaryCardItem
                 key={detail.label}
                 icon={detail.icon}
@@ -72,4 +62,4 @@ const EmployeToHireCard: React.FC<EmployeToHireCardProps> = ({ employe }) => {
   );
 };
 
-export default EmployeToHireCard;
+export default CandidateCard;

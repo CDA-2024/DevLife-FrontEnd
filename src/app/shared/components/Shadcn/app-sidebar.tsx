@@ -45,7 +45,7 @@ const data = {
     {
       title: "Équipe",
       icon: "👥",
-      url: "/employe",
+      url: "/employee",
       variant: "ghost",
     },
     {
