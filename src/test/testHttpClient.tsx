@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useGet } from "../app/core/hooks/useApi";
-import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
+import { useEffect, useState } from "react";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
-import { useGetEmployees } from "../app/pages/employePage/hooks/useEmployeeApi";
+import { apiService } from "../app/core/services/apiService";
+import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
 
 const TestHttpClient = () => {
   const [showChild, setShowChild] = useState(true);
@@ -18,32 +17,50 @@ const TestHttpClient = () => {
 };
 
 const ChildComponent = () => {
-  //const { data, loading, error } = useGet<Employee>("staff");
-  const { data, loading, error } =useGetEmployees(); 
 
-  const {
-    data: datas,
-    loading: allloading,
-    error: allerror,
-  } = useGet<Employee[]>("staff");
 
-  if (loading || allloading) {
-    return <p>Loading...</p>;
-  }
+  const saveEmployee = async () => {
+    const employee: Employee = {
+      id: "147",
+      name: "test",
+      id_skill: 7,
+      salary: 500,
+    };
 
-  if (error || allerror) {
-    return <p>{error?.message}</p>;
-  }
+    const response = await apiService.create<Employee>("employee", {
+      data: employee,
+    });
+    console.log(response);
+  };
 
-  if (data) {
-    console.log(data);
-    //console.log(emmployees);
-    
-  }
+  const updateEmployee = async () => {
+    const employee: Employee = {
+      id: "147",
+      name: "ttototomùlfdkjgsdfgsdfdfgstot",
+      id_skill: 7,
+      salary: 500,
+    };
+
+    const response = await apiService.update<Employee>("employee", {
+      id : "147",
+      data: employee,
+    });
+    console.log(response);
+  };
+
+  const deleteEmployee = async () => {
+    const response = await apiService.delete<Employee>("employee", {
+      id: "147",
+    });
+    console.log(response);
+  };
 
   return (
     <div>
-      <p>Data loaded!</p>
+      <h2>Child Component Mounted</h2>
+      <Button onClick={() => saveEmployee()}>create</Button>
+      <Button onClick={() => updateEmployee()}>update</Button>
+      <Button onClick={() => deleteEmployee()}>delete</Button>
     </div>
   );
 };

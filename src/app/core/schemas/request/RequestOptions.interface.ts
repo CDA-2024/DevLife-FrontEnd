@@ -1,16 +1,10 @@
 import { RequestMethod } from "./RequestMethode.type";
 
-export interface RequestOptions {
+export interface RequestOptions<T> {
   useCache?: boolean;
   headers?: HeadersInit;
   method?: RequestMethod;
-  body?:
-    | Record<string, unknown>
-    | string
-    | FormData
-    | URLSearchParams
-    | Blob
-    | ArrayBuffer;
+  body?: T;
   user?: {
     authenticated?: boolean;
     token?: string;
