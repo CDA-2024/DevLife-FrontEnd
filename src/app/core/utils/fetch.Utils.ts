@@ -4,9 +4,9 @@ import { httpClient } from "../services/httpClient";
 
 export const fetchRequestJson = async <T>(
   url: string,
-  options: RequestOptions = {}
+  options: RequestOptions<T> = {}
 ): Promise<T> => {
-  const headers = createHeadersFromOptions(options);
+  const headers = createHeadersFromOptions<T>(options);
 
   const response = await httpClient<T>(url, {
     method: options.method,
@@ -20,7 +20,12 @@ export const fetchRequestJson = async <T>(
     throw new Error(`Invalid response from ${url}`);
   }
 
+  if (options.method?.toUpperCase() === "DELETE" && response.status === 200) {
+    return {} as T;
+  }
+
   const jsonData = response.json;
+
 
   if (!jsonData) {
     throw new Error("No Valid Json.");
@@ -31,7 +36,7 @@ export const fetchRequestJson = async <T>(
 
 export const fetchRequest = async <T>(
   url: string,
-  options: RequestOptions = {}
+  options: RequestOptions<T> = {}
 ): Promise<ResponseHttpClient<T>> => {
   const response = await httpClient<T>(url, {
     method: options.method,
@@ -48,26 +53,27 @@ export const fetchRequest = async <T>(
   return response;
 };
 
-const createHeadersFromOptions = (options: RequestOptions): HeadersInit => {
-  const requestHeaders = (options.headers ||
-    new Headers({
-      Accept: "application/json",
-    })) as Headers;
-  const hasBody = options.body;
-  const isContentTypeSet = requestHeaders.has("Content-Type");
+const createHeadersFromOptions = <T>(
+  options: RequestOptions<T>
+): HeadersInit => {
+  let requestHeaders = {};
+
+  const hasBody = !!options.body;
   const isGetMethod = !options?.method || options?.method === "GET";
   const isFormData = options?.body instanceof FormData;
 
-  const shouldSetContentType =
-    hasBody && !isContentTypeSet && !isGetMethod && !isFormData;
-  if (shouldSetContentType) {
-    requestHeaders.set("Content-Type", "application/json");
+  if (hasBody && !isGetMethod && !isFormData) {
+    requestHeaders = {
+      ...requestHeaders,
+      "content-type": "application/json",
+    };
   }
 
-  if (options.user) {
-    if (options.user.authenticated && options.user.token) {
-      requestHeaders.set("Authorization", options.user.token);
-    }
+  if (options.user?.authenticated && options.user.token) {
+    requestHeaders = {
+      ...requestHeaders,
+      Authorization: options.user.token,
+    };
   }
 
   return requestHeaders;
