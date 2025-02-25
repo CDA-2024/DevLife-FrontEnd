@@ -1,7 +1,7 @@
 
 
 export interface Employee {
-  id?: string;
+  id?: number;
   name: string;
   // img?: string;
   // imgAlt: string;
