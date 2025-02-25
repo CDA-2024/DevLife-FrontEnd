@@ -1,52 +1,75 @@
-import { useGet } from "../../../core/hooks/useApi";
-import {
-  ParamsGet,
-  ParamsGetOne,
-} from "../../../core/schemas/ApiService.interface";
-import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
+import { useResource } from "../../../core/hooks/useRessource";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
 import { Employee } from "../interfaces/Employee.interface";
 import { validateEmployee } from "../services/employeeService";
 
-const resource = "employee";
+export const useEmployee = () => {
+  const {
+    data,
+    loading,
+    error,
+    fetchData,
+    create,
+    update,
+    delete: deleteItemGeneric,
+    getOne: getOneGeneric,
+    getAll: getAllGeneric,
+  } = useResource<Employee>("employee");
 
-export const useGetEmployees = (
-  params: ParamsGet = {}
-): ResponseApi<Employee[]> => {
-  const response = useGet<Employee[]>(resource, params);
+  let er = error;
 
-  const { validData, hasInvalidData } = validateResponseData<Employee[]>(
-    response.data,
-    validateEmployee
-  );
+  const getOneEmployee = async (id: number) => {
+    const employee = await getOneGeneric({ id });
 
-  if (hasInvalidData) {
-    response.error = handleApiError(
-      response.error,
-      new Error("Some employee data are invalid.")
+    const { validData, hasInvalidData } = validateResponseData<Employee>(
+      employee,
+      validateEmployee
     );
-  }
 
-  return { ...response, error: response.error, data: validData };
-};
+    if (hasInvalidData) {
+      er = handleApiError(er, new Error("Some employee data are invalid."));
+    }
 
-export const useGetOneEmployee = (
-  params: ParamsGetOne
-): ResponseApi<Employee> => {
-  const response = useGet<Employee>(resource, params);
+    return validData;
+  };
 
-  const { validData, hasInvalidData } = validateResponseData<Employee>(
-    response.data,
-    validateEmployee
-  );
+  const getAllEmployees = async () => {
+    await getAllGeneric();
 
-  if (hasInvalidData) {
-    response.error = handleApiError(
-      response.error,
-      new Error("employee data is invalid.")
+    const { validData, hasInvalidData } = validateResponseData<Employee[]>(
+      data,
+      validateEmployee
     );
-  }
 
-  return { ...response, error: response.error, data: validData };
+    if (hasInvalidData) {
+      er = handleApiError(er, new Error("Some employee data are invalid."));
+    }
+
+    return validData;
+  };
+
+  const createEmployee = async (employee: Employee) => {
+    return await create({ data: employee });
+  };
+
+  const updateEmployee = async (id: string, employee: Employee) => {
+    return await update({ id, data: employee });
+  };
+
+  const deleteEmployee = async (id: string) => {
+    return await deleteItemGeneric({ id });
+  };
+
+  return {
+    data,
+    loading,
+    error: er,
+    fetchData,
+    create: createEmployee,
+    update: updateEmployee,
+    delete: deleteEmployee,
+    getOne: getOneEmployee,
+    getAll: getAllEmployees,
+  };
 };

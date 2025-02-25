@@ -97,8 +97,8 @@ export const useResource = <T>(resource: string) => {
   };
 
   const getAll = async () => {
-    await handleFetchData();
-    return data;
+   const response = await handleFetchData();
+  return response
   };
 
   useEffect(() => {
