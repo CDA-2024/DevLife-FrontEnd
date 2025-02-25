@@ -11,7 +11,7 @@ import { Button } from "../../shared/components/Shadcn/ui/button";
 import { useResource } from "../../core/hooks/useRessource";
 import { Material } from "./interfaces/Material.interface";
 import { MaterialSkill } from "../../shared/interfaces/MaterialSkill.interface";
-import ReusableAlertDialog from "../../shared/components/AlertDialog/GenericAlertDIalog";
+import GenericAlertDialog from "../../shared/components/AlertDialog/GenericAlertDIalog";
 
 const useMaterial = () => {
   return useResource<Material>("materials");
@@ -138,7 +138,7 @@ const MaterialSkillModal = ({ material, onClose }: MaterialSkillModalProps) => {
   }, [material.idMaterialSkill, getOne]);
 
   return (
-    <ReusableAlertDialog
+    <GenericAlertDialog
       open={true}
       onOpenChange={onClose}
       title={<h2 className="text-xl font-bold">{material.name}</h2>}

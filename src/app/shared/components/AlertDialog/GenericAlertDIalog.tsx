@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogTitle } from "../Shadcn/ui/alert-dialog";
 
 
-interface ReusableAlertDialogProps {
+interface GenericAlertDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title?: ReactNode;
@@ -11,14 +11,14 @@ interface ReusableAlertDialogProps {
   footer?: ReactNode;
 }
 
-const ReusableAlertDialog = ({
+const GenericAlertDialog = ({
   open,
   onOpenChange,
   title,
   description,
   children,
   footer,
-}: ReusableAlertDialogProps) => {
+}: GenericAlertDialogProps) => {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
@@ -43,4 +43,4 @@ const ReusableAlertDialog = ({
   );
 };
 
-export default ReusableAlertDialog;
+export default GenericAlertDialog;
