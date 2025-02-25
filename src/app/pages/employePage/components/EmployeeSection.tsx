@@ -7,7 +7,7 @@ const EmployeeSection = () => {
     data: employees,
     loading,
     error,
-  } = useGetEmployees({ field: "name", order: "ASC" });
+  } = useGetEmployees();
 
   if (loading) {
     return <p>...Loading</p>;

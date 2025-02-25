@@ -3,7 +3,7 @@ import {
   ParamsGet,
   ParamsGetOne,
 } from "../../../core/schemas/ApiService.interface";
-import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
+import { GetResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
 import { Candidate } from "../interfaces/Candidate.interface";
@@ -13,7 +13,7 @@ const resource = "employee";
 
 export const useGetCandidate = (
   params: ParamsGet = {}
-): ResponseApi<Candidate[]> => {
+): GetResponseApi<Candidate[]> => {
   const response = useGet<Candidate[]>(resource, params);
 
   const { validData, hasInvalidData } = validateResponseData<Candidate[]>(
@@ -33,7 +33,7 @@ export const useGetCandidate = (
 
 export const useGetOneCandidate = (
   params: ParamsGetOne
-): ResponseApi<Candidate> => {
+): GetResponseApi<Candidate> => {
   const response = useGet<Candidate>(resource, params);
 
   const { validData, hasInvalidData } = validateResponseData<Candidate>(

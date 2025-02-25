@@ -1,9 +1,5 @@
-import { useGet } from "../../../core/hooks/useApi";
-import {
-  ParamsGet,
-  ParamsGetOne,
-} from "../../../core/schemas/ApiService.interface";
-import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
+import { useResource } from "../../../core/hooks/useRessource";
+import { ParamsGetOne } from "../../../core/schemas/ApiService.interface";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
 import { Employee } from "../interfaces/Employee.interface";
@@ -11,42 +7,61 @@ import { validateEmployee } from "../services/employeeService";
 
 const resource = "employee";
 
-export const useGetEmployees = (
-  params: ParamsGet = {}
-): ResponseApi<Employee[]> => {
-  const response = useGet<Employee[]>(resource, params);
+const useEmployee = () => {
+  return useResource<Employee>(resource);
+};
+
+export const useGetEmployees = (): {
+  loading: boolean;
+  error: Error | null;
+  data: Employee[];
+} => {
+  const { data, loading, error } = useEmployee();
+
+  let resError = error;
 
   const { validData, hasInvalidData } = validateResponseData<Employee[]>(
-    response.data,
+    data,
     validateEmployee
   );
 
   if (hasInvalidData) {
-    response.error = handleApiError(
-      response.error,
+    resError = handleApiError(
+      resError,
       new Error("Some employee data are invalid.")
     );
   }
 
-  return { ...response, error: response.error, data: validData };
+  return { loading, error: resError, data: validData };
 };
 
 export const useGetOneEmployee = (
   params: ParamsGetOne
-): ResponseApi<Employee> => {
-  const response = useGet<Employee>(resource, params);
+): { loading: boolean; error: Error | null; data: Employee | null } => {
+  const { loading, error, getOne } = useEmployee();
+  let resError = error;
+  let validData: Employee | null = null;
 
-  const { validData, hasInvalidData } = validateResponseData<Employee>(
-    response.data,
-    validateEmployee
-  );
+  const fetchEmployee = async () => {
+    try {
+      const employee = await getOne(params);
+      const { validData: validatedData, hasInvalidData } =
+        validateResponseData<Employee>(employee, validateEmployee);
 
-  if (hasInvalidData) {
-    response.error = handleApiError(
-      response.error,
-      new Error("employee data is invalid.")
-    );
-  }
+      validData = validatedData;
 
-  return { ...response, error: response.error, data: validData };
+      if (hasInvalidData) {
+        resError = handleApiError(
+          resError,
+          new Error("Some employee data are invalid.")
+        );
+      }
+    } catch (err) {
+      resError = handleApiError(resError, new Error("Employee not found."));
+    }
+  };
+
+  fetchEmployee();
+
+  return { loading, error: resError, data: validData };
 };
