@@ -15,9 +15,11 @@ export const httpClient = async <T>(
   const finalSignal = signal || controller.signal;
 
   try {
+
     const response = await fetch(url, {
       ...otherOptions,
       signal: finalSignal,
+      body: otherOptions.body
     });
 
     const { body, json } = await parseResponseBody<T>(response);
@@ -31,7 +33,6 @@ export const httpClient = async <T>(
       body,
       json,
     };
-
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === "AbortError") {
