@@ -1,13 +1,13 @@
-import { Material } from "../../../shared/interfaces/Material.interface";
+
 
 export interface Employee {
-  id: string;
+  id?: number;
   name: string;
-  img?: string;
-  imgAlt: string;
-  level: number;
-  xp: number;
-  skill: string;
+  // img?: string;
+  // imgAlt: string;
+  // level: number;
+  // xp: number;
+  id_skill: number;
   salary: number;
-  materials: Material[];
+  // materials: Material[];
 }

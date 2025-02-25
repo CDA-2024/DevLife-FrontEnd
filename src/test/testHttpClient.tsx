@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useGet } from "../app/core/hooks/useApi";
-import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
-import { useGetEmployees } from "../app/pages/employePage/hooks/useEmployeeApi";
+import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
+import { useResource } from "../app/core/hooks/useRessource";
 
 const TestHttpClient = () => {
   const [showChild, setShowChild] = useState(true);
@@ -17,33 +16,79 @@ const TestHttpClient = () => {
   );
 };
 
+const useEmployee = () => {
+  return useResource<Employee>("employee");
+};
+
 const ChildComponent = () => {
-  //const { data, loading, error } = useGet<Employee>("staff");
-  const { data, loading, error } =useGetEmployees(); 
-
   const {
-    data: datas,
-    loading: allloading,
-    error: allerror,
-  } = useGet<Employee[]>("staff");
+    data: allEmployee,
+    loading,
+    error,
+    create,
+    update,
+    delete: deleteItem,
+  } = useEmployee();
 
-  if (loading || allloading) {
-    return <p>Loading...</p>;
+
+
+  if (loading) {
+    return <p>...Loading</p>;
   }
 
-  if (error || allerror) {
-    return <p>{error?.message}</p>;
+  if (error) {
+    return <p>{error.message}</p>;
   }
 
-  if (data) {
-    console.log(data);
-    //console.log(emmployees);
-    
-  }
+  
+
+  const employee: Employee = {
+    name: "testlqksdfjhgmlkqjsdhf qdsfsdfqsdfqsdf sdfqsdfqsdfqs",
+    id_skill: 7,
+    salary: 500,
+  };
+
+  const employeeu: Employee = {
+    id: 147,
+    name: "msdlkfjhgmlkjsdfhg",
+    id_skill: 7,
+    salary: 500,
+  };
+
+ 
+
+  console.log(allEmployee);
+
+  const saveEmployee = async () => {
+    const response = await create({ data: employee });
+    console.log(response);
+  };
+
+  const updateEmployee = async () => {
+    const response = await update({ id: "147", data: employeeu });
+    console.log(response);
+  };
+
+  const deleteEmployee = async () => {
+    const response = await deleteItem({ id: "147" });
+    console.log(response);
+  };
+
 
   return (
     <div>
-      <p>Data loaded!</p>
+      <h2>Child Component Mounted</h2>
+      <Button onClick={() => saveEmployee()}>create</Button>
+      <Button onClick={() => updateEmployee()}>update</Button>
+      <Button onClick={() => deleteEmployee()}>delete</Button>
+
+      <div>
+        <ul>
+          {allEmployee.map((allEmploye) => (
+            <li key={allEmploye.id}>{allEmploye.name}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

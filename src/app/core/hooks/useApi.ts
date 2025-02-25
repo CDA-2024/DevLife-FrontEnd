@@ -1,39 +1,106 @@
-import { useEffect, useState } from "react";
-import { ParamsGet } from "../schemas/ApiService.interface";
+import {
+  ParamsCreate,
+  ParamsDelete,
+  ParamsGet,
+  ParamsUpdate,
+} from "../schemas/ApiService.interface";
 import { apiService } from "../services/apiService";
 import { useApiCallTracker } from "./useApiCallTracker";
-import { ResponseApi } from "../schemas/response/ResponseApi.interface";
+import {
+  CreateResponseApi,
+  DeleteResponseApi,
+  GetResponseApi,
+  UpdateResponseApi,
+} from "../schemas/response/ResponseApi.interface";
 
-export const useGet = <T>(
-  resource: string,
-  params: ParamsGet = {}
-): ResponseApi<T> => {
+export const useGet = <T>(resource: string): GetResponseApi<T> => {
   const { track, untrack, getState } = useApiCallTracker();
-  const key = `get:${resource}:${JSON.stringify(params || {})}`;
-  const [data, setData] = useState<T>([] as T);
+  const key = `get:${resource}`;
 
-  const fetchData = async () => {
-    return await track(key, async () => {
-      const response = await apiService.get<T>(resource, params);
-      setData(response);
+  const fetchData = async (params: ParamsGet = {}) => {
+    try {
+      const response = await track(key, async () => {
+        return await apiService.get<T>(resource, params);
+      });
       return response;
-    });
+    } finally {
+      untrack(key);
+    }
   };
 
-  useEffect(() => {
-    fetchData();
-
-    return () => {
-      untrack(key);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return {
-    data: data,
     key: key,
     loading: getState(key).loading,
     error: getState(key).error,
-    refresh: fetchData,
+    fetch: fetchData,
+  };
+};
+
+export const useCreate = <T>(resource: string): CreateResponseApi<T> => {
+  const { track, untrack, getState } = useApiCallTracker();
+  const key = `create:${resource}`;
+
+  const createData = async (params: ParamsCreate<T>) => {
+    try {
+      const response = await track(key, async () => {
+        return await apiService.create<T>(resource, params);
+      });
+      return response;
+    } finally {
+      untrack(key);
+    }
+  };
+
+  return {
+    key: key,
+    loading: getState(key).loading,
+    error: getState(key).error,
+    create: createData,
+  };
+};
+
+export const useUpdate = <T>(resource: string): UpdateResponseApi<T> => {
+  const { track, untrack, getState } = useApiCallTracker();
+  const key = `update:${resource}`;
+
+  const updateData = async (params: ParamsUpdate<T>) => {
+    try {
+      const response = await track(key, async () => {
+        return await apiService.update<T>(resource, params);
+      });
+      return response;
+    } finally {
+      untrack(key);
+    }
+  };
+
+  return {
+    key: key,
+    loading: getState(key).loading,
+    error: getState(key).error,
+    update: updateData,
+  };
+};
+
+export const useDelete = <T>(resource: string): DeleteResponseApi<T> => {
+  const { track, untrack, getState } = useApiCallTracker();
+  const key = `delete:${resource}`;
+
+  const deleteData = async (params: ParamsDelete) => {
+    try {
+      const response = await track(key, async () => {
+        return await apiService.delete<T>(resource, params);
+      });
+      return response;
+    } finally {
+      untrack(key);
+    }
+  };
+
+  return {
+    key: key,
+    loading: getState(key).loading,
+    error: getState(key).error,
+    delete: deleteData,
   };
 };

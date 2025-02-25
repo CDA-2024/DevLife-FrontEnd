@@ -9,7 +9,7 @@ import { validateResponseData } from "../../../core/utils/validation.Utils";
 import { Employee } from "../interfaces/Employee.interface";
 import { validateEmployee } from "../services/employeeService";
 
-const resource = "staff";
+const resource = "employee";
 
 export const useGetEmployees = (
   params: ParamsGet = {}
