@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GridComponent from "../../shared/components/GridComponent/GridComponent";
 import {
   Card,
@@ -8,18 +8,21 @@ import {
   CardTitle,
 } from "../../shared/components/Shadcn/ui/card";
 import { Button } from "../../shared/components/Shadcn/ui/button";
-import { useGetMaterial } from "./hooks/useMaterialApi";
-import { useGetOneMaterialSkill } from "./hooks/useMaterialSkillApi";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogTitle,
-} from "../../shared/components/Shadcn/ui/alert-dialog";
+import { useResource } from "../../core/hooks/useRessource";
+import { Material } from "./interfaces/Material.interface";
+import { MaterialSkill } from "../../shared/interfaces/MaterialSkill.interface";
+import ReusableAlertDialog from "../../shared/components/AlertDialog/GenericAlertDIalog";
+
+const useMaterial = () => {
+  return useResource<Material>("materials");
+};
+
+const useMaterialSkill = () => {
+  return useResource<MaterialSkill>("materialSkill");
+};
 
 export const MaterialScreen = () => {
-  const { data: materials, loading, error } = useGetMaterial({ field: "name" });
+  const { data: materials, loading, error } = useMaterial();
 
   if (loading) {
     return <p>...Loading</p>;
@@ -125,21 +128,22 @@ interface MaterialSkillModalProps {
 }
 
 const MaterialSkillModal = ({ material, onClose }: MaterialSkillModalProps) => {
-  const {
-    data: materialSkill,
-    loading,
-    error,
-  } = useGetOneMaterialSkill({
-    id: material.idMaterialSkill,
-  });
+  const { getOne, loading, error } = useMaterialSkill();
+  const [skill, setSkill] = useState<MaterialSkill | null>(null);
+
+  useEffect(() => {
+    getOne({ id: material.idMaterialSkill }).then((result: MaterialSkill) => {
+      setSkill(result);
+    });
+  }, [material.idMaterialSkill, getOne]);
 
   return (
-    <AlertDialog open={true} onOpenChange={onClose}>
-      <AlertDialogContent>
-        <AlertDialogTitle>
-          <h2 className="text-xl font-bold">{material.name}</h2>
-        </AlertDialogTitle>
-        <AlertDialogDescription>
+    <ReusableAlertDialog
+      open={true}
+      onOpenChange={onClose}
+      title={<h2 className="text-xl font-bold">{material.name}</h2>}
+      description={
+        <>
           <p className="mb-4">{material.description}</p>
           <div>
             <h3 className="text-lg font-semibold">
@@ -147,19 +151,17 @@ const MaterialSkillModal = ({ material, onClose }: MaterialSkillModalProps) => {
             </h3>
             {loading && <p>Chargement de la compétence...</p>}
             {error && <p>Erreur lors du chargement de la compétence.</p>}
-            {materialSkill && (
+            {skill && (
               <div className="mt-2">
                 <p>
-                  <strong>Description : </strong> {materialSkill.name}
+                  <strong>Description : </strong> {skill.name}
                 </p>
               </div>
             )}
           </div>
-        </AlertDialogDescription>
-        <AlertDialogFooter>
-          <Button onClick={onClose}>Fermer</Button>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+        </>
+      }
+      footer={<Button onClick={onClose}>Fermer</Button>}
+    />
   );
 };
