@@ -1,8 +1,8 @@
 export interface Material {
   id: number;
-  idMaterialSkill: number;
+  id_material_skill: number;
   name: string;
   type: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
 }

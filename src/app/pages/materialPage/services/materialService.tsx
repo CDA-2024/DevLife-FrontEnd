@@ -1,4 +1,4 @@
-import { Material } from "../../../shared/interfaces/Material.interface";
+import { Material } from "../interfaces/Material.interface";
 
 export const validateMaterial = (material: unknown): material is Material => {
   if (typeof material !== "object" || material === null) {
@@ -10,11 +10,11 @@ export const validateMaterial = (material: unknown): material is Material => {
 
   if (
     typeof m.id !== "number" ||
+    typeof m.id_material_skill !== "number" ||
     typeof m.name !== "string" ||
     typeof m.type !== "string" ||
-    typeof m.condition !== "number" ||
     typeof m.description !== "string" ||
-    typeof m.materialSkill !== "object"
+    typeof m.image_url !== "string"
   ) {
     console.error("Invalid material data:", m);
     return false;

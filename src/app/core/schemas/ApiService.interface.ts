@@ -6,7 +6,7 @@ export interface ApiService {
 }
 
 export interface ParamsGet extends Params, PaginationPayload, SortPayload {
-  id?: string;
+  id?: string | number;
   ids?: string[];
 }
 

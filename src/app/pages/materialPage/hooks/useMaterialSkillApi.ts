@@ -3,44 +3,45 @@ import { ParamsGet } from "../../../core/schemas/ApiService.interface";
 import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
-import { Material } from "../interfaces/Material.interface";
-import { validateMaterial } from "../services/materialService";
-const resource = "materials";
+import { MaterialSkill } from "../../../shared/interfaces/MaterialSkill.interface";
+import { validateMaterialSkill } from "../services/materialSkillService";
 
-export const useGetMaterial = (
+const resource = "materialSkill";
+
+export const useGetMaterialSkill = (
   params: ParamsGet = {}
-): ResponseApi<Material[]> => {
-  const response = useGet<Material[]>(resource, params);
+): ResponseApi<MaterialSkill[]> => {
+  const response = useGet<MaterialSkill[]>(resource, params);
 
-  const { validData, hasInvalidData } = validateResponseData<Material[]>(
+  const { validData, hasInvalidData } = validateResponseData<MaterialSkill[]>(
     response.data,
-    validateMaterial
+    validateMaterialSkill
   );
 
   if (hasInvalidData) {
     response.error = handleApiError(
       response.error,
-      new Error("Some material data are invalid.")
+      new Error("Some material skill data are invalid.")
     );
   }
 
   return { ...response, error: response.error, data: validData };
 };
 
-export const useGetOneMaterial = (
+export const useGetOneMaterialSkill = (
   params: ParamsGet = {}
-): ResponseApi<Material> => {
-  const response = useGet<Material>(resource, params);
+): ResponseApi<MaterialSkill> => {
+  const response = useGet<MaterialSkill>(resource, params);
 
-  const { validData, hasInvalidData } = validateResponseData<Material>(
+  const { validData, hasInvalidData } = validateResponseData<MaterialSkill>(
     response.data,
-    validateMaterial
+    validateMaterialSkill
   );
 
   if (hasInvalidData) {
     response.error = handleApiError(
       response.error,
-      new Error("Material data is invalid.")
+      new Error("Material skill data is invalid.")
     );
   }
 
