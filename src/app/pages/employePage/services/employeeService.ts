@@ -24,3 +24,4 @@ export const validateEmployee = (employee: unknown): employee is Employee => {
 
   return true;
 };
+

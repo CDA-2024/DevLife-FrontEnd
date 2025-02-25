@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
 import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
-import { useResource } from "../app/core/hooks/useRessource";
-import { useGetOneEmployee } from "../app/pages/employePage/hooks/useEmployeeApi";
+
+import { useEmployee } from "../app/pages/employePage/hooks/useEmployeeApi";
 
 const TestHttpClient = () => {
   const [showChild, setShowChild] = useState(true);
-
-  
-  
-
   return (
     <div>
       <Button onClick={() => setShowChild((prev) => !prev)}>
@@ -20,10 +16,6 @@ const TestHttpClient = () => {
   );
 };
 
-const useEmployee = () => {
-  return useResource<Employee>("employee");
-};
-
 const ChildComponent = () => {
   const {
     data: allEmployee,
@@ -31,10 +23,9 @@ const ChildComponent = () => {
     error,
     create,
     update,
+    getOne,
     delete: deleteItem,
   } = useEmployee();
-
-
 
   if (loading) {
     return <p>...Loading</p>;
@@ -43,8 +34,6 @@ const ChildComponent = () => {
   if (error) {
     return <p>{error.message}</p>;
   }
-
-  
 
   const employee: Employee = {
     name: "testlqksdfjhgmlkqjsdhf qdsfsdfqsdfqsdf sdfqsdfqsdfqs",
@@ -59,25 +48,27 @@ const ChildComponent = () => {
     salary: 500,
   };
 
- 
-
   console.log(allEmployee);
 
   const saveEmployee = async () => {
-    const response = await create({ data: employee });
+    const response = await create(employee);
     console.log(response);
   };
 
   const updateEmployee = async () => {
-    const response = await update({ id: "147", data: employeeu });
+    const response = await update("147", employeeu);
     console.log(response);
   };
 
   const deleteEmployee = async () => {
-    const response = await deleteItem({ id: "147" });
+    const response = await deleteItem("147");
     console.log(response);
   };
 
+  const getOneEmployee = async () => {
+    const response = await getOne(147);
+    console.log(response);
+  };
 
   return (
     <div>
@@ -85,6 +76,7 @@ const ChildComponent = () => {
       <Button onClick={() => saveEmployee()}>create</Button>
       <Button onClick={() => updateEmployee()}>update</Button>
       <Button onClick={() => deleteEmployee()}>delete</Button>
+      <Button onClick={() => getOneEmployee()}>getone</Button>
 
       <div>
         <ul>

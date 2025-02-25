@@ -1,67 +1,75 @@
 import { useResource } from "../../../core/hooks/useRessource";
-import { ParamsGetOne } from "../../../core/schemas/ApiService.interface";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
 import { Employee } from "../interfaces/Employee.interface";
 import { validateEmployee } from "../services/employeeService";
 
-const resource = "employee";
-
-const useEmployee = () => {
-  return useResource<Employee>(resource);
-};
-
-export const useGetEmployees = (): {
-  loading: boolean;
-  error: Error | null;
-  data: Employee[];
-} => {
-  const { data, loading, error } = useEmployee();
-
-  let resError = error;
-
-  const { validData, hasInvalidData } = validateResponseData<Employee[]>(
+export const useEmployee = () => {
+  const {
     data,
-    validateEmployee
-  );
+    loading,
+    error,
+    fetchData,
+    create,
+    update,
+    delete: deleteItemGeneric,
+    getOne: getOneGeneric,
+    getAll: getAllGeneric,
+  } = useResource<Employee>("employee");
 
-  if (hasInvalidData) {
-    resError = handleApiError(
-      resError,
-      new Error("Some employee data are invalid.")
+  let er = error;
+
+  const getOneEmployee = async (id: number) => {
+    const employee = await getOneGeneric({ id });
+
+    const { validData, hasInvalidData } = validateResponseData<Employee>(
+      employee,
+      validateEmployee
     );
-  }
 
-  return { loading, error: resError, data: validData };
-};
-
-export const useGetOneEmployee = (
-  params: ParamsGetOne
-): { loading: boolean; error: Error | null; data: Employee | null } => {
-  const { loading, error, getOne } = useEmployee();
-  let resError = error;
-  let validData: Employee | null = null;
-
-  const fetchEmployee = async () => {
-    try {
-      const employee = await getOne(params);
-      const { validData: validatedData, hasInvalidData } =
-        validateResponseData<Employee>(employee, validateEmployee);
-
-      validData = validatedData;
-
-      if (hasInvalidData) {
-        resError = handleApiError(
-          resError,
-          new Error("Some employee data are invalid.")
-        );
-      }
-    } catch (err) {
-      resError = handleApiError(resError, new Error("Employee not found."));
+    if (hasInvalidData) {
+      er = handleApiError(er, new Error("Some employee data are invalid."));
     }
+
+    return validData;
   };
 
-  fetchEmployee();
+  const getAllEmployees = async () => {
+    await getAllGeneric();
 
-  return { loading, error: resError, data: validData };
+    const { validData, hasInvalidData } = validateResponseData<Employee[]>(
+      data,
+      validateEmployee
+    );
+
+    if (hasInvalidData) {
+      er = handleApiError(er, new Error("Some employee data are invalid."));
+    }
+
+    return validData;
+  };
+
+  const createEmployee = async (employee: Employee) => {
+    return await create({ data: employee });
+  };
+
+  const updateEmployee = async (id: string, employee: Employee) => {
+    return await update({ id, data: employee });
+  };
+
+  const deleteEmployee = async (id: string) => {
+    return await deleteItemGeneric({ id });
+  };
+
+  return {
+    data,
+    loading,
+    error: er,
+    fetchData,
+    create: createEmployee,
+    update: updateEmployee,
+    delete: deleteEmployee,
+    getOne: getOneEmployee,
+    getAll: getAllEmployees,
+  };
 };
