@@ -1,5 +1,4 @@
 export interface MaterialSkill {
-  id: string;
+  id: number;
   name: string;
-  description: string;
 }
