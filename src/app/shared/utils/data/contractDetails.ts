@@ -4,7 +4,6 @@ import {
 } from "../../interfaces/Contract.interface";
 import { salaryToString } from "../parsers.Utils";
 
-
 export const getAvailableContractDetails = (contract: AvailableContract) => [
   {
     icon: "⏳",
@@ -16,7 +15,7 @@ export const getAvailableContractDetails = (contract: AvailableContract) => [
     label: "Récompense",
     value: salaryToString(contract.reward),
   },
-  { icon: "⚙️", label: "Difficulté", value: contract.difficultyLevel },
+  { icon: "⚙️", label: "Difficulté", value: contract.difficulty_level },
 ];
 
 export const getOngoingContractDetails = (contract: OngoingContract) => [
@@ -30,5 +29,5 @@ export const getOngoingContractDetails = (contract: OngoingContract) => [
     label: "Récompense",
     value: salaryToString(contract.reward),
   },
-  { icon: "⚙️", label: "Difficulté", value: contract.difficultyLevel },
+  { icon: "⚙️", label: "Difficulté", value: contract.difficulty_level },
 ];

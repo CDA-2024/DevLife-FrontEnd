@@ -1,10 +1,10 @@
 import { useResource } from "../../../core/hooks/useRessource";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
-import { Contract } from "../../../shared/interfaces/Contract.interface";
-import { validateContract } from "../services/contractService";
+import { Contract } from "../../interfaces/Contract.interface";
+import { validateContract } from "../../../pages/contractPage/services/contractService";
 
-export const useContract = () => {
+export const useContractApi = () => {
   const {
     data,
     loading,

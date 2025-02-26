@@ -4,18 +4,14 @@ export interface Contract {
   id: number;
   title: string;
   type: string;
-  imageUrl: string;
+  image_url: string;
   description: string;
   reward: number;
-  difficultyLevel: number;
+  difficulty_level: number;
 }
 
-export interface AvailableContract extends Contract {
-isAccepted: boolean; 
-}
+export type AvailableContract = Contract
 
 export interface OngoingContract extends Contract {
-startDate: Date; 
-isCompleted: boolean; 
-modifiers?: ContractModifier[]; 
+  modifiers?: ContractModifier[];
 }
