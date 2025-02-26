@@ -1,7 +1,7 @@
 import devPortrait from "../../../../assets/images/pixelPortrait.jpg";
 
 import { Button } from "../../../shared/components/Shadcn/ui/button";
-import { getCandidateDetails } from "../../../shared/utils/data/CandidateDetails";
+import { getCandidateDetails } from "../utils/candidateDetails";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import { Candidate } from "../interfaces/Candidate.interface";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
@@ -13,18 +13,18 @@ import useButtonClick from "../../../core/hooks/useButtonClick";
 import useResize from "../../../shared/hooks/useResize";
 
 interface CandidateCardProps {
-  employee: Candidate;
+  cadidate: Candidate;
 }
 
-const CandidateCard: React.FC<CandidateCardProps> = ({ employee }) => {
-  const emplyeDetails = getCandidateDetails(employee);
+const CandidateCard: React.FC<CandidateCardProps> = ({ cadidate }) => {
+  const emplyeDetails = getCandidateDetails(cadidate);
   const { isSmall, containerRef } = useResize(425);
   const { handleClick } = useButtonClick();
 
   return (
     <PrimaryCard>
       <PrimaryCardHeader>
-        <CardTitle className="text-gray-800">{employee.name}</CardTitle>
+        <CardTitle className="text-gray-800">{cadidate.name}</CardTitle>
       </PrimaryCardHeader>
       <PrimaryCardContent>
         <div
@@ -34,7 +34,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ employee }) => {
           <img
             className="min-w-15 max-w-48 h-full object-cover"
             src={devPortrait}
-            alt={employee.imgAlt}
+            alt={"Portrait of : " + cadidate.name}
           />
           <div className="flex flex-col flex-1 gap-2 h-full">
             {emplyeDetails.map((detail) => (
