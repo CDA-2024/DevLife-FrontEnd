@@ -1,38 +1,24 @@
-import { useEffect, useState } from "react";
-import { AvailableContract } from "../../../shared/interfaces/Contract.interface";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
+import { useContract } from "../hooks/useContractApi";
 import AvailableContractCard from "./AvailableContractCard";
 
 const AvailableContractsSection = () => {
-  const [contracts, setContracts] = useState<AvailableContract[]>([]);
+  const { data, loading, error } = useContract();
 
-  useEffect(() => {
-    const url = "http://localhost:3000/availableContracts";
+  if (loading) {
+    return <p>...Loading</p>;
+  }
 
-    const fetchContracts = async () => {
-      try {
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error("Erreur lors du chargement des contrats !");
-        }
-
-        const result = await response.json();
-        setContracts(result);
-      } catch (e) {
-        console.error("Une erreur inattendue est survenue", e);
-      }
-    };
-
-    fetchContracts();
-  }, []);
+  if (error) {
+    return <p>{error.message}</p>;
+  }
 
   return (
     <GridComponent
       cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
       gap="gap-6 w-full"
     >
-      {contracts.map((contract) => (
+      {data.map((contract) => (
         <AvailableContractCard key={contract.id} contract={contract} />
       ))}
     </GridComponent>

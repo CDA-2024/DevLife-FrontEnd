@@ -8,18 +8,10 @@ import {
   CardTitle,
 } from "../../shared/components/Shadcn/ui/card";
 import { Button } from "../../shared/components/Shadcn/ui/button";
-import { useResource } from "../../core/hooks/useRessource";
-import { Material } from "./interfaces/Material.interface";
 import { MaterialSkill } from "../../shared/interfaces/MaterialSkill.interface";
 import GenericAlertDialog from "../../shared/components/AlertDialog/GenericAlertDIalog";
-
-const useMaterial = () => {
-  return useResource<Material>("materials");
-};
-
-const useMaterialSkill = () => {
-  return useResource<MaterialSkill>("materialSkill");
-};
+import { useMaterial } from "./hooks/useMaterialApi";
+import { useMaterialSkill } from "./hooks/useMaterialSkillApi";
 
 export const MaterialScreen = () => {
   const { data: materials, loading, error } = useMaterial();
@@ -128,14 +120,14 @@ interface MaterialSkillModalProps {
 }
 
 const MaterialSkillModal = ({ material, onClose }: MaterialSkillModalProps) => {
-  const { getOne, loading, error } = useMaterialSkill();
+  const { getOneMaterialSkill, loading, error } = useMaterialSkill();
   const [skill, setSkill] = useState<MaterialSkill | null>(null);
 
   useEffect(() => {
-    getOne({ id: material.idMaterialSkill }).then((result: MaterialSkill) => {
+    getOneMaterialSkill(material.id).then((result: MaterialSkill) => {
       setSkill(result);
     });
-  }, [material.idMaterialSkill, getOne]);
+  }, [material.id, getOneMaterialSkill]);
 
   return (
     <GenericAlertDialog

@@ -1,25 +1,21 @@
 import { ContractModifier } from "./Modifier.interface";
 
 export interface Contract {
-  id: string;
+  id: number;
   title: string;
-  img?: string;
-  imgAlt: string;
+  type: string;
+  imageUrl: string;
   description: string;
-  deadline: Date;
   reward: number;
-  difficultyLevel: "Easy" | "Medium" | "Hard";
-  progress?: number;
-  employeesAssigned: string[]; 
+  difficultyLevel: number;
 }
 
 export interface AvailableContract extends Contract {
-  isAccepted: boolean; 
+isAccepted: boolean; 
 }
 
 export interface OngoingContract extends Contract {
-  startDate: Date; 
-  isCompleted: boolean; 
-  modifiers?: ContractModifier[]; 
+startDate: Date; 
+isCompleted: boolean; 
+modifiers?: ContractModifier[]; 
 }
-
