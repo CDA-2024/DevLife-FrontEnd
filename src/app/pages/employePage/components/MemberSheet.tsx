@@ -1,6 +1,6 @@
 import PrimarySheet from "../../../shared/components/PrimarySheet/PrimarySheet";
 
-const EmployeeSheet = () => {
+const MemberSheet = () => {
   return (
     <PrimarySheet btnTitle="Details" title="titre" description="deescription">
       <h1>coucou</h1>
@@ -8,4 +8,4 @@ const EmployeeSheet = () => {
   );
 };
 
-export default EmployeeSheet;
+export default MemberSheet;

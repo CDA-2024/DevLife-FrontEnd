@@ -3,7 +3,7 @@ import { EmployeeCompagny } from "../../../shared/interfaces/EmployeeCompagny.in
 import { EmployeeSkill } from "../../../shared/interfaces/EmployyeSkill.interface";
 import { Candidate } from "../interfaces/Candidate.interface";
 
-export const CandidatePipe = (
+export const candidateParser = (
   employeesCompagnie: EmployeeCompagny[],
   employeeSkills: EmployeeSkill[],
   employees: Employee[]
@@ -23,11 +23,11 @@ export const CandidatePipe = (
       );
 
       if (!employeeInfo || !skillInfo) {
-        return null; 
+        return null;
       }
-
+      
       return {
-        id: candidate.id, 
+        id: candidate.id,
         name: employeeInfo.name,
         salary: employeeInfo.salary,
         experience: candidate.experience,
@@ -35,6 +35,5 @@ export const CandidatePipe = (
         skillDescription: skillInfo.description,
       };
     })
-    .filter((candidate): candidate is Candidate => candidate !== null); 
+    .filter((candidate): candidate is Candidate => candidate !== null);
 };
-

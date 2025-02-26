@@ -1,9 +1,9 @@
 import { useEmployee } from "../../../shared/hooks/useEmployeeApi";
 import { useEmployeeCompagny } from "../../../shared/hooks/useEmployeeCompagny";
 import { useEmployeeSkill } from "../../../shared/hooks/useEmployeSkill";
-import { candidateParser } from "../utils/candidateParser";
+import { memberParser } from "../utils/memberParser";
 
-export const useCandidate = () => {
+export const useMember = () => {
   const { data: employees, loading: loadingE, error: errorE } = useEmployee();
   const {
     data: employeesCompagny,
@@ -16,14 +16,10 @@ export const useCandidate = () => {
     error: errorES,
   } = useEmployeeSkill();
 
-  const candidates = candidateParser(
-    employeesCompagny,
-    employeeSkills,
-    employees
-  );
+  const members = memberParser(employeesCompagny, employeeSkills, employees);
 
   return {
-    candidates,
+    members,
     loading: loadingE || loadingEC || loadingES,
     error: errorE || errorEC || errorES,
   };
