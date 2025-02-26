@@ -11,12 +11,7 @@ export const validateEmployee = (employee: unknown): employee is Employee => {
   if (
     typeof e.id !== "number" ||
     typeof e.name !== "string" ||
-    // typeof e.imgAlt !== "string" ||
-    // typeof e.level !== "number" ||
-    // typeof e.xp !== "number" ||
-    // typeof e.skill !== "string" ||
     typeof e.salary !== "number"
-    // !Array.isArray(e.materials)
   ) {
     console.error("Invalid employee data:", e);
     return false;
@@ -24,4 +19,3 @@ export const validateEmployee = (employee: unknown): employee is Employee => {
 
   return true;
 };
-

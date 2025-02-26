@@ -1,5 +1,5 @@
 import TabsSwitcher from "../../shared/components/TabSwitcher/TabsSwitcher";
-import EmployeeSection from "./components/EmployeeSection";
+import MembersSection from "./components/MembersSection";
 import CandidateSection from "./components/CandidateSection";
 
 const EmployeePage = () => {
@@ -12,7 +12,7 @@ const EmployeePage = () => {
     {
       label: "Management",
       value: "Management",
-      content: <EmployeeSection />,
+      content: <MembersSection />,
     },
   ];
 

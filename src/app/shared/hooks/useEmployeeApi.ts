@@ -1,10 +1,10 @@
-import { useResource } from "../../../core/hooks/useRessource";
-import { handleApiError } from "../../../core/utils/error.Utils";
-import { validateResponseData } from "../../../core/utils/validation.Utils";
+import { useResource } from "../../core/hooks/useRessource";
+import { handleApiError } from "../../core/utils/error.Utils";
+import { validateResponseData } from "../../core/utils/validation.Utils";
 import { Employee } from "../interfaces/Employee.interface";
-import { validateEmployee } from "../services/employeeService";
+import { validateEmployee } from "../services/employee.Service";
 
-export const useEmployee = () => {
+export function useEmployee()  {
   const {
     data,
     loading,
@@ -66,10 +66,10 @@ export const useEmployee = () => {
     loading,
     error: er,
     fetchData,
-    create: createEmployee,
-    update: updateEmployee,
-    delete: deleteEmployee,
-    getOne: getOneEmployee,
-    getAll: getAllEmployees,
+    createEmployee,
+    updateEmployee,
+    deleteEmployee,
+    getOneEmployee,
+    getAllEmployees,
   };
 };
