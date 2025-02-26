@@ -1,9 +1,8 @@
 export interface Candidate {
-  id: string;
+  id: number;
   name: string;
-  img?: string;
-  imgAlt: string;
-  level: number;
-  skill: string;
   salary: number;
+  experience: number;
+  skillName: string;
+  skillDescription: string;
 }

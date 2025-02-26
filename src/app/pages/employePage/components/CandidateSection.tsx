@@ -1,25 +1,10 @@
-import { useEffect} from "react";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
-// import { useGetCandidate } from "../hooks/useCandidateApi";
-import { useEmployee } from "../hooks/useEmployeeApi";
+import { useCandidate } from "../hooks/useCandidate";
+
 // import CandidateCard from "./CandidateCard";
 
 const CandidateSection = () => {
-  const { data: employees, loading, error, getAll } = useEmployee();
-
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        await getAll();
-      } catch (err) {
-        console.error("Error fetching employees in useEffect:", err);
-      }
-    };
-
-    fetchEmployees();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const {error, loading, candidates} = useCandidate();
 
   if (loading) {
     return <p>...Loading</p>;
@@ -28,6 +13,9 @@ const CandidateSection = () => {
   if (error) {
     return <p>{error.message}</p>;
   }
+
+  console.log(candidates);
+  
 
   return (
     <GridComponent
@@ -38,7 +26,7 @@ const CandidateSection = () => {
         <CandidateCard key={employee.id} employee={employee} />
       ))} */}
       <ul>
-        {employees.map((employee) => (
+        {candidates.map((employee) => (
           <li key={employee.id}>{employee.name}</li>
         ))}
       </ul>

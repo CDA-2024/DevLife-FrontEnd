@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
-import { Employee } from "../app/pages/employePage/interfaces/Employee.interface";
+import { Employee } from "../app/shared/interfaces/Employee.interface";
 
-import { useEmployee } from "../app/pages/employePage/hooks/useEmployeeApi";
+import { useEmployee } from "../app/shared/hooks/useEmployeeApi";
 
 const TestHttpClient = () => {
   const [showChild, setShowChild] = useState(true);

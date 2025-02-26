@@ -1,11 +1,10 @@
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
-import { useEmployee } from "../hooks/useEmployeeApi";
+import { useEmployee } from "../../../shared/hooks/useEmployeeApi";
 // import EmployeeCard from "./EmployeeCard";
 // import { Employee } from "../interfaces/Employee.interface";
 
 const EmployeeSection = () => {
   const { data, loading, error } = useEmployee();
-
 
   if (loading) {
     return <p>...Loading</p>;
@@ -15,7 +14,6 @@ const EmployeeSection = () => {
     return <p>{error.message}</p>;
   }
 
-  
   return (
     <GridComponent
       cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
