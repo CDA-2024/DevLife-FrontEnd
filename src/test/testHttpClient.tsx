@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
 import { Employee } from "../app/shared/interfaces/Employee.interface";
-
 import { useEmployee } from "../app/shared/hooks/useEmployeeApi";
 
 const TestHttpClient = () => {
@@ -21,11 +20,17 @@ const ChildComponent = () => {
     data: allEmployee,
     loading,
     error,
-    create,
-    update,
-    getOne,
-    delete: deleteItem,
+    createEmployee,
+    updateEmployee,
+    getOneEmployee,
+    deleteEmployee,
+    fetchData,
   } = useEmployee();
+
+  // Fetch data initially
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   if (loading) {
     return <p>...Loading</p>;
@@ -36,6 +41,7 @@ const ChildComponent = () => {
   }
 
   const employee: Employee = {
+    
     name: "testlqksdfjhgmlkqjsdhf qdsfsdfqsdfqsdf sdfqsdfqsdfqs",
     id_skill: 7,
     salary: 500,
@@ -51,22 +57,22 @@ const ChildComponent = () => {
   console.log(allEmployee);
 
   const saveEmployee = async () => {
-    const response = await create(employee);
-    console.log(response);
+    await createEmployee(employee);
+    fetchData();
   };
 
-  const updateEmployee = async () => {
-    const response = await update("147", employeeu);
-    console.log(response);
+  const update = async () => {
+    await updateEmployee("147", employeeu);
+    fetchData();
   };
 
-  const deleteEmployee = async () => {
-    const response = await deleteItem("147");
-    console.log(response);
+  const deleteI = async () => {
+    await deleteEmployee("147");
+    fetchData();
   };
 
-  const getOneEmployee = async () => {
-    const response = await getOne(147);
+  const getOne = async () => {
+    const response = await getOneEmployee(147);
     console.log(response);
   };
 
@@ -74,15 +80,15 @@ const ChildComponent = () => {
     <div>
       <h2>Child Component Mounted</h2>
       <Button onClick={() => saveEmployee()}>create</Button>
-      <Button onClick={() => updateEmployee()}>update</Button>
-      <Button onClick={() => deleteEmployee()}>delete</Button>
-      <Button onClick={() => getOneEmployee()}>getone</Button>
-
+      <Button onClick={() => update()}>update</Button>
+      <Button onClick={() => deleteI()}>delete</Button>
+      <Button onClick={() => getOne()}>getone</Button>
       <div>
         <ul>
-          {allEmployee.map((allEmploye) => (
-            <li key={allEmploye.id}>{allEmploye.name}</li>
-          ))}
+          {allEmployee &&
+            allEmployee.map((allEmploye) => (
+              <li key={allEmploye.id}>{allEmploye.name}</li>
+            ))}
         </ul>
       </div>
     </div>
