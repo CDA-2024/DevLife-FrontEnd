@@ -1,6 +1,6 @@
-import { Employee } from "../../../shared/interfaces/Employee.interface";
-import { EmployeeCompagny } from "../../../shared/interfaces/EmployeeCompagny.interface";
-import { EmployeeSkill } from "../../../shared/interfaces/EmployyeSkill.interface";
+import { Employee } from "../../../shared/interfaces/Models/Employee.interface";
+import { EmployeeCompagny } from "../../../shared/interfaces/Models/EmployeeCompagny.interface";
+import { EmployeeSkill } from "../../../shared/interfaces/Models/EmployyeSkill.interface";
 import { Candidate } from "../interfaces/Candidate.interface";
 
 export const candidateParser = (
@@ -25,7 +25,7 @@ export const candidateParser = (
       if (!employeeInfo || !skillInfo) {
         return null;
       }
-      
+
       return {
         id: candidate.id,
         name: employeeInfo.name,

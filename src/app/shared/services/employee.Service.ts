@@ -1,4 +1,4 @@
-import { Employee } from "../interfaces/Employee.interface";
+import { Employee } from "../interfaces/Models/Employee.interface";
 
 export const validateEmployee = (employee: unknown): employee is Employee => {
   if (typeof employee !== "object" || employee === null) {

@@ -9,7 +9,7 @@ import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardI
 import { Button } from "../../../shared/components/Shadcn/ui/button";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
-import { AvailableContract } from "../../../shared/interfaces/Contract.interface";
+import { AvailableContract } from "../../../shared/interfaces/Models/Contract.interface";
 import { getAvailableContractDetails } from "../../../shared/utils/data/contractDetails";
 
 interface AvailableContractCardProps {

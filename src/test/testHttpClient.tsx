@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "../app/shared/components/Shadcn/ui/button";
-import { Employee } from "../app/shared/interfaces/Employee.interface";
+import { Employee } from "../app/shared/interfaces/Models/Employee.interface";
 import { useEmployee } from "../app/shared/hooks/useEmployeeApi";
 
 const TestHttpClient = () => {
@@ -41,7 +41,6 @@ const ChildComponent = () => {
   }
 
   const employee: Employee = {
-    
     name: "testlqksdfjhgmlkqjsdhf qdsfsdfqsdfqsdf sdfqsdfqsdfqs",
     id_skill: 7,
     salary: 500,
