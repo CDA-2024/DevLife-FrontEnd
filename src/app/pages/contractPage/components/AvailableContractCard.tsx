@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import contractImage from "../../../../assets/images/contract.avif";
 import PrimaryCard from "../../../shared/components/PrimaryCard/PrimaryCard";
 import PrimaryCardContent from "../../../shared/components/PrimaryCard/PrimaryCardContent";
@@ -16,17 +17,22 @@ interface AvailableContractCardProps {
 }
 
 const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
-  contract
+  contract,
 }) => {
   const contractDetails = getAvailableContractDetails(contract);
   const {
     createContractCompany,
     deleteContractCompany,
     getOneContractCompany,
+    fetchContract,
   } = useContractCompanyApi();
   const { id } = contract;
 
   const { isSmall, containerRef } = useResize(425);
+
+  useEffect(() => {
+    fetchContract();
+  }, [fetchContract]);
 
   const handleClickUpdate = async () => {
     try {
@@ -42,6 +48,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
         deadline: (await fullContract).deadline,
       };
       await createContractCompany(updatedContract);
+      fetchContract();
     } catch (error) {
       console.error("Erreur lors de la mise à jour du contrat", error);
     }
@@ -49,6 +56,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
 
   const handleClickDelete = () => {
     deleteContractCompany(id);
+    fetchContract();
   };
 
   return (

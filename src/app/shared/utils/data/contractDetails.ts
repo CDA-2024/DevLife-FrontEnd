@@ -1,7 +1,5 @@
-import {
-  AvailableContract,
-  OngoingContract,
-} from "../../interfaces/Contract.interface";
+import { AvailableContract } from "../../../pages/contractPage/interfaces/availableContract.interface";
+import { OngoingContract } from "../../interfaces/Contract.interface";
 import { salaryToString } from "../parsers.Utils";
 
 export const getAvailableContractDetails = (contract: AvailableContract) => [

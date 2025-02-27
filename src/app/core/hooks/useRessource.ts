@@ -98,7 +98,6 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     setError(null);
     try {
       const response = await deleteItem(params);
-      
       await handleFetchData();
       return response;
     } catch (err) {
