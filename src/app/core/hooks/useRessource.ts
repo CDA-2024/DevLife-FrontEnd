@@ -36,7 +36,7 @@ export const useResource = <T>(resource: string) => {
     try {
       const response = await create(params);
       await handleFetchData();
-       return response;
+      return response;
     } catch (err) {
       setError(err as Error);
       throw err;
@@ -51,7 +51,7 @@ export const useResource = <T>(resource: string) => {
     try {
       const response = await update(params);
       await handleFetchData();
-       return response;
+      return response;
     } catch (err) {
       setError(err as Error);
       throw err;
@@ -64,9 +64,9 @@ export const useResource = <T>(resource: string) => {
     setLoading(true);
     setError(null);
     try {
-     const response = await deleteItem(params);
+      const response = await deleteItem(params);
       await handleFetchData();
-       return response;
+      return response;
     } catch (err) {
       setError(err as Error);
       throw err;
@@ -75,7 +75,7 @@ export const useResource = <T>(resource: string) => {
     }
   };
 
-  const getOne  = async (params: ParamsGet) => {
+  const getOne = async (params: ParamsGet) => {
     setLoading(true);
     setError(null);
     try {
@@ -86,8 +86,8 @@ export const useResource = <T>(resource: string) => {
         return foundItem;
       }
 
-      const response = await (fetch(params)) as T;
-      return response ;
+      const response = (await fetch(params)) as T;
+      return response;
     } catch (err) {
       setError(err as Error);
       throw err;
@@ -97,13 +97,13 @@ export const useResource = <T>(resource: string) => {
   };
 
   const getAll = async () => {
-   const response = await handleFetchData();
-  return response
+    const response = await handleFetchData();
+    return response;
   };
 
   useEffect(() => {
     handleFetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

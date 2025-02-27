@@ -6,5 +6,5 @@ export interface ContractCompany {
   is_accepted: boolean;
   is_completed: boolean;
   progress: number;
-  startDate: Date;
+  start_date?: Date;
 }

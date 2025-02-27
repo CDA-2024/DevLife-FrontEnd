@@ -19,9 +19,8 @@ export const useContractCompanyApi = () => {
 
   let er = error;
 
-  const getOneContractCompany = async (id: number) => {
+  const getOneContractCompany = async (id: number | string) => {
     const contractCompany = await getOneGeneric({ id });
-
     const { validData, hasInvalidData } = validateResponseData<ContractCompany>(
       contractCompany,
       validateContractCompany
@@ -58,13 +57,13 @@ export const useContractCompanyApi = () => {
   };
 
   const updateContractCompany = async (
-    id: string,
+    id: string | number,
     contractCompany: ContractCompany
   ) => {
     return await update({ id, data: contractCompany });
   };
 
-  const deleteContractCompany = async (id: string) => {
+  const deleteContractCompany = async (id: number) => {
     return await deleteItemGeneric({ id });
   };
 

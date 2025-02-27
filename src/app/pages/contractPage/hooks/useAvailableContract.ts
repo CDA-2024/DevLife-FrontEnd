@@ -7,6 +7,7 @@ export const useAvailableContract = () => {
     data: contract,
     loading: loadingContract,
     error: errorContract,
+    fetchData: fetchData
   } = useContractApi();
 
   const {
@@ -24,5 +25,6 @@ export const useAvailableContract = () => {
     availableContracts,
     loading: loadingContract || loadingCompany,
     error: errorContract || errorCompany,
+    fetchData: fetchData
   };
 };

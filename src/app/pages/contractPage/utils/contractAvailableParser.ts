@@ -1,5 +1,6 @@
-import { AvailableContract, Contract } from "../../../shared/interfaces/Contract.interface";
+import { Contract } from "../../../shared/interfaces/Contract.interface";
 import { ContractCompany } from "../../../shared/interfaces/ContractCompany.interface";
+import { AvailableContract } from "../interfaces/availableContract.interface";
 
 export const contractAvailableParser = (
   contract: Contract[],
@@ -19,14 +20,15 @@ export const contractAvailableParser = (
         id: contractCompany.id,
         title: contractInfo?.title,
         type: contractInfo?.type,
-        imageUrl: contractInfo?.image_url,
+        image_url: contractInfo?.image_url,
         description: contractInfo?.description,
         reward: contractInfo?.reward,
-        difficultyLevel: contractInfo?.difficulty_level,
+        difficulty_level: contractInfo?.difficulty_level,
         deadline: contractCompany.deadline,
       };
     })
     .filter(
-      (contractCompany): contractCompany is AvailableContract => contractCompany !== null
+      (contractCompany): contractCompany is AvailableContract =>
+        contractCompany !== null
     );
 };

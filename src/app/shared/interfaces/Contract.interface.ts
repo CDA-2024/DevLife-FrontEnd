@@ -10,8 +10,6 @@ export interface Contract {
   difficulty_level: number;
 }
 
-export type AvailableContract = Contract
-
 export interface OngoingContract extends Contract {
   modifiers?: ContractModifier[];
 }

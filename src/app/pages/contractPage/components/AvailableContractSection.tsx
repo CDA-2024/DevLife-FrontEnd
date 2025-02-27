@@ -12,28 +12,17 @@ const AvailableContractsSection = () => {
   if (error) {
     return <p>{error.message}</p>;
   }
-
-  console.log("availableContracts", availableContracts);
-
   return (
     <GridComponent
       cols="grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
       gap="gap-6 w-full"
     >
-      <ul>
-        {availableContracts.map((availableContracts) => (
-          <AvailableContractCard
-            key={availableContracts.id}
-            contract={availableContracts}
-          />
-        ))}
-      </ul>
-      {/* {availableContracts.map((availableContracts) => (
+      {availableContracts.map((availableContracts) => (
         <AvailableContractCard
           key={availableContracts.id}
           contract={availableContracts}
-        /> */}
-      {/* ))} */}
+        />
+      ))}
     </GridComponent>
   );
 };

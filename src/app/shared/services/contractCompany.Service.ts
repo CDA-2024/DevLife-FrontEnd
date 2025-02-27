@@ -4,7 +4,7 @@ export const validateContractCompany = (
   contractCompany: unknown
 ): contractCompany is ContractCompany => {
   if (typeof contractCompany !== "object" || contractCompany === null) {
-    console.error("Invalid contractCompany data:", contractCompany);
+    console.error("Invalid contractCompany data :", contractCompany);
     return false;
   }
 
@@ -12,13 +12,13 @@ export const validateContractCompany = (
 
   if (
     typeof cc.id !== "number" ||
-    typeof cc.idCompany !== "number" ||
-    typeof cc.idContract !== "number" ||
-    !(cc.deadline instanceof Date) ||
-    typeof cc.isAccepted !== "boolean" ||
-    typeof cc.isCompleted !== "boolean" ||
-    typeof cc.progress !== "number" ||
-    !(cc.startDate instanceof Date)
+    typeof cc.id_company !== "number" ||
+    typeof cc.id_contract !== "number" ||
+    // !(cc.deadline instanceof Date) ||
+    typeof cc.is_accepted !== "boolean" ||
+    typeof cc.is_completed !== "boolean" ||
+    typeof cc.progress !== "number"
+    // !(cc.start_date instanceof Date)
   ) {
     console.error("Invalid contractCompany data:", cc);
     return false;
