@@ -18,7 +18,8 @@ export const RegisterFormSchema = z
       .regex(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
         message:
           "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
-      }).max(50),
+      })
+      .max(50),
     confirmPassword: z.string().max(50),
   })
   .refine((data) => data.password === data.confirmPassword, {

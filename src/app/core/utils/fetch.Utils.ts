@@ -26,7 +26,6 @@ export const fetchRequestJson = async <T>(
 
   const jsonData = response.json;
 
-
   if (!jsonData) {
     throw new Error("No Valid Json.");
   }
