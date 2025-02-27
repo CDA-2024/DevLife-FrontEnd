@@ -16,6 +16,8 @@ export const fetchRequestJson = async <T>(
     },
   });
 
+  console.log('je passe ici 5', response);
+
   if (!response) {
     throw new Error(`Invalid response from ${url}`);
   }
@@ -25,6 +27,8 @@ export const fetchRequestJson = async <T>(
   }
 
   const jsonData = response.json;
+
+  console.log(jsonData);
 
 
   if (!jsonData) {
