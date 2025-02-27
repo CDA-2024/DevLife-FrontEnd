@@ -15,21 +15,20 @@ export const httpClient = async <T>(
   const finalSignal = signal || controller.signal;
 
   try {
-
     const response = await fetch(url, {
       ...otherOptions,
       signal: finalSignal,
-      body: otherOptions.body
+      body: otherOptions.body,
     });
 
-    console.log('je passe ici');
+    console.log("je passe ici");
     const { body, json } = await parseResponseBody<T>(response);
 
-    console.log('je passe ici 1' , body, json);
+    console.log("je passe ici 1", body, json);
 
-    await handleHttpErrors(response);
+    await handleHttpErrors(response, json);
 
-    console.log('je passe ici 2');
+    console.log("je passe ici 2");
 
     return {
       status: response.status,
@@ -76,14 +75,18 @@ const handleTimeout = (timeout: number): AbortController => {
   return controller;
 };
 
-const handleHttpErrors = async (response: Response): Promise<void> => {
+const handleHttpErrors = async <T>(
+  response: Response,
+  body: T & {message: string} | undefined 
+): Promise<void> => {
   if (!response.ok) {
-    console.log('je passe ici 4', response.body);
+    console.log(body);
+
     const errorBody = await response.json().catch(() => null);
-    console.log('je passe ici 3' , errorBody);
+
     const message =
-      errorBody?.message || `HTTP error! Status: ${response.statusText}`;
-    console.log('je passe ici 3' , message);
+      body!.message || errorBody?.message || `HTTP error! Status: ${response.statusText}`;
+
     throw new Error(
       `HTTP error! Status: ${response.status}, Message: ${message}`
     );
