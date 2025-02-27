@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState} from "react";
 import { useGet, useCreate, useUpdate, useDelete } from "./useApi";
 import {
   ParamsCreate,
@@ -26,7 +26,7 @@ export const useResource = <T extends BaseModel>(resource: string) => {
     localStorage.setItem(resource, JSON.stringify(newData));
   };
 
-  const handleFetchData = useCallback(async () => {
+  const handleFetchData = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -37,9 +37,9 @@ export const useResource = <T extends BaseModel>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  const handleFetchDataWithCache = useCallback(async () => {
+  const handleFetchDataWithCache = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -62,7 +62,7 @@ export const useResource = <T extends BaseModel>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   const handleCreate = async (params: ParamsCreate<T>) => {
     setLoading(true);
