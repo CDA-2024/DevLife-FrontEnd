@@ -8,6 +8,7 @@ import { Button } from "../../../shared/components/Shadcn/ui/button";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import { useContractCompanyApi } from "../../../shared/hooks/contracts/useContractCompanyApi";
 import useResize from "../../../shared/hooks/useResize";
+import { AvailableContract } from "../../../shared/interfaces/Models/Contract.interface";
 import { getAvailableContractDetails } from "../../../shared/utils/data/contractDetails";
 import { AvailableContract } from "../interfaces/availableContract.interface";
 

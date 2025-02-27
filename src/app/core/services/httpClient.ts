@@ -15,16 +15,16 @@ export const httpClient = async <T>(
   const finalSignal = signal || controller.signal;
 
   try {
-
     const response = await fetch(url, {
       ...otherOptions,
       signal: finalSignal,
-      body: otherOptions.body
+      body: otherOptions.body,
     });
 
     const { body, json } = await parseResponseBody<T>(response);
 
-    await handleHttpErrors(response);
+    await handleHttpErrors(response, json as T & { message: string, error: string });
+
 
     return {
       status: response.status,
@@ -55,7 +55,7 @@ const parseResponseBody = async <T>(
   try {
     json = JSON.parse(body);
   } catch {
-    console.warn("Response body is not a valid JSON.");
+    //...
   }
 
   return { body, json };
@@ -71,13 +71,18 @@ const handleTimeout = (timeout: number): AbortController => {
   return controller;
 };
 
-const handleHttpErrors = async (response: Response): Promise<void> => {
+const handleHttpErrors = async <T>(
+  response: Response,
+  body: T & { message: string, error: string } | undefined
+): Promise<void> => {
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
+
     const message =
-      errorBody?.message || `HTTP error! Status: ${response.statusText}`;
+      body?.message || body?.error || errorBody?.message || `HTTP error! Status: ${response.statusText}`;
+
     throw new Error(
-      `HTTP error! Status: ${response.status}, Message: ${message}`
+      `${message}`
     );
   }
 };

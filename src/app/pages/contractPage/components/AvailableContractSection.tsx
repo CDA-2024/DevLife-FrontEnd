@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AvailableContract } from "../../../shared/interfaces/Models/Contract.interface";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 import { useAvailableContract } from "../hooks/useAvailableContract";
 import AvailableContractCard from "./AvailableContractCard";

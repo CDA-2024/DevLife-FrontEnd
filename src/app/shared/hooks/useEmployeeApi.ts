@@ -1,10 +1,10 @@
 import { useResource } from "../../core/hooks/useRessource";
 import { handleApiError } from "../../core/utils/error.Utils";
 import { validateResponseData } from "../../core/utils/validation.Utils";
-import { Employee } from "../interfaces/Employee.interface";
+import { Employee } from "../interfaces/Models/Employee.interface";
 import { validateEmployee } from "../services/employee.Service";
 
-export function useEmployee()  {
+export function useEmployee() {
   const {
     data,
     loading,
@@ -72,4 +72,4 @@ export function useEmployee()  {
     getOneEmployee,
     getAllEmployees,
   };
-};
+}

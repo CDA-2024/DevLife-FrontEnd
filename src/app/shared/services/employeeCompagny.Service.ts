@@ -1,4 +1,4 @@
-import { EmployeeCompagny } from "../interfaces/EmployeeCompagny.interface";
+import { EmployeeCompagny } from "../interfaces/Models/EmployeeCompagny.interface";
 
 export const validateEmployeeCompagny = (
   employee: unknown

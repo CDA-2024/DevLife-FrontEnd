@@ -1,7 +1,7 @@
 import { useResource } from "../../core/hooks/useRessource";
 import { handleApiError } from "../../core/utils/error.Utils";
 import { validateResponseData } from "../../core/utils/validation.Utils";
-import { EmployeeCompagny } from "../interfaces/EmployeeCompagny.interface";
+import { EmployeeCompagny } from "../interfaces/Models/EmployeeCompagny.interface";
 import { validateEmployeeCompagny } from "../services/employeeCompagny.Service";
 
 export const useEmployeeCompagny = () => {

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState} from "react";
 import { useGet, useCreate, useUpdate, useDelete } from "./useApi";
 import {
   ParamsCreate,
@@ -8,8 +8,9 @@ import {
   ParamsGet,
 } from "../schemas/ApiService.interface";
 import { cacheManager } from "../services/cacheManager";
+import { BaseModel } from "../../shared/interfaces/Models/BaseModel.interface";
 
-export const useResource = <T extends Identifiable>(resource: string) => {
+export const useResource = <T extends BaseModel>(resource: string) => {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -25,7 +26,7 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     localStorage.setItem(resource, JSON.stringify(newData));
   };
 
-  const handleFetchData = useCallback(async () => {
+  const handleFetchData = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -36,9 +37,9 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  const handleFetchDataWithCache = useCallback(async () => {
+  const handleFetchDataWithCache = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -60,7 +61,7 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   const handleCreate = async (params: ParamsCreate<T>) => {
     setLoading(true);
@@ -157,6 +158,3 @@ export const useResource = <T extends Identifiable>(resource: string) => {
   };
 };
 
-interface Identifiable {
-  id: string | number;
-}

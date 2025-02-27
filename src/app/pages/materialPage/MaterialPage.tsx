@@ -8,7 +8,9 @@ import {
   CardTitle,
 } from "../../shared/components/Shadcn/ui/card";
 import { Button } from "../../shared/components/Shadcn/ui/button";
-import { MaterialSkill } from "../../shared/interfaces/MaterialSkill.interface";
+import { useResource } from "../../core/hooks/useRessource";
+import { Material } from "./interfaces/Material.interface";
+import { MaterialSkill } from "../../shared/interfaces/Models/MaterialSkill.interface";
 import GenericAlertDialog from "../../shared/components/AlertDialog/GenericAlertDIalog";
 import { useMaterial } from "./hooks/useMaterialApi";
 import { useMaterialSkill } from "./hooks/useMaterialSkillApi";
