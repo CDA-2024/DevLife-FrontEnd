@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useCallback } from "react";
 import { useGet, useCreate, useUpdate, useDelete } from "./useApi";
 import {
   ParamsCreate,
@@ -24,7 +25,7 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     localStorage.setItem(resource, JSON.stringify(newData));
   };
 
-  const handleFetchData = async () => {
+  const handleFetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -35,17 +36,22 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const handleFetchDataWithCache = async () => {
+  const handleFetchDataWithCache = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
+      
       const cachedData =
         cacheManager.get(resource) ||
         JSON.parse(localStorage.getItem(resource) ?? "null");
+
       if (cachedData) {
         setData(cachedData);
+        setLoading(false);
+        const response = await fetch({});
+        updateData(response);
       } else {
         const response = await fetch({});
         updateData(response);
@@ -55,15 +61,14 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handleCreate = async (params: ParamsCreate<T>) => {
     setLoading(true);
     setError(null);
     try {
       const response = await create(params);
-      const updatedData = [...data, response];
-      updateData(updatedData);
+      await handleFetchData();
       return response;
     } catch (err) {
       setError(err as Error);
@@ -78,10 +83,7 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     setError(null);
     try {
       const response = await update(params);
-      const updatedData = data.map((item) =>
-        item.id === params.id ? response : item
-      );
-      updateData(updatedData);
+      await handleFetchData();
       return response;
     } catch (err) {
       setError(err as Error);
@@ -96,8 +98,8 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     setError(null);
     try {
       const response = await deleteItem(params);
-      const updatedData = data.filter((item) => item.id !== params.id);
-      updateData(updatedData);
+      
+      await handleFetchData();
       return response;
     } catch (err) {
       setError(err as Error);
@@ -115,6 +117,7 @@ export const useResource = <T extends Identifiable>(resource: string) => {
         cacheManager.get(`${resource}_${params.id}`) ||
         JSON.parse(localStorage.getItem(`${resource}_${params.id}`) ?? "null");
       if (cachedItem) {
+        setLoading(false);
         return cachedItem;
       }
 
@@ -140,7 +143,6 @@ export const useResource = <T extends Identifiable>(resource: string) => {
 
   useEffect(() => {
     handleFetchDataWithCache();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
