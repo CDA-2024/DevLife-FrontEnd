@@ -47,8 +47,6 @@ export const authApiService: ApiAuthService = {
             body: params.data as unknown as T,
         });
 
-        console.log(response);
-
         return response;
     },
 
