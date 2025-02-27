@@ -55,7 +55,7 @@ const parseResponseBody = async <T>(
   try {
     json = JSON.parse(body);
   } catch {
-    console.warn("Response body is not a valid JSON.");
+    //...
   }
 
   return { body, json };

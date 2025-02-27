@@ -1,4 +1,4 @@
-import { MaterialSkill } from "../../../shared/interfaces/MaterialSkill.interface";
+import { MaterialSkill } from "../../../shared/interfaces/Models/MaterialSkill.interface";
 
 export const validateMaterialSkill = (
   materialSkill: unknown
@@ -10,10 +10,7 @@ export const validateMaterialSkill = (
 
   const ms = materialSkill as MaterialSkill;
 
-  if (
-    typeof ms.id !== "number" ||
-    typeof ms.name !== "string"
-  ) {
+  if (typeof ms.id !== "number" || typeof ms.name !== "string") {
     console.error("Invalid material skill data:", ms);
     return false;
   }

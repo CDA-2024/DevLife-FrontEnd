@@ -1,9 +1,8 @@
 import {
   AvailableContract,
   OngoingContract,
-} from "../../interfaces/Contract.interface";
+} from "../../interfaces/Models/Contract.interface";
 import { salaryToString } from "../parsers.Utils";
-
 
 export const getAvailableContractDetails = (contract: AvailableContract) => [
   {

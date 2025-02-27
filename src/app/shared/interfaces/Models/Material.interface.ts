@@ -1,7 +1,7 @@
+import { BaseModel } from "./BaseModel.interface";
 import { MaterialSkill } from "./MaterialSkill.interface";
 
-export interface Material {
-  id: string;
+export interface Material extends BaseModel {
   employeId: string;
   name: string;
   type: string;

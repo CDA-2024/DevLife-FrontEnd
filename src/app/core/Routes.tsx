@@ -5,7 +5,7 @@ import TestPage from "./screens/TestPage";
 import LoginScreen from "./screens/auth/LoginScreen";
 import RegisterScreen from "./screens/auth/RegisterScreen";
 import GamePage from "../pages/gamePage/Game";
-import EmployeePage from "../pages/employePage/EmployeePage";
+import EmployeePage from "../pages/employeePage/EmployeePage";
 import EditUserProfilePage from "./screens/editUserProfile/EditUserProfile";
 import LandingPage from "./screens/LandingPage/LandingPage";
 import BusinessScreenFreelance from "./pages/businessPage/BusinessScreenFreelance";

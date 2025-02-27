@@ -1,7 +1,7 @@
 import { useResource } from "../../core/hooks/useRessource";
 import { handleApiError } from "../../core/utils/error.Utils";
 import { validateResponseData } from "../../core/utils/validation.Utils";
-import { EmployeeSkill } from "../interfaces/EmployyeSkill.interface";
+import { EmployeeSkill } from "../interfaces/Models/EmployyeSkill.interface";
 import { validateEmployeeSkill } from "../services/employeeSkill.Service";
 
 export const useEmployeeSkill = () => {

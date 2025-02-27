@@ -7,7 +7,7 @@ import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCar
 import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
-import { OngoingContract } from "../../../shared/interfaces/Contract.interface";
+import { OngoingContract } from "../../../shared/interfaces/Models/Contract.interface";
 import { getOngoingContractDetails } from "../../../shared/utils/data/contractDetails";
 import OngoingContractSheet from "./OngoingContractSheet";
 
@@ -50,9 +50,9 @@ const OngoingContractCard: React.FC<OngoingContractCardProps> = ({
         </div>
       </PrimaryCardContent>
       <PrimaryCardFooter>
-          <div className="flex flex-row w-full justify-end">
-            <OngoingContractSheet />
-          </div>
+        <div className="flex flex-row w-full justify-end">
+          <OngoingContractSheet />
+        </div>
       </PrimaryCardFooter>
     </PrimaryCard>
   );
