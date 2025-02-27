@@ -21,14 +21,10 @@ export const httpClient = async <T>(
       body: otherOptions.body,
     });
 
-    console.log("je passe ici");
     const { body, json } = await parseResponseBody<T>(response);
 
-    console.log("je passe ici 1", body, json);
+    await handleHttpErrors(response, json as T & { message: string, error: string });
 
-    await handleHttpErrors(response, json);
-
-    console.log("je passe ici 2");
 
     return {
       status: response.status,
@@ -77,18 +73,16 @@ const handleTimeout = (timeout: number): AbortController => {
 
 const handleHttpErrors = async <T>(
   response: Response,
-  body: T & {message: string} | undefined 
+  body: T & { message: string, error: string } | undefined
 ): Promise<void> => {
   if (!response.ok) {
-    console.log(body);
-
     const errorBody = await response.json().catch(() => null);
 
     const message =
-      body!.message || errorBody?.message || `HTTP error! Status: ${response.statusText}`;
+      body?.message || body?.error || errorBody?.message || `HTTP error! Status: ${response.statusText}`;
 
     throw new Error(
-      `HTTP error! Status: ${response.status}, Message: ${message}`
+      `${message}`
     );
   }
 };

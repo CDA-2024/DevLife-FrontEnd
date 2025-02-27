@@ -121,7 +121,20 @@ export const useAuth = () => {
             return response;
         } catch (error) {
             console.error("Error during login:", error);
-            throw error;
+            
+            // Gestion améliorée des erreurs (similaire à register)
+            let errorMessage: string;
+            if (error instanceof Error) {
+                errorMessage = error.message;
+            } else if (typeof error === 'string') {
+                errorMessage = error;
+            } else {
+                errorMessage = "Identifiant ou mot de passe incorrect";
+            }
+            
+            // Définir l'erreur avec le message extrait
+            setError(loginKey, new Error(errorMessage));
+            throw errorMessage; // Lancer une chaîne au lieu d'un objet Error
         } finally {
             untrack(loginKey);
         }
@@ -140,14 +153,22 @@ export const useAuth = () => {
                 });
             });
 
-            console.log(response);
-
             // The front-end can use response.message to notify the user.
             return response;
         } catch (error) {
             console.error("Error during registration:", error);
-            setError(registerKey, error as Error);
-            throw error;
+            let errorMessage: string;
+            if (error instanceof Error) {
+                errorMessage = error.message;
+            } else if (typeof error === 'string') {
+                errorMessage = error;
+            } else {
+                errorMessage = "Une erreur inconnue est survenue lors de l'inscription";
+            }
+            
+            // Set error with the extracted message
+            setError(registerKey, new Error(errorMessage));
+            throw errorMessage; // Throw string instead of Error object
         } finally {
             untrack(registerKey);
         }
@@ -199,8 +220,6 @@ export const useAuth = () => {
         } catch (error) {
             console.error("Erreur lors de la vérification de l'email:", error);
             throw error;
-        } finally {
-            untrack(verifyEmailKey);
         }
     };
 
@@ -220,9 +239,6 @@ export const useAuth = () => {
         } catch (error) {
             console.error("Erreur lors de l'envoi de l'email de vérification:", error);
             throw error;
-        } finally {
-            // S'assurer que l'état est nettoyé, quelle que soit l'issue
-            untrack(resendEmailKey);
         }
     };
 

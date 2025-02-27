@@ -49,17 +49,20 @@ const LoginScreen = () => {
     } catch (error) {
       console.error("Erreur lors de la connexion", error);
       
+      // Extraction du message d'erreur
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
       // Affichage d'un toast d'erreur
       toast({
         title: "Échec de la connexion",
-        description: "Identifiant ou mot de passe incorrect",
+        description: errorMessage,
         variant: "destructive",
         duration: 5000, // Durée plus longue pour les erreurs
       });
       
       // Définir une erreur sur le formulaire
       form.setError("root.serverError", {
-        message: "Identifiant ou mot de passe incorrect"
+        message: errorMessage
       });
     }
   };
@@ -176,7 +179,9 @@ const LoginScreen = () => {
                   role="alert" 
                   className="p-3 text-sm text-white bg-destructive rounded-md"
                 >
-                  {loginError?.message || form.formState.errors.root?.serverError?.message}
+                  {typeof loginError === 'object' && loginError instanceof Error 
+                    ? loginError.message 
+                    : loginError || form.formState.errors.root?.serverError?.message}
                 </div>
               )}
               

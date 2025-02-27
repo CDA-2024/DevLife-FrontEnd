@@ -161,12 +161,6 @@ const EmailConfirmedScreen = () => {
                             <div className="bg-success/10 p-4 rounded-lg text-sm border border-success/30">
                                 <p className="font-medium text-success">Félicitations !</p>
                                 <p className="mt-1">Votre compte est maintenant actif. Profitez de toutes les fonctionnalités de DevLife.</p>
-                                <div className="mt-2 h-2 bg-muted rounded-full overflow-hidden">
-                                    <div 
-                                        className="h-full bg-success transition-all duration-1000" 
-                                        style={{ width: `${(redirectCountdown / 5) * 100}%` }}
-                                    ></div>
-                                </div>
                             </div>
                         )}
 

@@ -45,6 +45,7 @@ const RegisterScreen = () => {
         password: data.password
       });
 
+
       // Rediriger vers la page de vérification avec les paramètres dans l'URL
       const params = new URLSearchParams();
       params.append('email', data.email);
@@ -62,15 +63,18 @@ const RegisterScreen = () => {
     } catch (error) {
       console.error("Erreur lors de l'inscription", error);
       
+      // Extraction du message d'erreur
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
       toast({
         title: "Échec de l'inscription",
-        description: "Une erreur est survenue lors de la création de votre compte.",
+        description: errorMessage,
         variant: "destructive",
         duration: 5000,
       });
       
       form.setError("root.serverError", {
-        message: "Une erreur est survenue lors de l'inscription."
+        message: errorMessage
       });
     }
   };
@@ -233,7 +237,9 @@ const RegisterScreen = () => {
                   role="alert" 
                   className="p-3 text-sm text-white bg-destructive rounded-md"
                 >
-                  {registerError?.message || form.formState.errors.root?.serverError?.message}
+                  {typeof registerError === 'object' && registerError instanceof Error 
+                    ? registerError.message 
+                    : registerError || form.formState.errors.root?.serverError?.message}
                 </div>
               )}
               
