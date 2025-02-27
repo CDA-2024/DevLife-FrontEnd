@@ -12,10 +12,10 @@ export const validateContract = (contract: unknown): contract is Contract => {
     typeof c.id !== "number" ||
     typeof c.title !== "string" ||
     typeof c.type !== "string" ||
-    typeof c.imageUrl !== "string" ||
+    typeof c.image_url !== "string" ||
     typeof c.description !== "string" ||
     typeof c.reward !== "number" ||
-    typeof c.difficultyLevel !== "number"
+    typeof c.difficulty_level !== "number"
   ) {
     console.error("Invalid contract data:", c);
     return false;

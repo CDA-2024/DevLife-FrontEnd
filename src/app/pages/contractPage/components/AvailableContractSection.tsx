@@ -1,9 +1,18 @@
+import { useEffect, useState } from "react";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 import { useAvailableContract } from "../hooks/useAvailableContract";
 import AvailableContractCard from "./AvailableContractCard";
 
 const AvailableContractsSection = () => {
-  const { loading, error, availableContracts } = useAvailableContract();
+  const { loading, error, availableContracts, fetchData } =
+    useAvailableContract();
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchData();
+    setIsUpdated(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUpdated]);
 
   if (loading) {
     return <p>...Loading</p>;
@@ -22,6 +31,7 @@ const AvailableContractsSection = () => {
         <AvailableContractCard
           key={availableContracts.id}
           contract={availableContracts}
+          setIsUpdated={() => setIsUpdated}
         />
       ))}
     </GridComponent>

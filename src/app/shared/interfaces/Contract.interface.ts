@@ -12,4 +12,5 @@ export interface Contract {
 
 export interface OngoingContract extends Contract {
   modifiers?: ContractModifier[];
+  deadline: Date;
 }

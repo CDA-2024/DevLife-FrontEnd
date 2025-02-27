@@ -42,7 +42,6 @@ export const useResource = <T extends Identifiable>(resource: string) => {
     setLoading(true);
     setError(null);
     try {
-      
       const cachedData =
         cacheManager.get(resource) ||
         JSON.parse(localStorage.getItem(resource) ?? "null");
