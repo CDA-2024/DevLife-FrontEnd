@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { OngoingContract } from "../../../shared/interfaces/Models/Contract.interface";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 import OngoingContractCard from "./OngoingContractCard";
 import { useContract } from "../hooks/useContract";

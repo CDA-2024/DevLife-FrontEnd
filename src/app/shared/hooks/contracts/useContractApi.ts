@@ -1,8 +1,8 @@
 import { useResource } from "../../../core/hooks/useRessource";
 import { handleApiError } from "../../../core/utils/error.Utils";
 import { validateResponseData } from "../../../core/utils/validation.Utils";
-import { Contract } from "../../interfaces/Contract.interface";
 import { validateContract } from "../../../pages/contractPage/services/contractService";
+import { Contract } from "../../interfaces/Models/Contract.interface";
 
 export const useContractApi = () => {
   const {
@@ -19,8 +19,9 @@ export const useContractApi = () => {
 
   let er = error;
 
-  const getOneContract = async (id: number) => {
+  const getOneContract = async (id: number | string) => {
     const contract = await getOneGeneric({ id });
+    console.log(contract);
 
     const { validData, hasInvalidData } = validateResponseData<Contract>(
       contract,

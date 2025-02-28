@@ -8,18 +8,17 @@ import { Button } from "../../../shared/components/Shadcn/ui/button";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import { useContractCompanyApi } from "../../../shared/hooks/contracts/useContractCompanyApi";
 import useResize from "../../../shared/hooks/useResize";
-import { AvailableContract } from "../../../shared/interfaces/Models/Contract.interface";
 import { getAvailableContractDetails } from "../../../shared/utils/data/contractDetails";
 import { AvailableContract } from "../interfaces/availableContract.interface";
 
 interface AvailableContractCardProps {
   contract: AvailableContract;
-  setIsUpdated: (boolean: boolean) => void;
+  onUpdate: () => void;
 }
 
 const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
   contract,
-  setIsUpdated,
+  onUpdate,
 }) => {
   const contractDetails = getAvailableContractDetails(contract);
   const {
@@ -45,7 +44,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
         deadline: (await fullContract).deadline,
       };
       await createContractCompany(updatedContract);
-      setIsUpdated(true);
+      onUpdate();
     } catch (error) {
       console.error("Erreur lors de la mise à jour du contrat", error);
     }
@@ -53,7 +52,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
 
   const handleClickDelete = () => {
     deleteContractCompany(id);
-    setIsUpdated(true);
+    onUpdate();
   };
 
   return (
@@ -85,10 +84,10 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
       </PrimaryCardContent>
       <PrimaryCardFooter>
         <div className="flex flex-row gap-4 h-full justify-end">
-          <Button variant="destructive" onClick={handleClickDelete}>
+          <Button variant="destructive" onClick={() => handleClickDelete()}>
             Refuser
           </Button>
-          <Button variant="accept" onClick={handleClickUpdate}>
+          <Button variant="accept" onClick={() => handleClickUpdate()}>
             accepter
           </Button>
         </div>

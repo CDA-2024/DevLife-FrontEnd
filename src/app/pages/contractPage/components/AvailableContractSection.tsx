@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { AvailableContract } from "../../../shared/interfaces/Models/Contract.interface";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 import { useAvailableContract } from "../hooks/useAvailableContract";
 import AvailableContractCard from "./AvailableContractCard";
 
 const AvailableContractsSection = () => {
-  const { loading, error, availableContracts, fetchData } =
+  const { loading, error, availableContracts, updateContracts } =
     useAvailableContract();
-  const [isUpdated, setIsUpdated] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    fetchData();
-    setIsUpdated(true);
+    updateContracts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUpdated]);
+  }, [refresh]);
 
   if (loading) {
     return <p>...Loading</p>;
@@ -32,7 +30,7 @@ const AvailableContractsSection = () => {
         <AvailableContractCard
           key={availableContracts.id}
           contract={availableContracts}
-          setIsUpdated={() => setIsUpdated}
+          onUpdate={() => setRefresh((prev) => prev + 1)}
         />
       ))}
     </GridComponent>

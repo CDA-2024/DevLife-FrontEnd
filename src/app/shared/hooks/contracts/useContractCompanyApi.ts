@@ -67,15 +67,12 @@ export const useContractCompanyApi = () => {
     return await deleteItemGeneric({ id });
   };
 
-  const fetchContract = async () => {
-    return await fetchData();
-  }
 
   return {
     data,
     loading,
     error: er,
-    fetchContract,
+    fetchData,
     createContractCompany,
     updateContractCompany,
     deleteContractCompany,

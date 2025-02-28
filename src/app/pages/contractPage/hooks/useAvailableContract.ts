@@ -7,13 +7,14 @@ export const useAvailableContract = () => {
     data: contract,
     loading: loadingContract,
     error: errorContract,
-    fetchData: fetchData
+    fetchData: fetchContract
   } = useContractApi();
 
   const {
     data: contractsCompany,
     loading: loadingCompany,
     error: errorCompany,
+    fetchData: fetchContractCompany
   } = useContractCompanyApi();
 
   const availableContracts = contractAvailableParser(
@@ -21,10 +22,16 @@ export const useAvailableContract = () => {
     contractsCompany
   );
 
+  const updateContracts = () => {
+    fetchContract();
+    fetchContractCompany();
+  };
+
+
   return {
     availableContracts,
+    updateContracts,
     loading: loadingContract || loadingCompany,
     error: errorContract || errorCompany,
-    fetchData: fetchData
   };
 };
