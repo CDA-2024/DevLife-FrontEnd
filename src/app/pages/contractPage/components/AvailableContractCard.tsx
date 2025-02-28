@@ -7,6 +7,7 @@ import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardI
 import { Button } from "../../../shared/components/Shadcn/ui/button";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import { useContractCompanyApi } from "../../../shared/hooks/contracts/useContractCompanyApi";
+import { useToast } from "../../../shared/hooks/use-toast";
 import useResize from "../../../shared/hooks/useResize";
 import { getAvailableContractDetails } from "../../../shared/utils/data/contractDetails";
 import { AvailableContract } from "../interfaces/availableContract.interface";
@@ -27,6 +28,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
     getOneContractCompany,
   } = useContractCompanyApi();
   const { id } = contract;
+  const { toast } = useToast();
 
   const { isSmall, containerRef } = useResize(425);
 
@@ -44,6 +46,11 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
         deadline: (await fullContract).deadline,
       };
       await createContractCompany(updatedContract);
+      toast({
+        title: "Contrat accepté",
+        description: `Vous avez accepté le contrat : ${contract.title}`,
+        variant: "success",
+      });
       onUpdate();
     } catch (error) {
       console.error("Erreur lors de la mise à jour du contrat", error);
@@ -51,8 +58,22 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
   };
 
   const handleClickDelete = async () => {
-    await deleteContractCompany(id);
-    onUpdate();
+    try {
+      await deleteContractCompany(id);
+      toast({
+        title: "Contrat refusé",
+        description: `Vous avez refusé le contrat : ${contract.title}`,
+        variant: "destructive",
+      });
+      onUpdate();
+    } catch (error) {
+      console.error("Erreur lors de la suppression du contrat", error);
+      toast({
+        title: "Erreur",
+        description: "Erreur lors de la suppression du contrat",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

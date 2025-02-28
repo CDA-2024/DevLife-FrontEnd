@@ -15,7 +15,7 @@ const OngoingContractSheet: React.FC<OngoingContractSheetProps> = ({
       title={contractData.title}
       description={contractData.description}
     >
-      <p></p>
+      <p>Type du contrat : "{contractData.type}"</p>
     </PrimarySheet>
   );
 };
