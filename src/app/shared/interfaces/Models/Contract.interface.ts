@@ -3,10 +3,9 @@ import { BaseModel } from "./BaseModel.interface";
 
 export interface Contract extends BaseModel {
   title: string;
-  img?: string;
-  imgAlt: string;
+  type: string;
+  image_url: string;
   description: string;
-  deadline: Date;
   reward: number;
   difficultyLevel: "Easy" | "Medium" | "Hard";
   progress?: number;

@@ -1,49 +1,84 @@
-// import { useGet } from "../../../core/hooks/useApi";
-// import { ParamsGet } from "../../../core/schemas/ApiService.interface";
-// import { ResponseApi } from "../../../core/schemas/response/ResponseApi.interface";
-// import { handleApiError } from "../../../core/utils/error.Utils";
-// import { validateResponseData } from "../../../core/utils/validation.Utils";
-// import { MaterialSkill } from "../../../shared/interfaces/MaterialSkill.interface";
-// import { validateMaterialSkill } from "../services/materialSkillService";
+import { useResource } from "../../../core/hooks/useRessource";
+import { handleApiError } from "../../../core/utils/error.Utils";
+import { validateResponseData } from "../../../core/utils/validation.Utils";
+import { MaterialSkill } from "../../../shared/interfaces/MaterialSkill.interface";
+import { validateMaterialSkill } from "../services/materialSkillService";
 
-// const resource = "materialSkill";
+export const useMaterialSkill = () => {
+  const {
+    data,
+    loading,
+    error,
+    fetchData,
+    create,
+    update,
+    delete: deleteItemGeneric,
+    getOne: getOneGeneric,
+    getAll: getAllGeneric,
+  } = useResource<MaterialSkill>("materialSkill");
 
-// export const useGetMaterialSkill = (
-//   params: ParamsGet = {}
-// ): ResponseApi<MaterialSkill[]> => {
-//   const response = useGet<MaterialSkill[]>(resource, params);
+  let er = error;
 
-//   const { validData, hasInvalidData } = validateResponseData<MaterialSkill[]>(
-//     response.data,
-//     validateMaterialSkill
-//   );
+  const getOneMaterialSkill = async (id: number) => {
+    const materialSkill = await getOneGeneric({ id });
 
-//   if (hasInvalidData) {
-//     response.error = handleApiError(
-//       response.error,
-//       new Error("Some material skill data are invalid.")
-//     );
-//   }
+    const { validData, hasInvalidData } = validateResponseData<MaterialSkill>(
+      materialSkill,
+      validateMaterialSkill
+    );
 
-//   return { ...response, error: response.error, data: validData };
-// };
+    if (hasInvalidData) {
+      er = handleApiError(
+        er,
+        new Error("Some materialSkill data are invalid.")
+      );
+    }
 
-// export const useGetOneMaterialSkill = (
-//   params: ParamsGet = {}
-// ): ResponseApi<MaterialSkill> => {
-//   const response = useGet<MaterialSkill>(resource, params);
+    return validData;
+  };
 
-//   const { validData, hasInvalidData } = validateResponseData<MaterialSkill>(
-//     response.data,
-//     validateMaterialSkill
-//   );
+  const getAllMaterialSkills = async () => {
+    await getAllGeneric();
 
-//   if (hasInvalidData) {
-//     response.error = handleApiError(
-//       response.error,
-//       new Error("Material skill data is invalid.")
-//     );
-//   }
+    const { validData, hasInvalidData } = validateResponseData<MaterialSkill[]>(
+      data,
+      validateMaterialSkill
+    );
 
-//   return { ...response, error: response.error, data: validData };
-// };
+    if (hasInvalidData) {
+      er = handleApiError(
+        er,
+        new Error("Some materialSkill data are invalid.")
+      );
+    }
+
+    return validData;
+  };
+
+  const createMaterialSkill = async (materialSkill: MaterialSkill) => {
+    return await create({ data: materialSkill });
+  };
+
+  const updateMaterialSkill = async (
+    id: string,
+    materialSkill: MaterialSkill
+  ) => {
+    return await update({ id, data: materialSkill });
+  };
+
+  const deleteMaterialSkill = async (id: string) => {
+    return await deleteItemGeneric({ id });
+  };
+
+  return {
+    data,
+    loading,
+    error: er,
+    fetchData,
+    createMaterialSkill,
+    updateMaterialSkill,
+    deleteMaterialSkill,
+    getOneMaterialSkill,
+    getAllMaterialSkills,
+  };
+};

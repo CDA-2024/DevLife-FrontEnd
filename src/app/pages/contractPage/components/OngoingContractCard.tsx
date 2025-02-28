@@ -7,12 +7,12 @@ import PrimaryCardHeader from "../../../shared/components/PrimaryCard/PrimaryCar
 import PrimaryCardItem from "../../../shared/components/PrimaryCard/PrimaryCardItem";
 import { CardTitle } from "../../../shared/components/Shadcn/ui/card";
 import useResize from "../../../shared/hooks/useResize";
-import { OngoingContract } from "../../../shared/interfaces/Models/Contract.interface";
 import { getOngoingContractDetails } from "../../../shared/utils/data/contractDetails";
+import { AcceptedContract } from "../interfaces/acceptedContract.interface";
 import OngoingContractSheet from "./OngoingContractSheet";
 
 interface OngoingContractCardProps {
-  contract: OngoingContract;
+  contract: AcceptedContract;
 }
 
 const OngoingContractCard: React.FC<OngoingContractCardProps> = ({
@@ -51,7 +51,7 @@ const OngoingContractCard: React.FC<OngoingContractCardProps> = ({
       </PrimaryCardContent>
       <PrimaryCardFooter>
         <div className="flex flex-row w-full justify-end">
-          <OngoingContractSheet />
+          <OngoingContractSheet contractData={contract} />
         </div>
       </PrimaryCardFooter>
     </PrimaryCard>

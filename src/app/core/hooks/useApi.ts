@@ -12,7 +12,6 @@ import {
   GetResponseApi,
   UpdateResponseApi,
 } from "../schemas/response/ResponseApi.interface";
-
 export const useGet = <T>(resource: string): GetResponseApi<T> => {
   const { track, untrack, getState } = useApiCallTracker();
   const key = `get:${resource}`;
@@ -39,7 +38,6 @@ export const useGet = <T>(resource: string): GetResponseApi<T> => {
 export const useCreate = <T>(resource: string): CreateResponseApi<T> => {
   const { track, untrack, getState } = useApiCallTracker();
   const key = `create:${resource}`;
-
   const createData = async (params: ParamsCreate<T>) => {
     try {
       const response = await track(key, async () => {

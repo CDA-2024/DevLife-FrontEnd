@@ -43,7 +43,6 @@ export const useResource = <T extends BaseModel>(resource: string) => {
     setLoading(true);
     setError(null);
     try {
-      
       const cachedData =
         cacheManager.get(resource) ||
         JSON.parse(localStorage.getItem(resource) ?? "null");
@@ -99,7 +98,6 @@ export const useResource = <T extends BaseModel>(resource: string) => {
     setError(null);
     try {
       const response = await deleteItem(params);
-      
       await handleFetchData();
       return response;
     } catch (err) {

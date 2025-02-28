@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react";
-import { OngoingContract } from "../../../shared/interfaces/Models/Contract.interface";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
-import OngoingContractCard from "./OngingContractCard";
+import OngoingContractCard from "./OngoingContractCard";
+import { useContract } from "../hooks/useContract";
 
 const OngoingContractsSection = () => {
-  const [contracts, setContracts] = useState<OngoingContract[]>([]);
+  const { loading, error, contracts } = useContract();
 
-  useEffect(() => {
-    const url = "http://localhost:3000/ongoingContracts";
+  if (loading) {
+    return <p>...Loading</p>;
+  }
 
-    const fetchContracts = async () => {
-      try {
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error("Erreur lors du chargement des contrats !");
-        }
-
-        const result = await response.json();
-        setContracts(result);
-      } catch (e) {
-        console.error("Une erreur inattendue est survenue", e);
-      }
-    };
-
-    fetchContracts();
-  }, []);
+  if (error) {
+    return <p>{error.message}</p>;
+  }
 
   return (
     <GridComponent

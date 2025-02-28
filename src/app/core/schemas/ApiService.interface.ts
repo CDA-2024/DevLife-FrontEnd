@@ -6,7 +6,7 @@ export interface ApiService {
 }
 
 export interface ParamsGet extends Params, PaginationPayload, SortPayload {
-  id?: number;
+  id?: number | string;
   ids?: number[];
 }
 
@@ -15,16 +15,16 @@ export interface ParamsGetOne extends Params {
 }
 
 export interface ParamsCreate<T> extends Params {
-  data: T ;
+  data: T;
 }
 
 export interface ParamsUpdate<T> extends Params {
-  id: string;
-  data: T ;
+  id: string | number;
+  data: T;
 }
 
 export interface ParamsDelete extends Params {
-  id: string;
+  id: string | number;
 }
 
 export interface Params {

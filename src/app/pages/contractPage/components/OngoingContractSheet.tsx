@@ -1,9 +1,21 @@
 import PrimarySheet from "../../../shared/components/PrimarySheet/PrimarySheet";
+import { AcceptedContract } from "../interfaces/acceptedContract.interface";
 
-const OngoingContractSheet = () => {
+interface OngoingContractSheetProps {
+  contractData: AcceptedContract;
+}
+
+const OngoingContractSheet: React.FC<OngoingContractSheetProps> = ({
+  contractData,
+}) => {
+
   return (
-    <PrimarySheet btnTitle="Details" title="titre" description="deescription">
-      <h1>coucou</h1>
+    <PrimarySheet
+      btnTitle="Détails"
+      title={contractData.title}
+      description={contractData.description}
+    >
+      <p></p>
     </PrimarySheet>
   );
 };
