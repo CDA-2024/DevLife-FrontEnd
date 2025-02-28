@@ -50,8 +50,8 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
     }
   };
 
-  const handleClickDelete = () => {
-    deleteContractCompany(id);
+  const handleClickDelete = async () => {
+    await deleteContractCompany(id);
     onUpdate();
   };
 
@@ -88,7 +88,7 @@ const AvailableContractCard: React.FC<AvailableContractCardProps> = ({
             Refuser
           </Button>
           <Button variant="accept" onClick={() => handleClickUpdate()}>
-            accepter
+            Accepter
           </Button>
         </div>
       </PrimaryCardFooter>

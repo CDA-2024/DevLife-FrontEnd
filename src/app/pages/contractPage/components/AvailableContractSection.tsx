@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import GridComponent from "../../../shared/components/GridComponent/GridComponent";
 import { useAvailableContract } from "../hooks/useAvailableContract";
@@ -10,7 +11,6 @@ const AvailableContractsSection = () => {
 
   useEffect(() => {
     updateContracts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
   if (loading) {

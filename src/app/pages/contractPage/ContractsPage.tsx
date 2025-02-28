@@ -5,13 +5,13 @@ import OngoingContractsSection from "./components/OngoingContractSection";
 const ContractsPage = () => {
   const tabs = [
     {
-      label: "Contracts Disponible",
-      value: "contract_disponible",
+      label: "Contrats Disponible",
+      value: "contrat_disponible",
       content: <AvailableContractsSection />,
     },
     {
-      label: "Contracts en Cours",
-      value: "contract_en_cours",
+      label: "Contrats en Cours",
+      value: "contrat_en_cours",
       content: <OngoingContractsSection />,
     },
   ];
